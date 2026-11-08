@@ -1,0 +1,135 @@
+/* =====================================================================
+   StudyVerse - SHARED STYLESHEET  (owner: AMEENA)
+   Look: "cozy desk" - cream grid paper, brown handwriting-style text, mustard accent,
+   sage-green leaves, sticky-note cards with a red pin, wobbly hand-drawn borders.
+   Fonts: Gaegu (headings, buttons, nav) + Patrick Hand (body text).
+   Every page links this file. Do NOT change the :root variables or the
+   navbar/footer rules without telling Ameena.
+   PERSON 2, 3, 4: put page-specific styles in your OWN file
+   (css/planner.css, css/focus.css, css/spots.css) and ALWAYS use the
+   variables below (var(--accent), var(--note), var(--edge) ...) instead of hex codes,
+   so your page works in light AND dark mode (toggle button in the navbar).
+   Cards = class "sv-card" (sticky note + pin; add class "no-pin" to hide the pin).
+   Buttons = "btn-brand" / "btn-outline-brand". Circled heading word = <span class="circled">.
+   PERSON 3: these variables ARE the colour palette for planning-design.html.
+   ===================================================================== */
+:root, [data-bs-theme="light"] {
+  --bg: #FFFBF3;          /* grid paper */
+  --grid: rgba(165,139,124,.17);
+  --surface: #FFFFFF;     /* inputs, white cards */
+  --surface-2: #F3EBDA;   /* alternate sections, progress track */
+  --note: #FDEDC9;        /* sticky-note yellow: cards, nav */
+  --desk: #E8E4D8;        /* desk beige: footer */
+  --edge: #5B5552;        /* thick note/button outlines */
+  --ink-line: #8B6355;    /* brown doodle lines + headings */
+  --text: #6B4A3E;        /* body text (brown) */
+  --muted: #7A5A4D;
+  --accent: #DDAA55;      /* mustard */
+  --accent-text: #A9731A; /* mustard dark enough for big text */
+  --accent-2: #5E9F85;    /* sage green */
+  --pop: #EC6A6F;         /* pin red */
+  --link: #3F7A62;
+  --on-accent: #4A3329;   /* text on mustard */
+  --mug: #D9C9B8;
+  --font-head: 'Gaegu', 'Patrick Hand', cursive;
+  --font-body: 'Patrick Hand', 'Gaegu', cursive;
+  --blob: 28px 20px 30px 18px / 20px 30px 18px 28px;      /* hand-drawn wobbly corners */
+  --blob-sm: 16px 12px 18px 10px / 12px 18px 10px 16px;
+  --shadow: 3px 5px 0 rgba(91,74,68,.18);
+}
+[data-bs-theme="dark"] {
+  --bg: #2A211E; --grid: rgba(255,255,255,.06); --surface: #3A2E2A; --surface-2: #33282A;
+  --note: #4A3A33; --desk: #3A2E2A; --edge: #CDBBA6; --ink-line: #D8BFA8;
+  --text: #F1E3D0; --muted: #CDBBA6; --accent: #E8B65F; --accent-text: #E8B65F;
+  --accent-2: #7FBF9F; --pop: #F07E83; --link: #9AD3B6; --on-accent: #3B2A22; --mug: #6B5649;
+  --shadow: 3px 5px 0 rgba(0,0,0,.3);
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+body { background-color: var(--bg); background-image: linear-gradient(var(--grid) 2.5px, transparent 2.5px), linear-gradient(90deg, var(--grid) 2.5px, transparent 2.5px); background-size: 108px 108px;
+  color: var(--text); font-family: var(--font-body); font-size: 1.25rem; line-height: 1.55; }
+h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 700; line-height: 1.05; color: var(--ink-line); }
+h1 { font-size: clamp(3.2rem, 8vw, 5.4rem); }
+h2 { font-size: clamp(2.3rem, 4.5vw, 3.2rem); }
+h3 { font-size: 1.9rem; }
+p { max-width: 62ch; color: var(--muted); }
+a { color: var(--link); text-underline-offset: 4px; }
+:focus-visible { outline: 3px dashed var(--pop); outline-offset: 3px; }
+.eyebrow { font-family: var(--font-head); font-weight: 700; font-size: 1.9rem; color: var(--accent-text); margin: 0 0 .2rem; }
+.circled { position: relative; display: inline-block; padding: 0 .6em; isolation: isolate; }
+.circled .hand-circle { left: -.15em; top: -.1em; width: calc(100% + .3em); height: calc(100% + .25em); stroke-width: 4; z-index: -1; }
+
+/* ---------- Navbar (shared): sticky-note bar, mustard circle slides to the link ---------- */
+.nav-wrap { position: sticky; top: 0; z-index: 1030; padding: 12px 0; background: var(--bg); border-bottom: 3px dashed var(--ink-line); }
+.site-nav { padding: 0; }
+.site-nav .navbar-brand { display: flex; align-items: center; gap: .6rem; font-family: var(--font-head); font-weight: 700; font-size: 2.1rem; line-height: 1; color: var(--ink-line); order: 1; }
+.brand-mark { width: 24px; height: 24px; border-radius: 50%; background: var(--pop); border: 3px solid var(--edge); box-shadow: 2px 3px 0 rgba(91,74,68,.25); }
+.nav-pill { position: relative; background: var(--note); border: 3px solid var(--edge); border-radius: var(--blob); padding: 6px; margin: .75rem 0 0; }
+.nav-pill .navbar-nav { position: relative; z-index: 1; }
+.nav-pill .nav-link { position: relative; z-index: 1; padding: .35rem 1.45rem; font-family: var(--font-head); font-weight: 700; font-size: 1.45rem; color: var(--text); transition: color .2s; }
+.nav-pill .nav-link:hover, .nav-pill .nav-link:focus-visible { color: var(--ink-line); }
+.nav-pill .nav-link.active { color: var(--ink-line); }
+/* the sliding highlight (moved by js/nav.js): a loose, open, hand-drawn mustard circle like the one around "OUR TEAM" */
+.nav-indicator { position: absolute; top: 0; left: 0; width: 0; height: 0; z-index: 0; pointer-events: none;
+  transition: transform .45s cubic-bezier(.68,-.3,.27,1.3), width .45s ease, height .45s ease; }
+.hand-circle { position: absolute; left: -9px; top: -6px; width: calc(100% + 18px); height: calc(100% + 12px); overflow: visible; fill: none; stroke: var(--accent); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.hand-circle path { vector-effect: non-scaling-stroke; }
+.nav-actions { display: flex; align-items: center; gap: .6rem; order: 2; }
+.icon-btn { width: 46px; height: 46px; border-radius: var(--blob-sm); border: 3px solid var(--edge); background: var(--note); color: var(--ink-line); display: grid; place-items: center; cursor: pointer; box-shadow: var(--shadow); transition: transform .15s, background .15s; }
+.icon-btn:hover { background: var(--accent); color: var(--on-accent); transform: rotate(-4deg) translateY(-2px); }
+.icon-btn svg { width: 21px; height: 21px; }
+[data-bs-theme="light"] .icon-sun, [data-bs-theme="dark"] .icon-moon { display: none; }
+.site-nav .navbar-toggler { border: 3px solid var(--edge); border-radius: var(--blob-sm); padding: .4rem .6rem; background: var(--note); }
+[data-bs-theme="dark"] .navbar-toggler-icon { filter: invert(1); }
+.site-nav .navbar-collapse { order: 3; }
+@media (min-width: 1200px) {
+  .nav-pill { margin: 0; }
+  .nav-pill .navbar-nav { flex-direction: row; }
+  .site-nav .navbar-collapse { order: 2; justify-content: center; }
+  .nav-actions { order: 3; }
+}
+
+/* ---------- Buttons (shared) ---------- */
+.btn-brand, .btn-outline-brand { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; line-height: 1.2; padding: .35rem 1.7rem; border: 3px solid var(--edge); border-radius: var(--blob); box-shadow: var(--shadow); transition: transform .15s, background .15s; }
+.btn-brand { background: var(--accent); color: var(--on-accent); }
+.btn-outline-brand { background: var(--surface); color: var(--ink-line); }
+.btn-brand:hover, .btn-outline-brand:hover { transform: rotate(-1.5deg) translateY(-2px); background: var(--accent); color: var(--on-accent); border-color: var(--edge); }
+
+/* ---------- Cards (shared) - use class "sv-card" for ALL cards: a sticky note with a pin ---------- */
+.sv-card { position: relative; background: var(--note); border: 3.5px solid var(--edge); border-radius: 6px 8px 5px 9px / 8px 5px 9px 6px; box-shadow: var(--shadow); padding: 2rem 1.6rem 1.5rem; height: 100%; }
+.sv-card::before { content: ""; position: absolute; top: -13px; left: 50%; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; background: var(--pop); border: 3px solid var(--edge); }
+.sv-card.no-pin::before { display: none; }
+.sv-card h3 { margin-bottom: .3rem; }
+a.sv-card { display: block; text-decoration: none; color: var(--text); transition: transform .2s; }
+a.sv-card p { color: var(--muted); margin-bottom: 0; }
+a.sv-card:hover { transform: rotate(-1.2deg) translateY(-4px); }
+
+/* ---------- Progress bar (PERSON 2: reuse for the study progress tracker) ---------- */
+.progress { height: 1.6rem; background: var(--surface); border: 3px solid var(--edge); border-radius: var(--blob-sm); }
+.progress-bar { background: var(--accent); color: var(--on-accent); font-family: var(--font-head); font-weight: 700; }
+
+/* ---------- Page header strip for inner pages ---------- */
+.page-header { padding: 2.5rem 0 1rem; }
+
+/* ---------- Home page ---------- */
+.hero { padding: 3.5rem 0 4rem; }
+.hero .lead { font-size: 1.45rem; color: var(--muted); }
+.hero-art .d-line { stroke: var(--ink-line); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.hero-art .d-nofill { fill: none; }
+.hero-art .d-desk { fill: var(--desk); } .hero-art .d-mug { fill: var(--mug); } .hero-art .d-leaf { fill: var(--accent-2); }
+.hero-art .d-white { fill: var(--surface); } .hero-art .d-note { fill: var(--accent); stroke: none; } .hero-art .d-red { fill: var(--pop); stroke: none; }
+.section { padding: 4rem 0; }
+.section-alt { background: var(--surface-2); border-block: 3px dashed var(--ink-line); }
+.reg-form .form-label { font-family: var(--font-head); font-weight: 700; font-size: 1.4rem; color: var(--ink-line); margin-bottom: .1rem; }
+.reg-form .form-control { font-family: var(--font-body); font-size: 1.2rem; background: var(--surface); color: var(--text); border: 3px solid var(--edge); border-radius: var(--blob-sm); padding: .45rem .9rem; }
+.reg-form .form-control::placeholder { color: var(--muted); opacity: .65; }
+.reg-form .form-control:focus { border-color: var(--accent-2); box-shadow: 3px 4px 0 var(--accent-2); }
+#form-message { min-height: 1.5rem; font-family: var(--font-head); font-weight: 700; font-size: 1.4rem; }
+
+/* ---------- Footer (shared) ---------- */
+.site-footer { background: var(--desk); border-top: 3px solid var(--ink-line); color: var(--text); padding: 3rem 0 1.5rem; margin-top: 3rem; }
+.site-footer h2 { font-size: 1.9rem; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.site-footer hr { border-color: var(--ink-line); opacity: .4; border-top-style: dashed; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
