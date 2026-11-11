@@ -1,6 +1,7 @@
-StudyVerse 
+StudyVerse - starter project (Ameena delivery)
+Open home.html in a browser (needs internet for Bootstrap + Google Fonts).
 Each teammate edits ONLY their own files - see the PERSON comments at the top of each page and JS file.
-  Ameena: home.html, css/styles.css, js/home.js, js/nav.js, shared navbar/footer, final integration
+  Ameena: home.html, css/styles.css, js/home.js, js/nav.js, js/auth.js, shared navbar/login window/footer, final integration
   Person 2: subtopic1.html, css/planner.css, js/planner.js, reflection-ai-report.html
   Person 3: subtopic2.html, css/focus.css, js/focus.js, planning-design.html
   Person 4: subtopic3.html, css/spots.css, js/spots.js, overview.html
