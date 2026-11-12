@@ -1,1 +1,37 @@
 /* PERSON 2 - styles for subtopic1.html. Use the CSS variables from styles.css (var(--accent), var(--surface), var(--text), ...). */
+/* =====================================
+   StudyVerse - Study Planner
+   Person 2: Planner Page Styling
+   ===================================== */
+
+/* Introduction */
+.planner-intro{text-align: center; margin-bottom: 3rem;}
+.planner-intro h2{color: var(--ink-line); margin-bottom: 1rem;}
+.planner-intro p{max-width: 650px; margin: 0 auto 1rem;}
+
+/* Planner Section */
+.planner-section{margin-bottom: 3rem;}
+
+/* Form Labels */
+.planner-section .form-label, .deadline-section .form-label {
+    font-family: var(--font-head); font-size: 1.5 rem; font-weight: bold;
+    color: var(--ink-line);
+}
+
+/* Input Fields */
+.planner-section .form-control, .deadline-section .form-control{
+    background: var(--surface); color: var(--text); border: 3px solid var(--edge);
+    border-radius: var(--blob-sm); padding: 10px 15px; font-family: var(--font-body);
+    font-size: 1.2rem;
+}
+
+/* Input Focus */
+.planner-section .form-control:focus, .deadline-section .form-control:focus{
+    border-color: var(--accent-2);
+    box-shadow: 3px 4px 0 var(--accent-2);
+}
+
+/* Add Task Button */
+.planner-add-btn{background: var(--accent); color: var(--on-accent); border: 3px solid var(--edge);
+border-radius: var(--blob); padding: 10px 25px; font-family: var(--font-head); font-size: 1.5rem;
+font-weight: bold; box-shadow: var(--shadow); transition: transform 0.2s ease;}
