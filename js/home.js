@@ -39,6 +39,7 @@
       message.className = 'text-success';
       message.textContent = 'Welcome to StudyVerse, ' + name + '! Your registration was successful.';
       form.reset();
+      if (window.svAuth) window.svAuth.login(name, true);   // shows the welcome message (js/auth.js)
       form.querySelectorAll('.form-control').forEach(i => i.classList.remove('is-valid'));
     } else {
       message.className = 'text-danger';
