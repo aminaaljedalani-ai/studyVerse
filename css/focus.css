@@ -1,1 +1,177 @@
-/* PERSON 3 - styles for subtopic2.html. Use the CSS variables from styles.css (var(--accent), var(--surface), var(--text), ...). */
+
+/* PERSON 3 - Focus & Recharge */
+/* Uses the shared StudyVerse theme variables */
+
+.focus-page {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.focus-intro {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 1.25rem;
+}
+
+.focus-panel {
+  padding-top: 2.5rem;
+}
+
+.focus-panel h2,
+.focus-bottom h2 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  color: var(--ink-line);
+}
+
+.focus-panel p {
+  line-height: 1.6;
+}
+
+.focus-modes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+  margin: 1.8rem 0;
+}
+
+.focus-mode {
+  padding: 0.5rem 0.9rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 3px solid var(--edge);
+  border-radius: var(--blob-sm);
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.focus-mode:hover,
+.focus-mode.is-selected {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.focus-mode:focus-visible {
+  outline: 3px dashed var(--pop);
+  outline-offset: 3px;
+}
+
+.focus-mode-label {
+  margin-bottom: 0;
+  font-family: var(--font-head);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.focus-clock {
+  margin: 0.3rem 0 1.5rem;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(4.5rem, 10vw, 7rem);
+  line-height: 1.2;
+  color: var(--ink-line);
+  font-variant-numeric: tabular-nums;
+}
+
+.focus-feedback {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  min-height: 4rem;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 2px dashed var(--edge);
+  border-radius: 12px;
+}
+
+.focus-page .form-select {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--edge);
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+}
+
+.focus-page .form-select:focus {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 0.2rem var(--surface-2);
+}
+
+.focus-breathing {
+  margin-top: 1.5rem;
+}
+
+.focus-breathing[hidden] {
+  display: none !important;
+}
+
+.focus-breath-circle {
+  width: 145px;
+  height: 145px;
+  margin: 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-2);
+  color: var(--on-accent);
+  border: 3px solid var(--edge);
+  border-radius: 50%;
+  font-family: var(--font-head);
+  font-size: 1.7rem;
+  font-weight: 700;
+  animation: focus-breathe 8s ease-in-out infinite;
+}
+
+@keyframes focus-breathe {
+  0%, 100% {
+    transform: scale(0.85);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.focus-reminder {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.focus-bottom {
+  padding: 2rem;
+  border: 3px dashed var(--edge);
+  border-radius: var(--blob);
+  background: var(--note);
+}
+
+@media (max-width: 767px) {
+  .focus-page {
+    padding-top: 1rem;
+  }
+
+  .focus-panel {
+    padding: 2rem 1.1rem 1.3rem;
+  }
+
+  .focus-modes {
+    gap: 0.4rem;
+  }
+
+  .focus-mode {
+    font-size: 1.1rem;
+  }
+
+  .focus-clock {
+    font-size: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .focus-breath-circle {
+    animation: none;
+  }
+}
