@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
@@ -6,15 +7,195 @@
   <script>try{var t=localStorage.getItem('sv-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}</script>
   <title>Planning & Design | StudyVerse</title>
   <meta name="description" content="StudyVerse helps students plan their studies, stay focused and find study spots in Bahrain.">
-  <!-- Shared head: keep these 3 links on every page -->
+
+  <!-- Shared head - AMEENA -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+
+  <!-- PERSON 3 - Page-specific styles -->
+  <style>
+    .design-page {
+      padding-bottom: 4rem;
+    }
+
+    .design-page .design-section {
+      margin-bottom: 4rem;
+    }
+
+    .design-page .design-lead {
+      max-width: 850px;
+      margin-bottom: 1.5rem;
+    }
+
+    .design-page .design-card {
+      height: 100%;
+    }
+
+    .design-page .design-card h3 {
+      margin-bottom: 1rem;
+    }
+
+    .design-page .design-diagram {
+      padding: 1rem;
+      background: var(--surface);
+      border: 2px dashed var(--edge);
+      border-radius: 14px;
+    }
+
+    .design-page .design-box {
+      padding: .7rem;
+      margin-bottom: .65rem;
+      background: var(--surface-2);
+      color: var(--text);
+      border: 2px solid var(--edge);
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .design-page .design-box:last-child {
+      margin-bottom: 0;
+    }
+
+    .design-page .design-box-large {
+      padding: 1.4rem .7rem;
+      background: var(--note);
+      font-weight: bold;
+    }
+
+    .design-page .design-arrow {
+      text-align: center;
+      font-size: 1.5rem;
+      margin: .25rem 0;
+      color: var(--text);
+    }
+
+    .design-page .mock-screen {
+      padding: 1rem;
+      border: 3px solid var(--edge);
+      border-radius: 18px;
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .design-page .mock-nav,
+    .design-page .mock-footer {
+      padding: .7rem;
+      border: 2px solid var(--edge);
+      border-radius: 10px;
+      background: var(--note);
+      text-align: center;
+      font-family: "Gaegu", cursive;
+      font-weight: 700;
+    }
+
+    .design-page .mock-title {
+      margin: 1.2rem 0;
+      text-align: center;
+      font-family: "Gaegu", cursive;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .design-page .mock-feature {
+      padding: 1rem;
+      margin-bottom: .75rem;
+      border: 2px solid var(--edge);
+      border-radius: 12px;
+      background: var(--surface-2);
+      text-align: center;
+    }
+
+    .design-page .mock-feature strong {
+      display: block;
+      font-family: "Gaegu", cursive;
+      font-size: 2.4rem;
+      line-height: 1.2;
+    }
+
+    .design-page .mock-button {
+      display: inline-block;
+      padding: .3rem .9rem;
+      margin-top: .5rem;
+      border-radius: 12px;
+      background: var(--accent);
+      color: var(--on-accent);
+      font-family: "Gaegu", cursive;
+      font-weight: 700;
+    }
+
+    .design-page .mock-mobile {
+      max-width: 290px;
+      margin: 0 auto;
+    }
+
+    .design-page .color-swatch {
+      height: 75px;
+      border: 2px solid var(--edge);
+      border-radius: 12px;
+      margin-bottom: .8rem;
+    }
+
+    .design-page .color-code {
+      font-family: monospace;
+      font-size: 1rem;
+    }
+
+    .design-page .design-demo-input {
+      width: 100%;
+      padding: .7rem;
+      background: var(--surface);
+      color: var(--text);
+      border: 2px solid var(--edge);
+      border-radius: 10px;
+    }
+
+    .design-page .design-progress {
+      height: 24px;
+      overflow: hidden;
+      background: var(--surface-2);
+      border: 2px solid var(--edge);
+      border-radius: 12px;
+    }
+
+    .design-page .design-progress-fill {
+      width: 60%;
+      height: 100%;
+      background: var(--accent-2);
+    }
+
+    .design-page .design-sample-gaegu {
+      font-family: "Gaegu", cursive;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .design-page .design-sample-patrick {
+      font-family: "Patrick Hand", cursive;
+      font-size: 1.4rem;
+    }
+
+    @media (max-width: 767px) {
+      .design-page .design-section {
+        margin-bottom: 2.5rem;
+      }
+
+      .design-page .mock-screen {
+        padding: .7rem;
+      }
+
+      .design-page .mock-title {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <!-- ===== NAVBAR - SHARED. Copy this block EXACTLY into your page. Only move the "active" class
-       and aria-current="page" to your own page's link. The sliding highlight is js/nav.js. Owner: AMEENA ===== -->
+
+  <!-- ===== NAVBAR - SHARED. OWNER: AMEENA ===== -->
   <header class="nav-wrap">
     <nav class="navbar navbar-expand-xl site-nav" aria-label="Main navigation">
       <div class="container-xl">
@@ -23,13 +204,13 @@
           <div class="nav-pill">
             <span class="nav-indicator" aria-hidden="true"><svg class="hand-circle" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M55 3 C25 1 3 12 3 26 C3 41 28 48 52 48 C80 48 97 38 97 24 C97 10 75 3 45 4 C38 4 33 5 27 8"/></svg></span>
             <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="home.html" title="Home">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="subtopic1.html" title="Plan Your Studies">Plan</a></li>
-            <li class="nav-item"><a class="nav-link" href="subtopic2.html" title="Focus &amp; Recharge">Focus</a></li>
-            <li class="nav-item"><a class="nav-link" href="subtopic3.html" title="Study Spot Finder">Spots</a></li>
-            <li class="nav-item"><a class="nav-link active" href="planning-design.html" title="Planning &amp; Design" aria-current="page">Design</a></li>
-            <li class="nav-item"><a class="nav-link" href="reflection-ai-report.html" title="Reflection &amp; AI Report">Reflection</a></li>
-            <li class="nav-item"><a class="nav-link" href="overview.html" title="Overview">Overview</a></li>
+              <li class="nav-item"><a class="nav-link" href="home.html" title="Home">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="subtopic1.html" title="Plan Your Studies">Plan</a></li>
+              <li class="nav-item"><a class="nav-link" href="subtopic2.html" title="Focus &amp; Recharge">Focus</a></li>
+              <li class="nav-item"><a class="nav-link" href="subtopic3.html" title="Study Spot Finder">Spots</a></li>
+              <li class="nav-item"><a class="nav-link active" href="planning-design.html" title="Planning &amp; Design" aria-current="page">Design</a></li>
+              <li class="nav-item"><a class="nav-link" href="reflection-ai-report.html" title="Reflection &amp; AI Report">Reflection</a></li>
+              <li class="nav-item"><a class="nav-link" href="overview.html" title="Overview">Overview</a></li>
             </ul>
           </div>
         </div>
@@ -51,34 +232,724 @@
     </nav>
   </header>
 
-  <!-- =====================================================================
-       PERSON 3 - THIS PAGE IS YOURS
-       The navbar, footer and head are already done and shared. Build ONLY inside <main>.
-       Rules: use Bootstrap 5 classes + the CSS variables in css/styles.css, use class "sv-card"
-       for cards, keep one <h1>, give every image an alt, credit images in the footer.
-       Keep the js/nav.js script tag, and test your page in BOTH dark and light mode (moon button in the navbar).
-       TODO:
-       1. Design introduction (your approach to designing StudyVerse).
-       2. Low-fidelity wireframes for all 7 pages.
-       3. High-fidelity mockups: desktop AND mobile.
-       4. Design decisions: simple layout, easy navigation, cards, consistent spacing, clear buttons/headings.
-       5. Colour palette: use the values in the :root block of css/styles.css (light mode: cream paper #FFFBF3, sticky-note #FDEDC9, brown text #6B4A3E, mustard #DDAA55, sage #5E9F85, pin red #EC6A6F, desk beige #E8E4D8) plus the purple dark-mode set under [data-bs-theme=dark]. Style: cozy hand-drawn desk - grid paper, sticky-note cards with a pin, wobbly borders.
-       6. Typography: Gaegu (headings, buttons, nav) and Patrick Hand (body) - both handwriting-style, already loaded. List sizes and weights.
-       7. UI components: navbar, buttons, cards, registration form, inputs, progress bar (copy the real ones).
-       8. Responsive design: desktop / tablet / mobile + explain media queries and Bootstrap grid classes.
-       9. Hand your wireframes, mockups, style guide and responsive plan to PERSON 4 for overview.html.
-       ===================================================================== -->
+  <!-- PERSON 3 - PAGE HEADER -->
   <header class="page-header">
     <div class="container"><h1>Planning & Design</h1></div>
   </header>
-  <main id="main" class="section">
+
+  <!-- PERSON 3 - MAIN CONTENT -->
+  <main id="main" class="section design-page">
     <div class="container">
-      <p>Replace this placeholder with your page content.</p>
+
+      <!-- 1. DESIGN INTRODUCTION -->
+      <section class="design-section" aria-labelledby="designIntro">
+        <p class="eyebrow">Behind the Design</p>
+        <h2 id="designIntro">Our Design Approach</h2>
+
+        <p class="design-lead">
+          StudyVerse is a student-focused website designed to make
+          studying more organized, productive and enjoyable.
+          Our design combines practical study tools with a cozy,
+          hand-drawn desk theme.
+        </p>
+
+        <p>
+          We use sticky-note cards, soft colors, handwritten fonts,
+          clear headings and consistent navigation. The aim is to
+          create a welcoming experience where students can plan
+          their work, improve their focus and explore study spots
+          in Bahrain.
+        </p>
+      </section>
+
+      <!-- 2. SITEMAP -->
+      <section class="design-section" aria-labelledby="sitemapTitle">
+        <h2 id="sitemapTitle">Website Sitemap</h2>
+        <p>
+          StudyVerse contains seven connected HTML pages.
+          The shared navigation allows users to move between them.
+        </p>
+
+        <div class="sv-card">
+          <div class="design-diagram">
+            <div class="design-box design-box-large">
+              StudyVerse
+            </div>
+
+            <div class="design-arrow" aria-hidden="true">↓</div>
+
+            <div class="row g-2">
+              <div class="col-md-4">
+                <div class="design-box">1. Home</div>
+              </div>
+              <div class="col-md-4">
+                <div class="design-box">2. Plan Your Studies</div>
+              </div>
+              <div class="col-md-4">
+                <div class="design-box">3. Focus & Recharge</div>
+              </div>
+              <div class="col-md-4">
+                <div class="design-box">4. Study Spot Finder</div>
+              </div>
+              <div class="col-md-4">
+                <div class="design-box">5. Planning & Design</div>
+              </div>
+              <div class="col-md-4">
+                <div class="design-box">6. Reflection & AI Report</div>
+              </div>
+              <div class="col-md-12">
+                <div class="design-box">7. Overview</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. LOW-FIDELITY WIREFRAMES -->
+      <section class="design-section" aria-labelledby="wireframesTitle">
+        <h2 id="wireframesTitle">Low-Fidelity Wireframes</h2>
+
+        <p>
+          These simplified wireframes show the planned arrangement
+          of content for all seven StudyVerse pages.
+          They focus on structure rather than final visual details.
+        </p>
+
+        <div class="row g-4">
+
+          <!-- Home -->
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>1. Home Page</h3>
+              <div class="design-diagram">
+                <div class="design-box">Navigation Bar</div>
+                <div class="design-box design-box-large">
+                  Welcome / Hero Section
+                </div>
+                <div class="design-box">Website Introduction</div>
+                <div class="design-box">Study Feature Cards</div>
+                <div class="design-box">Registration Form</div>
+                <div class="design-box">Footer</div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Planner -->
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>2. Plan Your Studies</h3>
+              <div class="design-diagram">
+                <div class="design-box">Navigation Bar</div>
+                <div class="design-box design-box-large">
+                  Page Heading
+                </div>
+                <div class="design-box">Study Planner</div>
+                <div class="design-box">Planning Tools</div>
+                <div class="design-box">Study Information</div>
+                <div class="design-box">Footer</div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Focus -->
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>3. Focus & Recharge</h3>
+              <div class="design-diagram">
+                <div class="design-box">Navigation Bar</div>
+                <div class="design-box design-box-large">
+                  Focus & Recharge Heading
+                </div>
+                <div class="row g-2">
+                  <div class="col-7">
+                    <div class="design-box">Pomodoro Timer</div>
+                  </div>
+                  <div class="col-5">
+                    <div class="design-box">Mood Matcher</div>
+                  </div>
+                </div>
+                <div class="row g-2">
+                  <div class="col-6">
+                    <div class="design-box">Stress SOS</div>
+                  </div>
+                  <div class="col-6">
+                    <div class="design-box">Break Generator</div>
+                  </div>
+                </div>
+                <div class="design-box">Footer</div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Spots -->
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>4. Study Spot Finder</h3>
+              <div class="design-diagram">
+                <div class="design-box">Navigation Bar</div>
+                <div class="design-box design-box-large">
+                  Study Spot Finder Heading
+                </div>
+                <div class="design-box">Study Spot Cards</div>
+                <div class="design-box">Spot Information</div>
+                <div class="design-box">Footer</div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Planning -->
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>5. Planning & Design</h3>
+              <div class="design-diagram">
+                <div class="design-box">Navigation Bar</div>
+                <div class="design-box design-box-large">
+                  Design Introduction
+                </div>
+                <div class="design-box">Sitemap & Wireframes</div>
+                <div class="design-box">Desktop & Mobile Mockups</div>
+                <div class="design-box">Style Guide & Decisions</div>
+                <div class="design-box">Responsive Design</div>
+                <div class="design-box">Footer</div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Reflection -->
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>6. Reflection & AI Report</h3>
+              <div class="design-diagram">
+                <div class="design-box">Navigation Bar</div>
+                <div class="design-box design-box-large">
+                  Reflection Introduction
+                </div>
+                <div class="design-box">Project Reflection</div>
+                <div class="design-box">AI Tools Documentation</div>
+                <div class="design-box">Lessons Learned</div>
+                <div class="design-box">Footer</div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Overview -->
+          <div class="col-md-12">
+            <article class="sv-card design-card">
+              <h3>7. Overview</h3>
+              <div class="design-diagram">
+                <div class="design-box">Navigation Bar</div>
+                <div class="design-box design-box-large">
+                  Project Overview
+                </div>
+                <div class="design-box">Project Goals & Requirements</div>
+                <div class="design-box">Sitemap & Design Summary</div>
+                <div class="design-box">Responsive & AI Overview</div>
+                <div class="design-box">Footer</div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 4. HIGH-FIDELITY MOCKUPS -->
+      <section class="design-section" aria-labelledby="mockupsTitle">
+        <h2 id="mockupsTitle">High-Fidelity Mockup Concepts</h2>
+
+        <p>
+          The following styled mockups illustrate how the
+          Focus & Recharge page is intended to appear
+          on desktop and mobile screens.
+        </p>
+
+        <div class="row g-4">
+
+          <!-- Desktop -->
+          <div class="col-lg-7">
+            <article class="sv-card design-card">
+              <h3>Desktop Mockup</h3>
+
+              <div class="mock-screen">
+                <div class="mock-nav">
+                  StudyVerse | Home | Plan | Focus | Spots
+                </div>
+
+                <div class="mock-title">Focus & Recharge</div>
+
+                <div class="row g-2">
+                  <div class="col-7">
+                    <div class="mock-feature">
+                      <h4>Pomodoro Timer</h4>
+                      <strong>25:00</strong>
+                      <span class="mock-button">Start</span>
+                    </div>
+                  </div>
+
+                  <div class="col-5">
+                    <div class="mock-feature">
+                      <h4>Mood Matcher</h4>
+                      <p class="mb-0">Choose a mood</p>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="mock-feature">Stress SOS</div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="mock-feature">Break Generator</div>
+                  </div>
+                </div>
+
+                <div class="mock-footer mt-2">
+                  StudyVerse Footer
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Mobile -->
+          <div class="col-lg-5">
+            <article class="sv-card design-card">
+              <h3>Mobile Mockup</h3>
+
+              <div class="mock-screen mock-mobile">
+                <div class="mock-nav">
+                  StudyVerse | Menu
+                </div>
+
+                <div class="mock-title">Focus & Recharge</div>
+
+                <div class="mock-feature">
+                  <h4>Pomodoro Timer</h4>
+                  <strong>25:00</strong>
+                  <span class="mock-button">Start</span>
+                </div>
+
+                <div class="mock-feature">
+                  Mood Matcher
+                </div>
+
+                <div class="mock-feature">
+                  Stress SOS
+                </div>
+
+                <div class="mock-feature">
+                  Break Generator
+                </div>
+
+                <div class="mock-footer">
+                  Footer
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. COLOR PALETTE -->
+      <section class="design-section" aria-labelledby="colorsTitle">
+        <h2 id="colorsTitle">Color Palette</h2>
+
+        <p>
+          The light theme uses warm paper colors with
+          brown text and soft accents. The colors below
+          follow the values specified in the shared design.
+        </p>
+
+        <div class="row g-3">
+
+          <div class="col-6 col-md-4">
+            <div class="sv-card design-card">
+              <div class="color-swatch" style="background:#FFFBF3"></div>
+              <h3>Cream Paper</h3>
+              <p class="color-code">#FFFBF3</p>
+              <p>Main paper background</p>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4">
+            <div class="sv-card design-card">
+              <div class="color-swatch" style="background:#FDEDC9"></div>
+              <h3>Sticky Note</h3>
+              <p class="color-code">#FDEDC9</p>
+              <p>Cards and notes</p>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4">
+            <div class="sv-card design-card">
+              <div class="color-swatch" style="background:#6B4A3E"></div>
+              <h3>Brown Text</h3>
+              <p class="color-code">#6B4A3E</p>
+              <p>Headings and text</p>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4">
+            <div class="sv-card design-card">
+              <div class="color-swatch" style="background:#DDAA55"></div>
+              <h3>Mustard</h3>
+              <p class="color-code">#DDAA55</p>
+              <p>Warm accent color</p>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4">
+            <div class="sv-card design-card">
+              <div class="color-swatch" style="background:#5E9F85"></div>
+              <h3>Sage Green</h3>
+              <p class="color-code">#5E9F85</p>
+              <p>Secondary accent</p>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4">
+            <div class="sv-card design-card">
+              <div class="color-swatch" style="background:#EC6A6F"></div>
+              <h3>Pin Red</h3>
+              <p class="color-code">#EC6A6F</p>
+              <p>Decorative pins</p>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-4">
+            <div class="sv-card design-card">
+              <div class="color-swatch" style="background:#E8E4D8"></div>
+              <h3>Desk Beige</h3>
+              <p class="color-code">#E8E4D8</p>
+              <p>Desk-inspired background</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sv-card mt-4">
+          <h3>Dark Mode</h3>
+          <p>
+            StudyVerse also supports a purple-based dark
+            theme. The shared CSS variables switch colors
+            when the user activates the moon/sun button.
+            This keeps the layout and components consistent
+            across both themes.
+          </p>
+        </div>
+      </section>
+
+      <!-- 6. TYPOGRAPHY -->
+      <section class="design-section" aria-labelledby="typographyTitle">
+        <h2 id="typographyTitle">Typography</h2>
+
+        <div class="row g-4">
+
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>Gaegu</h3>
+
+              <p class="design-sample-gaegu">
+                StudyVerse
+              </p>
+
+              <p>
+                Used for headings, navigation labels and
+                buttons. Its handwritten appearance supports
+                the friendly desk theme.
+              </p>
+
+              <p>
+                <strong>Weights:</strong> 400 and 700
+              </p>
+
+              <p>
+                <strong>Typical sizes:</strong>
+                approximately 24–56px for headings,
+                depending on hierarchy and screen size.
+              </p>
+            </article>
+          </div>
+
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>Patrick Hand</h3>
+
+              <p class="design-sample-patrick">
+                Your world of focus and balance.
+              </p>
+
+              <p>
+                Used for paragraphs, descriptions and
+                supporting information. The font is
+                readable while maintaining a casual,
+                handwritten style.
+              </p>
+
+              <p>
+                <strong>Weight:</strong> 400
+              </p>
+
+              <p>
+                <strong>Typical size:</strong>
+                approximately 18–20px for body text.
+              </p>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 7. UI COMPONENTS -->
+      <section class="design-section" aria-labelledby="componentsTitle">
+        <h2 id="componentsTitle">UI Components</h2>
+
+        <p>
+          StudyVerse reuses common components to maintain
+          a consistent experience across the website.
+        </p>
+
+        <div class="row g-4">
+
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>Navigation Bar</h3>
+              <p>
+                The shared navbar contains links to all
+                seven pages, a theme toggle and login controls.
+                It becomes collapsible on smaller screens.
+              </p>
+
+              <div class="design-box">
+                StudyVerse | Home | Plan | Focus | Spots
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>Buttons</h3>
+              <p>
+                Primary and secondary buttons help users
+                recognize important actions.
+              </p>
+
+              <div class="d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-brand">
+                  Primary Button
+                </button>
+
+                <button type="button" class="btn btn-outline-brand">
+                  Secondary Button
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>Sticky-Note Cards</h3>
+              <p>
+                The shared <strong>sv-card</strong> component
+                uses decorative borders and a note-like
+                appearance to separate information.
+              </p>
+            </article>
+          </div>
+
+          <div class="col-md-6">
+            <article class="sv-card design-card">
+              <h3>Forms and Inputs</h3>
+              <p>
+                Forms use clear labels and readable input
+                fields. The home page includes registration,
+                while the shared login modal supports sign-in.
+              </p>
+
+              <label for="designInput" class="form-label">
+                Example Username
+              </label>
+
+              <input id="designInput"
+                     type="text"
+                     class="form-control"
+                     placeholder="Enter username">
+            </article>
+          </div>
+
+          <div class="col-md-12">
+            <article class="sv-card design-card">
+              <h3>Progress Bar</h3>
+              <p>
+                Progress bars provide visual feedback
+                for study-related tasks. This is a
+                sample component showing 60% progress.
+              </p>
+
+              <div class="design-progress"
+                   role="progressbar"
+                   aria-label="Sample progress"
+                   aria-valuenow="60"
+                   aria-valuemin="0"
+                   aria-valuemax="100">
+
+                <div class="design-progress-fill"></div>
+              </div>
+
+              <p class="mt-2 mb-0">60% Complete</p>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 8. DESIGN DECISIONS -->
+      <section class="design-section" aria-labelledby="decisionsTitle">
+        <h2 id="decisionsTitle">Design Decisions</h2>
+
+        <div class="sv-card">
+          <h3>Simple Layout</h3>
+          <p>
+            Content is divided into clear sections so
+            students can find information without confusion.
+          </p>
+
+          <h3>Easy Navigation</h3>
+          <p>
+            The same navigation bar appears on every page.
+            The active link indicates the current page.
+          </p>
+
+          <h3>Consistent Cards</h3>
+          <p>
+            Sticky-note cards create visual consistency
+            and separate different tools and topics.
+          </p>
+
+          <h3>Clear Buttons and Headings</h3>
+          <p>
+            Buttons use action-based labels such as
+            Start, Pause, Reset and Surprise Me.
+            Headings describe each section clearly.
+          </p>
+
+          <h3>Consistent Spacing</h3>
+          <p>
+            Bootstrap spacing utilities, containers and
+            grid classes create balanced layouts.
+          </p>
+
+          <h3>Light and Dark Themes</h3>
+          <p>
+            Shared CSS variables allow colors to change
+            without rebuilding the page structure.
+          </p>
+        </div>
+      </section>
+
+      <!-- 9. RESPONSIVE DESIGN -->
+      <section class="design-section" aria-labelledby="responsiveTitle">
+        <h2 id="responsiveTitle">Responsive Design Plan</h2>
+
+        <p>
+          The website is designed to adapt to desktop,
+          tablet and mobile screens using Bootstrap 5
+          and CSS media queries.
+        </p>
+
+        <div class="row g-4">
+
+          <div class="col-md-4">
+            <article class="sv-card design-card">
+              <h3>Desktop</h3>
+              <p>
+                Larger screens use multi-column layouts
+                to display tools side by side.
+              </p>
+
+              <p>
+                Example: the Pomodoro Timer and
+                Mood Matcher share one row.
+              </p>
+            </article>
+          </div>
+
+          <div class="col-md-4">
+            <article class="sv-card design-card">
+              <h3>Tablet</h3>
+              <p>
+                Grid columns adjust to available width.
+                Spacing and cards remain readable.
+              </p>
+
+              <p>
+                Bootstrap classes such as
+                <code>col-md-6</code> help organize content.
+              </p>
+            </article>
+          </div>
+
+          <div class="col-md-4">
+            <article class="sv-card design-card">
+              <h3>Mobile</h3>
+              <p>
+                Cards stack vertically, navigation
+                collapses into a menu and large
+                elements scale down.
+              </p>
+
+              <p>
+                Media queries adjust spacing
+                and typography for smaller screens.
+              </p>
+            </article>
+          </div>
+
+        </div>
+
+        <div class="sv-card mt-4">
+          <h3>Bootstrap Grid and Media Queries</h3>
+
+          <p>
+            The Bootstrap <code>container</code>,
+            <code>row</code>, <code>col-md-6</code>
+            and <code>col-lg-7</code> classes organize
+            content responsively.
+          </p>
+
+          <p>
+            CSS media queries such as
+            <code>@media (max-width: 767px)</code>
+            allow us to adjust padding, typography
+            and layouts on narrow screens.
+          </p>
+        </div>
+      </section>
+
+      <!-- 10. ACCESSIBILITY -->
+      <section class="design-section" aria-labelledby="accessibilityTitle">
+        <h2 id="accessibilityTitle">Accessibility</h2>
+
+        <div class="sv-card">
+          <p>
+            StudyVerse uses semantic HTML elements,
+            meaningful headings, labeled inputs,
+            descriptive buttons and keyboard-accessible
+            controls.
+          </p>
+
+          <p>
+            The responsive layout helps students use
+            the website on different devices. Light
+            and dark modes offer different visual
+            preferences, while feedback messages help
+            users understand interactive features.
+          </p>
+        </div>
+      </section>
+
     </div>
   </main>
 
-  <!-- ===== FOOTER - SHARED. Copy EXACTLY into your page. Owner: AMEENA =====
-       Credits: add the source of every image/media you use on YOUR page to the list below. -->
+  <!-- ===== FOOTER - SHARED. OWNER: AMEENA ===== -->
   <footer class="site-footer">
     <div class="container">
       <div class="row g-4">
@@ -89,13 +960,13 @@
         <div class="col-md-4">
           <h2>Quick links</h2>
           <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="subtopic1.html">Plan Your Studies</a></li>
-        <li><a href="subtopic2.html">Focus & Recharge</a></li>
-        <li><a href="subtopic3.html">Study Spot Finder</a></li>
-        <li><a href="planning-design.html">Planning & Design</a></li>
-        <li><a href="reflection-ai-report.html">Reflection & AI Report</a></li>
-        <li><a href="overview.html">Overview</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="subtopic1.html">Plan Your Studies</a></li>
+            <li><a href="subtopic2.html">Focus & Recharge</a></li>
+            <li><a href="subtopic3.html">Study Spot Finder</a></li>
+            <li><a href="planning-design.html">Planning & Design</a></li>
+            <li><a href="reflection-ai-report.html">Reflection & AI Report</a></li>
+            <li><a href="overview.html">Overview</a></li>
           </ul>
         </div>
         <div class="col-md-3">
@@ -112,7 +983,7 @@
     </div>
   </footer>
 
-  <!-- ===== LOGIN WINDOW + WELCOME NOTE - SHARED. Copy EXACTLY into your page. Logic: js/auth.js. Owner: AMEENA ===== -->
+  <!-- ===== LOGIN WINDOW + WELCOME NOTE - SHARED. OWNER: AMEENA ===== -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -133,7 +1004,6 @@
     </div>
   </div>
   <div class="welcome-toast" id="welcomeToast" role="status" aria-live="polite" hidden></div>
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/nav.js"></script>
