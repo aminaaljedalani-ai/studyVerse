@@ -94,30 +94,6 @@
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a class="nav-link"
-                   href="planning-design.html"
-                   title="Planning &amp; Design">
-                  Design
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link"
-                   href="reflection-ai-report.html"
-                   title="Reflection &amp; AI Report">
-                  Reflection
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link"
-                   href="overview.html"
-                   title="Overview">
-                  Overview
-                </a>
-              </li>
-
             </ul>
           </div>
         </div>
@@ -221,9 +197,26 @@
 
   <!-- PAGE HEADING -->
   <header class="page-header">
-    <div class="container">
-      <h1>Focus & Recharge</h1>
+  <div class="container text-center">
+    <h1>How are you feeling today?</h1>
+
+    <div id="moodOptions"
+         class="d-flex flex-wrap justify-content-center gap-2 mt-3"
+         role="group"
+         aria-label="Choose how you are feeling">
+      <button type="button" class="btn btn-outline-brand" data-mood="great">😄 Great</button>
+      <button type="button" class="btn btn-outline-brand" data-mood="okay">🙂 Okay</button>
+      <button type="button" class="btn btn-outline-brand" data-mood="tired">😴 Tired</button>
+      <button type="button" class="btn btn-outline-brand" data-mood="stressed">😰 Stressed</button>
+      <button type="button" class="btn btn-outline-brand" data-mood="sad">😔 Sad</button>
     </div>
+
+    <p id="moodAdvice"
+       class="focus-feedback mood-advice mx-auto"
+       role="status"
+       aria-live="polite"
+       hidden></p>
+  </div>
   </header>
 
 
@@ -232,28 +225,12 @@
 
     <div class="container">
 
-      <!-- Introduction -->
-      <section class="text-center mb-5">
-
-        <p class="eyebrow">
-          Find your focus. Protect your peace.
-        </p>
-
-        <p class="focus-intro">
-          Stay productive with our Pomodoro timer,
-          personalized study tips, calming breathing
-          exercises and refreshing break activities.
-        </p>
-
-      </section>
-
-
-      <div class="row g-4">
+      <div class="row g-4 justify-content-center">
 
         <!-- POMODORO TIMER -->
-        <div class="col-lg-7">
+        <div class="col-12 col-lg-8 mx-auto">
 
-          <section class="sv-card focus-panel text-center"
+          <section class="sv-card focus-panel focus-timer-card text-center"
                    aria-labelledby="pomodoroHeading">
 
             <h2 id="pomodoroHeading">
@@ -261,40 +238,9 @@
             </h2>
 
             <p>
-              Study smarter by balancing focus and rest.
-              Choose your session and start your timer.
+              Focus for 25 minutes, then pick a break.
+              When your break ends, the next focus session starts automatically.
             </p>
-
-            <!-- Timer modes -->
-            <div class="focus-modes"
-                 role="group"
-                 aria-label="Timer mode">
-
-              <button type="button"
-                      class="focus-mode is-selected"
-                      data-mode="Focus"
-                      data-minutes="25"
-                      aria-pressed="true">
-                Focus 25 min
-              </button>
-
-              <button type="button"
-                      class="focus-mode"
-                      data-mode="Short Break"
-                      data-minutes="5"
-                      aria-pressed="false">
-                Short Break 5 min
-              </button>
-
-              <button type="button"
-                      class="focus-mode"
-                      data-mode="Long Break"
-                      data-minutes="15"
-                      aria-pressed="false">
-                Long Break 15 min
-              </button>
-
-            </div>
 
             <!-- Timer display -->
             <p id="timerMode"
@@ -302,11 +248,18 @@
               FOCUS
             </p>
 
-            <div id="timerDisplay"
-                 class="focus-clock"
-                 role="timer"
-                 aria-label="Time remaining">
-              25:00
+            <div class="focus-ring">
+              <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+                <circle class="ring-track" cx="100" cy="100" r="90"></circle>
+                <circle id="timerRing" class="ring-progress" cx="100" cy="100" r="90"></circle>
+              </svg>
+
+              <div id="timerDisplay"
+                   class="focus-clock"
+                   role="timer"
+                   aria-label="Time remaining">
+                25:00
+              </div>
             </div>
 
             <!-- Timer buttons -->
@@ -332,6 +285,49 @@
 
             </div>
 
+            <!-- Break chooser (appears when a focus session ends) -->
+            <div id="breakChooser"
+                 class="focus-break-chooser"
+                 hidden>
+
+              <h3 class="focus-break-title">Time for a break!</h3>
+              <p>Choose how long you want to rest:</p>
+
+              <div class="focus-modes"
+                   role="group"
+                   aria-label="Choose your break length">
+
+                <button type="button"
+                        class="focus-mode"
+                        data-break="Short Break"
+                        data-minutes="5">
+                  Short Break 5 min
+                </button>
+
+                <button type="button"
+                        class="focus-mode"
+                        data-break="Long Break"
+                        data-minutes="15">
+                  Long Break 15 min
+                </button>
+
+                <button type="button"
+                        id="surpriseBreak"
+                        class="focus-mode focus-surprise">
+                  Surprise Me!
+                </button>
+
+              </div>
+
+              <p id="breakResult"
+                 class="focus-feedback"
+                 role="status"
+                 aria-live="polite">
+                Not sure what to do? Tap Surprise Me for a break idea.
+              </p>
+
+            </div>
+
             <p id="timerStatus"
                class="focus-feedback"
                role="status"
@@ -343,73 +339,11 @@
         </div>
 
 
-        <!-- STUDY MOOD MATCHER -->
-        <div class="col-lg-5">
-
-          <section id="mood"
-                   class="sv-card focus-panel"
-                   aria-labelledby="moodHeading">
-
-            <h2 id="moodHeading">
-              Study Mood Matcher
-            </h2>
-
-            <p>
-              How are you feeling today?
-              Get a study tip that matches your mood.
-            </p>
-
-            <label for="moodSelect"
-                   class="form-label">
-              Choose your mood
-            </label>
-
-            <select id="moodSelect"
-                    class="form-select">
-
-              <option value="">
-                Select your mood
-              </option>
-
-              <option value="stressed">
-                Stressed
-              </option>
-
-              <option value="tired">
-                Tired
-              </option>
-
-              <option value="motivated">
-                Motivated
-              </option>
-
-              <option value="distracted">
-                Distracted
-              </option>
-
-            </select>
-
-            <button type="button"
-                    id="moodMatch"
-                    class="btn btn-brand mt-3">
-              Get My Study Tip
-            </button>
-
-            <p id="moodResult"
-               class="focus-feedback"
-               role="status"
-               aria-live="polite">
-              Your personalized tip will appear here.
-            </p>
-
-          </section>
-        </div>
-
-
         <!-- STRESS SOS -->
-        <div class="col-md-6">
+        <div class="col-12 col-lg-8 mx-auto">
 
-          <section class="sv-card focus-panel"
+          <section id="sosSection"
+                   class="sv-card focus-panel focus-timer-card text-center"
                    aria-labelledby="sosHeading">
 
             <h2 id="sosHeading">
@@ -434,25 +368,16 @@
                  class="focus-breathing text-center"
                  hidden>
 
-              <div class="focus-breath-circle"
+              <div id="breathCircle"
+                   class="focus-breath-circle"
                    aria-hidden="true">
-                Breathe
+                <span id="breathLabel" class="breath-label">Breathe in</span>
+                <span id="breathCount" class="breath-count">4</span>
               </div>
 
-              <p>
-                Breathe in slowly for four seconds,
-                then breathe out gently for four seconds.
-              </p>
-
-              <p class="focus-reminder">
+              <p class="focus-reminder mx-auto">
                 You are doing your best.
                 One step at a time!
-              </p>
-
-              <p>
-                Take a short break,
-                stretch your body,
-                and drink some water.
               </p>
 
               <button type="button"
@@ -466,37 +391,6 @@
           </section>
         </div>
 
-
-        <!-- BREAK GENERATOR -->
-        <div class="col-md-6">
-
-          <section class="sv-card focus-panel"
-                   aria-labelledby="breakHeading">
-
-            <h2 id="breakHeading">
-              Break Generator
-            </h2>
-
-            <p>
-              Need a quick recharge?
-              Get a random activity for your next study break.
-            </p>
-
-            <button type="button"
-                    id="surpriseBreak"
-                    class="btn btn-brand">
-              Surprise Me!
-            </button>
-
-            <p id="breakResult"
-               class="focus-feedback"
-               role="status"
-               aria-live="polite">
-              Your break suggestion will appear here.
-            </p>
-
-          </section>
-        </div>
 
       </div>
 
@@ -528,7 +422,7 @@
 
       <div class="row g-4">
 
-        <div class="col-md-5">
+        <div class="col-md-3 pe-md-4">
 
           <h2>StudyVerse</h2>
 
@@ -539,7 +433,7 @@
 
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
 
           <h2>Quick links</h2>
 
@@ -548,6 +442,15 @@
             <li><a href="subtopic1.html">Plan Your Studies</a></li>
             <li><a href="subtopic2.html">Focus & Recharge</a></li>
             <li><a href="subtopic3.html">Study Spot Finder</a></li>
+          </ul>
+
+        </div>
+
+        <div class="col-md-3">
+
+          <h2>Documents</h2>
+
+          <ul>
             <li><a href="planning-design.html">Planning & Design</a></li>
             <li><a href="reflection-ai-report.html">Reflection & AI Report</a></li>
             <li><a href="overview.html">Overview</a></li>
