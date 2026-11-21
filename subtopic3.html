@@ -71,7 +71,80 @@
   </header>
   <main id="main" class="section">
     <div class="container">
-      <p>Replace this placeholder with your page content.</p>
+      <section class="mb-5" aria-labelledby="introTitle">
+      <p class="eyebrow">Study Spot Finder</p>
+      <h2 id="introTitle">Find your perfect study environment</h2>
+      <p>Find a place in Bahrain that matches how you like to study. Filter by location, budget, noise level, Wi-Fi and power sockets, or take the quick quiz to get a recommendation.</p>
+    </section>
+    
+    <section class="mb-5" aria-labelledby="filterTitle">
+      <h2 id="filterTitle">Filters</h2>
+      <div class="sv-card">
+        <form id="filterForm" class="row g-3 align-items-end">
+
+  <div class="col-12 col-md-4">
+    <label for="filterLocation" class="form-label">Location</label>
+    <select id="filterLocation" class="form-select">
+      <option value="all">All locations</option>
+      <option value="Manama">Manama</option>
+      <option value="Riffa">Riffa</option>
+      <option value="Muharraq">Muharraq</option>
+    </select>
+  </div>
+
+  <div class="col-12 col-md-4">
+    <label for="filterBudget" class="form-label">Budget</label>
+    <select id="filterBudget" class="form-select">
+      <option value="all">Any budget</option>
+      <option value="Free">Free</option>
+      <option value="$">$</option>
+      <option value="$$">$$</option>
+      <option value="$$$">$$$</option>
+    </select>
+  </div>
+
+  <div class="col-12 col-md-4">
+    <label for="filterNoise" class="form-label">Noise level</label>
+    <select id="filterNoise" class="form-select">
+      <option value="all">Any noise level</option>
+      <option value="Quiet">Quiet</option>
+      <option value="Moderate">Moderate</option>
+      <option value="Lively">Lively</option>
+    </select>
+  </div>
+
+  <div class="col-12 col-md-4">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="filterWifi">
+      <label class="form-check-label" for="filterWifi">Wi-Fi available</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="filterSockets">
+      <label class="form-check-label" for="filterSockets">Power sockets</label>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-4">
+    <button type="reset" class="btn btn-outline-brand">Reset filters</button>
+  </div>
+
+</form>
+      </div>
+    </section>
+
+    <section class="mb-5" aria-labelledby="spotsTitle">
+      <h2 id="spotsTitle">Study spots in Bahrain</h2>
+      <div class="row g-4" id="spotList">
+        
+      </div>
+    </section>
+
+    <section class="mb-5" aria-labelledby="quizTitle">
+      <h2 id="quizTitle">Which study environment suits you?</h2>
+      <div class="sv-card">
+        
+      </div>
+    </section>
     </div>
   </main>
 
