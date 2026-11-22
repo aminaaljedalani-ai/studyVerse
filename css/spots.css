@@ -13,6 +13,7 @@
   background: var(--surface-2);
   color: var(--text);
   font-size: .95rem;
+  justify-content: center;
 }
 
 .spot-facts {
@@ -21,7 +22,7 @@
 
 .spot-img {
   width: 100%;
-  height: 160px;
+  height: 140px;
   object-fit: cover;
   border: 2px solid var(--edge);
   border-radius: 10px;
@@ -86,6 +87,7 @@
 .spot-bar {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: .75rem;
   align-items: center;
 }
@@ -102,7 +104,6 @@
   border: 3px solid var(--edge);
   border-radius: 50%;
 }
-
 .spot-trigger::after {
   content: "\25BE";
   margin-left: .5rem;
@@ -151,4 +152,107 @@
 .spots-page p {
   margin-left: auto;
   margin-right: auto;
+}
+
+.spot-feature {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .2rem .8rem;
+  font-size: .95rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 2px solid var(--edge);
+  border-radius: 999px;
+}
+
+.spot-feature-yes {
+  font-weight: bold;
+}
+
+.spot-feature-no {
+  opacity: .7;
+}
+
+.spot-feature-unknown {
+  border-style: dashed;
+  opacity: .8;
+}
+
+.spot-actions {
+  padding-top: 1rem;
+  border-top: 2px dashed var(--edge);
+}
+
+.spot-modes {
+  display: inline-flex;
+  overflow: hidden;
+  background: var(--surface);
+  border: 2px solid var(--edge);
+  border-radius: 999px;
+}
+
+.spot-mode {
+  padding: .4rem 1.3rem;
+  font-family: "Gaegu", cursive;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.spot-mode + .spot-mode {
+  border-left: 2px solid var(--edge);
+}
+
+.spot-mode[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.spot-panel {
+  padding: 1.5rem;
+  background: var(--surface-2);
+  border: 2px dashed var(--edge);
+  border-radius: 18px;
+}
+
+.spot-logo svg {
+  width: 24px;
+  height: 24px;
+}
+.spot-modebar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  margin-bottom: 1.5rem;
+}
+
+.spot-modebar-label {
+  font-family: "Gaegu", cursive;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+
+.spots-page[data-mode="library"] { --mode-tint: var(--accent-2); }
+.spots-page[data-mode="cafe"]    { --mode-tint: var(--accent); }
+
+.spots-page[data-mode="library"],
+.spots-page[data-mode="cafe"] {
+  background-color: color-mix(in srgb, var(--mode-tint) 18%, transparent);
+}
+
+.spots-page[data-mode="library"] .sv-card,
+.spots-page[data-mode="cafe"] .sv-card {
+  background-color: color-mix(in srgb, var(--note) 70%, var(--mode-tint));
+}
+
+.page-header .spot-modebar {
+  margin-bottom: 0;
+  justify-content: flex-end;
 }

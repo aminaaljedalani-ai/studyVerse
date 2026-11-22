@@ -11,7 +11,86 @@
   <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  
+  <style>
+    /* the menu */
+.overview-menu {
+  --bs-nav-pills-link-active-bg: var(--accent);
+  --bs-nav-pills-link-active-color: var(--on-accent);
+  --bs-nav-link-color: var(--text);
+  --bs-nav-link-hover-color: var(--text);
+  gap: .35rem;
+}
+
+.overview-menu .nav-link {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  text-align: left;
+  font-family: "Gaegu", cursive;
+  font-size: 1.2rem;
+  border-radius: 12px;
+}
+
+.overview-num {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--note);
+  border: 2px solid var(--edge);
+  border-radius: 50%;
+}
+
+/* a notebook-margin line between menu and content */
+@media (min-width: 768px) {
+  .overview-content {
+    padding-left: 2rem;
+    border-left: 2px dashed var(--edge);
+  }
+}
+
+/* on phones, the menu becomes one scrollable row */
+@media (max-width: 767px) {
+  .overview-menu {
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: .5rem;
+  }
+
+  .overview-menu .nav-link {
+    white-space: nowrap;
+  }
+
+  .overview-checks li::before {
+  content: "✓";
+  margin-right: .6rem;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+.overview-reqs li {
+  display: flex;
+  gap: .7rem;
+  margin-bottom: .9rem;
+}
+
+.overview-id {
+  flex: none;
+  align-self: flex-start;
+  padding: .05rem .6rem;
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--note);
+  border: 2px solid var(--edge);
+  border-radius: 999px;
+}
+}
+  </style>
 </head>
 <body>
   <!-- ===== NAVBAR - SHARED. Copy this block EXACTLY into your page. Only move the "active" class
@@ -69,293 +148,117 @@
     <div class="container">
       <h1>Overview</h1></div>
   </header>
-  <main id="main" class="section">
-    <!--page container-->
-    <div class="container">
-          
-      <h2 id="projectOverview">Project Overview</h2>
-      <!--section 1: overview table-->
-      <section class="mb-5" aria-labelledby="projectOverview">
-        
-        <div class="row g-4 mb-5">
-          <div class="col-md-4">
-            <section class="sv-card h-100">
-              <p class="eyebrow mb-1">Website title</p>
-              <p class="fs-4 mb-0">StudyVerse</p>
-           </section>
-          </div>
+ <main id="main" class="section overview-page">
+  <div class="container">
+    <div class="row g-4">
 
-          <div class="col-md-4">
-            <section class="sv-card h-100">
-              <p class="eyebrow mb-1">Category</p>
-              <p class="fs-4 mb-0">Educational website</p>
-          </section>  
-          </div>
-          <div class="col-md-4">
-            <section class="sv-card h-100">
-              <p class="eyebrow mb-1">Target audience</p>
-              <p class="fs-4 mb-0">Students in Bahrain</p>
-            </section>
-          </div>
-          
-          <hr class="my-0">
-          <div class="col-12">
-            <section class="sv-card">
-              <p class="eyebrow mb-1">Problem statement</p>
-  <p class="mw-100 mb-0">Students often struggle to organise their study time, stay focused and find a suitable place to study. These tools are usually spread across different apps and websites. StudyVerse brings them together in one friendly place, with study spots that are relevant to students in Bahrain.</p>
-           </section> 
-          </div>
-          <hr class="my-0">
-          <div class="col-12">
-            <section class="sv-card">
-              <p class="eyebrow mb-1">Project objectives</p>
-              <ul class="list-unstyled row row-cols-md-2 g-2 mb-0">
-                <li class="col">1. Help students plan and organise their study time.</li>
-                <li class="col">2. Support focus and wellbeing with a Pomodoro timer, mood matcher, stress relief and break ideas.</li>
-                <li class="col">3. Help students discover study spots in Bahrain.</li>
-                <li class="col">4. Provide a consistent, responsive website that works on desktop, tablet and mobile in light and dark mode.</li>
-                <li class="col">5. Use AI tools responsibly and document how they were used.</li>
-              </ul>
-           </section> 
-          </div>
-          </div>
-          
-        
-        <div class="sv-card mb-5">
+      <!-- LEFT: the menu -->
+      <div class="col-md-4 col-lg-3">
+        <div class="nav flex-column nav-pills overview-menu" role="tablist" aria-orientation="vertical">
 
-  <!-- Zone 1: key facts -->
-  <div class="row g-4">
-    <div class="col-md-4">
-      <p class="eyebrow mb-1">Website title</p>
-      <p class="fs-4 mb-0">StudyVerse</p>
-    </div>
-    <div class="col-md-4">
-      <p class="eyebrow mb-1">Category</p>
-      <p class="fs-4 mb-0">Educational website</p>
-    </div>
-    <div class="col-md-4">
-      <p class="eyebrow mb-1">Target audience</p>
-      <p class="fs-4 mb-0">Students in Bahrain</p>
-    </div>
+          <button class="nav-link active" id="tab-s1" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s1" aria-controls="s1" aria-selected="true">
+            <span class="overview-num">1</span> Project Overview
+          </button>
+
+          <button class="nav-link" id="tab-s2" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s2" aria-controls="s2" aria-selected="false">
+            <span class="overview-num">2</span> Requirements
+          </button>
+
+          <!-- repeat for s3 ... s11 (without "active") -->
+
+        </div>
+      </div>
+
+      <!-- RIGHT: the content -->
+      <div class="col-md-8 col-lg-9 overview-content">
+        <div class="tab-content">
+
+          <section class="tab-pane fade show active" id="s1" role="tabpanel" aria-labelledby="tab-s1" tabindex="0">
+            <h2>Project <span class="circled">Overview</span></h2>
+            <!-- content later -->
+             
+<p class="lead">StudyVerse is an educational website that helps students in Bahrain plan their studies, stay focused and find places to study.</p>
+
+<hr class="my-4">
+
+<dl class="overview-facts row g-3 mb-0">
+  <div class="col-sm-6">
+    <dt class="eyebrow mb-1">Website title</dt>
+    <dd class="fs-4 mb-0">StudyVerse</dd>
+  </div>
+  <div class="col-sm-6">
+    <dt class="eyebrow mb-1">Category</dt>
+    <dd class="fs-4 mb-0">Educational website</dd>
+  </div>
+  <div class="col-12">
+    <dt class="eyebrow mb-1">Target audience</dt>
+    <dd class="fs-5 mb-0">School, college and university students in Bahrain who want to plan their studies, improve their focus and find good places to study.</dd>
+  </div>
+</dl>
+
+<hr class="my-4">
+
+<h3>Problem statement</h3>
+<p>Students often struggle to organise their study time, stay focused and find a suitable place to study. These tools are usually spread across different apps and websites. StudyVerse brings them together in one friendly place, with study spots that are relevant to students in Bahrain.</p>
+
+<h3 class="mt-4">Project objectives</h3>
+<ul class="overview-checks list-unstyled row row-cols-md-2 g-2 mb-0">
+  <li class="col">Help students plan and organise their study time.</li>
+  <li class="col">Support focus and wellbeing with simple tools.</li>
+  <li class="col">Help students discover study spots in Bahrain.</li>
+  <li class="col">Provide a responsive website for desktop, tablet and mobile, in light and dark mode.</li>
+  <li class="col">Use AI tools responsibly and document how they were used.</li>
+</ul>
+          </section>
+
+          <section class="tab-pane fade" id="s2" role="tabpanel" aria-labelledby="tab-s2" tabindex="0">
+            <h2>Requirement Analysis</h2>
+            <!-- content later -->
+             
+<p class="lead">What the website must do, and how well it must do it.</p>
+
+<hr class="my-4">
+
+<div class="row g-4">
+
+  <div class="col-lg-6">
+    <h3>Functional requirements</h3>
+    <ul class="overview-reqs list-unstyled">
+      <li><span class="overview-id">FR1</span><span><strong>User registration:</strong> a form on the Home page collects first name, last name, mobile number and email.</span></li>
+      <li><span class="overview-id">FR2</span><span><strong>Form validation:</strong> names need at least 3 characters, the mobile number exactly 8 digits and the email a valid format, with clear success and error messages.</span></li>
+      <li><span class="overview-id">FR3</span><span><strong>Navigation system:</strong> one shared navigation bar links all seven pages.</span></li>
+      <li><span class="overview-id">FR4</span><span><strong>Login demo:</strong> a login window shows a welcome message (front-end only).</span></li>
+      <li><span class="overview-id">FR5</span><span><strong>Theme switch:</strong> a moon/sun button changes between light and dark mode.</span></li>
+      <li><span class="overview-id">FR6</span><span><strong>Study planner:</strong> tools to plan study tasks.</span></li>
+      <li><span class="overview-id">FR7</span><span><strong>Focus tools:</strong> Pomodoro timer, Mood Matcher, Stress SOS and Break Generator.</span></li>
+      <li><span class="overview-id">FR8</span><span><strong>Study spot finder:</strong> study spots in Bahrain that can be filtered by location, budget, noise level, Wi-Fi and power sockets.</span></li>
+    </ul>
   </div>
 
-  <hr class="my-4">
-
-  <!-- Zone 2: problem -->
-  <p class="eyebrow mb-1">Problem statement</p>
-  <p class="mw-100 mb-0">Students often struggle to organise their study time, stay focused and find a suitable place to study. These tools are usually spread across different apps and websites. StudyVerse brings them together in one friendly place, with study spots that are relevant to students in Bahrain.</p>
-
-  <hr class="my-4">
-
-  <!-- Zone 3: objectives -->
-  <p class="eyebrow mb-1">Project objectives</p>
-  <ul class="list-unstyled row row-cols-md-2 g-2 mb-0">
-    <li class="col">1. Help students plan and organise their study time.</li>
-    <li class="col">2. Support focus and wellbeing with a Pomodoro timer, mood matcher, stress relief and break ideas.</li>
-    <li class="col">3. Help students discover study spots in Bahrain.</li>
-    <li class="col">4. Provide a consistent, responsive website that works on desktop, tablet and mobile in light and dark mode.</li>
-    <li class="col">5. Use AI tools responsibly and document how they were used.</li>
-  </ul>
+  <div class="col-lg-6">
+    <h3>Non-functional requirements</h3>
+    <ul class="overview-reqs list-unstyled">
+      <li><span class="overview-id">NFR1</span><span><strong>Performance:</strong> lightweight pages that load quickly.</span></li>
+      <li><span class="overview-id">NFR2</span><span><strong>Accessibility:</strong> semantic HTML, labelled form fields, alt text on images and readable colours in both themes.</span></li>
+      <li><span class="overview-id">NFR3</span><span><strong>Security:</strong> user input is validated, and the demo collects no passwords.</span></li>
+      <li><span class="overview-id">NFR4</span><span><strong>Usability:</strong> a simple layout, consistent cards and buttons, and the same navigation on every page.</span></li>
+      <li><span class="overview-id">NFR5</span><span><strong>Responsiveness:</strong> layouts adapt to desktop, tablet and mobile.</span></li>
+      <li><span class="overview-id">NFR6</span><span><strong>Maintainability:</strong> shared styles and files keep all pages consistent and easy to update.</span></li>
+    </ul>
+  </div>
 
 </div>
-        
-        
-        <!--choice 1-->
-        <!--<div class="sv-card">
-          <table class="table" style="--bs-table-bg: transparent;">
-            <tbody>
-              <tr>
-                <th scope="row">Website title</th>
-                <th scope="row">Category</th>
-                <th scope="row">problem statement</th>
-                <th scope="row">target audience</th>
-                <th scope="row">objectives</th>
-              </tr>
-              <tr>
-                <td>StudyVerse</td>
-                <td>Educational website</td>
-                <td>Students often struggle to organise their study time, stay focused
-                  and find a suitable place to study. These tools are usually spread
-                  across different apps and websites. StudyVerse brings them together
-                  in one friendly place, with study spots that are relevant to
-                  students in Bahrain</td>
-                  <td>School, college and university students in Bahrain who want to
-                  plan their studies, improve their focus and find good places to study.</td>
-                  <td>
-                      <ul class="mb-0">
-                      <li>Help students plan and organise their study time.</li>
-                      <li>Support focus and wellbeing with a Pomodoro timer, mood matcher, stress relief and break ideas.</li>
-                      <li>Help students discover study spots in Bahrain.</li>
-                      <li>Provide a consistent, responsive website that works on desktop, tablet and mobile in light and dark mode.</li>
-                      <li>Use AI tools responsibly and document how they were used.</li>
-                    </ul>
-                  </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-      <section class="mb-5" aria-labelledby="table2">
-        <!--another choice: select one-->
-        <div class="sv-card">
-          
-          <table class="table table-hover table-sm align-middle mb-0 --bs-table-color: var(--text);" style="--bs-table-bg: transparent; --bs-table-color: var(--text);">
-            <tbody>
-              <tr>
-                <th scope="row">Website title</th>
-                <td>StudyVerse</td>
-              </tr>
-              <tr>
-                <th scope="row">Website category</th>
-                <td>Educational website</td>
-              </tr>
-              <tr>
-                <th scope="row">Problem statement</th>
-                <td>
-                  Students often struggle to organise their study time, stay focused
-                  and find a suitable place to study. These tools are usually spread
-                  across different apps and websites. StudyVerse brings them together
-                  in one friendly place, with study spots that are relevant to
-                  students in Bahrain.
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Target audience</th>
-                <td>
-                  School, college and university students in Bahrain who want to
-                  plan their studies, improve their focus and find good places to study.
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Project objectives</th>
-                <td>
-                  <ul class="mb-0">
-                    <li>Help students plan and organise their study time.</li>
-                    <li>Support focus and wellbeing with a Pomodoro timer, mood matcher, stress relief and break ideas.</li>
-                    <li>Help students discover study spots in Bahrain.</li>
-                    <li>Provide a consistent, responsive website that works on desktop, tablet and mobile in light and dark mode.</li>
-                    <li>Use AI tools responsibly and document how they were used.</li>
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        
-        </div>
-        
-      </section>
-      <!--section 2: Requirement Analysis-->
-      <section class="mb-5" aria-labelledby="RequirementAnalysis">
-        <h2 id="RequirementAnalysis">Requirement Analysis</h2>
-        <div class="row g-4">
+          </section>
 
-        <div class="col-md-6">
-          <article class="sv-card h-100">
-            <h3>Functional Requirements</h3>
-            <ul>
-              <li><strong>User registration:</strong> a form on the Home page collecting first name, last name, mobile number and email.</li>
-              <li><strong>Form validation:</strong> first and last name at least 3 characters, mobile number exactly 8 digits, valid email format, with clear success and error messages.</li>
-              <li><strong>Navigation system:</strong> one shared navigation bar linking all seven pages.</li>
-              <li><strong>Login demo:</strong> a login window with a welcome message (front-end only).</li>
-              <li><strong>Theme switch:</strong> a moon/sun button that switches between light and dark mode.</li>
-              <li><strong>Study planner:</strong> tools to plan study time.</li>
-              <li><strong>Focus tools:</strong> Pomodoro timer, Mood Matcher, Stress SOS and Break Generator.</li>
-              <li><strong>Study Spot Finder:</strong> cards with information about study spots.</li>
-            </ul>
-          </article>
-        </div>
+          <!-- repeat for s3 ... s11 (without "show active") -->
 
-        <div class="col-md-6">
-          <article class="sv-card h-100">
-            <h3>Non-Functional Requirements</h3>
-            <ul>
-              <li><strong>Performance:</strong> lightweight pages with no heavy frameworks beyond Bootstrap, so pages load quickly.</li>
-              <li><strong>Accessibility:</strong> semantic HTML, one clear heading structure per page, labelled form fields, alt text on images and readable colour contrast in both themes.</li>
-              <li><strong>Security:</strong> input is validated before use, and no passwords are collected. The site is a front-end demo and sends nothing to a server.</li>
-              <li><strong>Usability:</strong> simple layout, consistent cards, clear buttons and the same navigation on every page.</li>
-              <li><strong>Responsiveness:</strong> layouts adapt to desktop, tablet and mobile using Bootstrap's grid and CSS media queries.</li>
-              <li><strong>Maintainability:</strong> shared CSS variables and shared files keep the design consistent across all pages.</li>
-            </ul>
-          </article>
         </div>
+      </div>
 
-      </div>
-      </section>
-      <!--section 3: Site Map-->
-      <section class="mb-5" aria-labelledby="SiteMap">
-        <h2 id="SiteMap">Site Map</h2>
-        <div class="sv-card">
-        <!-- TODO (Person 2): paste the site map diagram here -->
-        <p class="mb-0">[TODO: site map diagram from Person 2]</p>
-        
-      </div>
-      </section>
-      <!--section 4: User Journey Map-->
-      <section class="mb-5" aria-labelledby="Journey">
-        <h2 id="Journey">User Journey Map</h2>
-        <div class="sv-card">
-        <!-- TODO (Person 2): paste the site map diagram here -->
-        <p class="mb-0">[TODO: site map diagram from Person 2]</p>
-        
-      </div>
-        
-      </section>
-      <!--section 5: design documentaion -->
-      <section class="mb-5" aria-labelledby="designDocs">
-        <h2 id="designDocs">design documentaion</h2>
-        <div class="sv-card">
-        <!-- TODO (Person 3): paste the site map diagram here -->
-        <p class="mb-0">[TODO: site map diagram from Person 3]</p>
-        
-      </div>
-      </section>
-      <!--section 6:AI Utilization Plan -->
-      <section class="mb-5" aria-labelledby="AiUtilization">
-        <h2 id="AiUtilization">AI Utilization Plan</h2>
-        <div class="sv-card">
-        <!-- TODO (Ameena): paste the site map diagram here -->
-        <p class="mb-0">[TODO: paste text from Ameena]</p>
-        
-      </div>
-      </section>
-      <!--section 7: AI Documentation -->
-      <section class="mb-5" aria-labelledby="AiDocs">
-        <h2 id="AiDocs">AI Documentation</h2>
-        <p>Every AI tool used in this project is recorded below, with the prompt used, what it produced and what we changed.</p>
-      <div class="sv-card">
-        <div class="table-responsive">
-          <table class="table align-middle mb-0 ">
-            <thead>
-              <tr>
-                <th scope="col"> <p class="eyebrow">AI Tool</p></th>
-                <th scope="col"><p class="eyebrow">Purpose</p></th>
-                <th scope="col"><p class="eyebrow">Prompt Used</p></th>
-                <th scope="col"><p class="eyebrow">Output Generated</p></th>
-                <th scope="col"><p class="eyebrow">Modifications Made</p></th>
-              </tr>
-            </thead>
-            <tbody>
-              
-              <tr>
-                <td>[TODO: tool name]</td>
-                <td>[TODO: purpose]</td>
-                <td>[TODO: paste the prompt]</td>
-                <td>[TODO: what it generated]</td>
-                <td>[TODO: what we changed or improved]</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      </section>
-      <!--section 8: Ethical & Legal -->
-      <section class="mb-5" aria-labelledby="Ethical&Legal">
-        <h2 id="Ethical&Legal">Ethical & Legal</h2>
-        <section class="sv-card"></section>
-      </section>
-      
-      
     </div>
+  </div>
 </main>
 
 
