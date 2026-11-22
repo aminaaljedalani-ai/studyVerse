@@ -18,6 +18,7 @@
 .spot-facts {
   margin-bottom: 1rem;
 }
+
 .spot-img {
   width: 100%;
   height: 160px;
@@ -33,4 +34,121 @@
   justify-content: center;
   background: var(--surface-2);
   color: var(--text);
+}
+
+.spot-filter {
+  position: relative;
+  display: inline-block;
+}
+
+.spot-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 20;
+  min-width: 100%;
+  margin: 0;
+  padding: .4rem;
+  list-style: none;
+  background: var(--surface);
+  border: 2px solid var(--edge);
+  border-radius: 12px;
+}
+
+.spot-filter:hover .spot-menu,
+.spot-filter:has(:focus-visible) .spot-menu {
+  display: block;
+}
+
+.spot-menu button {
+  display: block;
+  width: 100%;
+  padding: .4rem .8rem;
+  text-align: left;
+  white-space: nowrap;
+  font: inherit;
+  color: var(--text);
+  background: none;
+  border: 0;
+  border-radius: 8px;
+}
+
+.spot-menu button:hover,
+.spot-menu button:focus-visible {
+  background: var(--note);
+}
+
+.spot-menu button.active {
+  font-weight: bold;
+}
+
+.spot-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  align-items: center;
+}
+
+.spot-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1rem;
+  color: var(--text);
+  background: var(--note);
+  border: 3px solid var(--edge);
+  border-radius: 50%;
+}
+
+.spot-trigger::after {
+  content: "\25BE";
+  margin-left: .5rem;
+}
+
+.spot-trigger.has-value {
+  background: var(--note);
+  font-weight: bold;
+}
+
+.spot-reset {
+  padding: .4rem .6rem;
+  font: inherit;
+  color: var(--text);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+
+.spots-hero-img {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  margin: 0 auto;
+  color: var(--text);
+}
+
+@media (min-width: 992px) {
+  .spots-hero p {
+    margin-left: 0;
+  }
+}
+
+.spot-bar {
+  justify-content: center;
+}
+
+.spot-badges {
+  justify-content: center;
+}
+
+.spots-page p {
+  margin-left: auto;
+  margin-right: auto;
 }

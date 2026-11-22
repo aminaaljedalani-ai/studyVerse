@@ -66,84 +66,137 @@
   <header class="page-header">
     <div class="container"><h1>Study Spot Finder</h1></div>
   </header>
-  <main id="main" class="section">
-    <div class="container">
-      <section class="mb-5" aria-labelledby="introTitle">
-      <p class="eyebrow">Study Spot Finder</p>
+  
+    <main id="main" class="section spots-page">
+    <div class="container text-center">
+     <!-- ===== INTRO / HERO ===== -->
+<section class="mb-5 spots-hero" aria-labelledby="introTitle">
+  <div class="row align-items-center g-4">
+
+    <div class="col-lg-6 text-center text-lg-start">
+      <p class="eyebrow">Bahrain study spots</p>
       <h2 id="introTitle">Find your perfect study environment</h2>
       <p>Find a place in Bahrain that matches how you like to study. Filter by location, budget, noise level, Wi-Fi and power sockets, or take the quick quiz to get a recommendation.</p>
-    </section>
-    
-    <section class="mb-5" aria-labelledby="filterTitle">
-      <h2 id="filterTitle">Filters</h2>
-      <div class="sv-card">
-        <form id="filterForm" class="row g-3 align-items-end">
-
-  <div class="col-12 col-md-4">
-    <label for="filterLocation" class="form-label">Location</label>
-    <select id="filterLocation" class="form-select">
-      <option value="all">All locations</option>
-      <option value="Manama">Manama</option>
-      <option value="Riffa">Riffa</option>
-      <option value="Muharraq">Muharraq</option>
-    </select>
-  </div>
-
-  <div class="col-12 col-md-4">
-    <label for="filterBudget" class="form-label">Budget</label>
-    <select id="filterBudget" class="form-select">
-      <option value="all">Any budget</option>
-      <option value="Free">Free</option>
-      <option value="$">$</option>
-      <option value="$$">$$</option>
-      <option value="$$$">$$$</option>
-    </select>
-  </div>
-
-  <div class="col-12 col-md-4">
-    <label for="filterNoise" class="form-label">Noise level</label>
-    <select id="filterNoise" class="form-select">
-      <option value="all">Any noise level</option>
-      <option value="Quiet">Quiet</option>
-      <option value="Moderate">Moderate</option>
-      <option value="Lively">Lively</option>
-    </select>
-  </div>
-
-  <div class="col-12 col-md-4">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="filterWifi">
-      <label class="form-check-label" for="filterWifi">Wi-Fi available</label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="filterSockets">
-      <label class="form-check-label" for="filterSockets">Power sockets</label>
-    </div>
-  </div>
-
-  <div class="col-12 col-md-4">
-    <button type="reset" class="btn btn-outline-brand">Reset filters</button>
-  </div>
-
-</form>
-      </div>
-    </section>
-
-    <section class="mb-5" aria-labelledby="spotsTitle">
-      <h2 id="spotsTitle">Study spots in Bahrain</h2>
-      <div class="row g-4" id="spotList">
+      <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+        
         
       </div>
-    </section>
+    </div>
 
-    <section class="mb-5" aria-labelledby="quizTitle">
-      <h2 id="quizTitle">Which study environment suits you?</h2>
-      <div class="sv-card">
-        
-      </div>
-    </section>
+    <div class="col-lg-6">
+      <svg class="spots-hero-img" viewBox="0 0 400 300" role="img"
+           aria-label="Illustration of a map pin above a laptop, a stack of books and a coffee cup on a desk"
+           fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+
+        <!-- desk -->
+        <path d="M22 256 Q200 248 378 256 L368 280 Q200 288 32 280 Z" fill="var(--surface-2)"/>
+
+        <!-- books -->
+        <rect x="30" y="227" width="100" height="28" rx="4" fill="var(--note)"/>
+        <rect x="38" y="200" width="84" height="27" rx="4" fill="var(--accent)"/>
+        <rect x="46" y="175" width="68" height="25" rx="4" fill="var(--accent-2)"/>
+        <path d="M44 241 H62 M54 214 H70 M60 188 H74" stroke-width="3"/>
+
+        <!-- laptop -->
+        <rect x="160" y="165" width="120" height="62" rx="6" fill="var(--surface)"/>
+        <path d="M148 228 H292 L302 254 H138 Z" fill="var(--note)"/>
+        <path d="M176 185 H254 M176 199 H236 M176 213 H248" stroke-width="3"/>
+
+        <!-- coffee cup -->
+        <path d="M316 216 H354 V240 Q354 255 335 255 Q316 255 316 240 Z" fill="var(--surface)"/>
+        <path d="M354 224 Q370 224 370 236 Q370 248 353 247"/>
+        <path d="M327 206 Q321 196 327 188 Q333 180 327 172 M342 206 Q336 196 342 188 Q348 180 342 172" stroke-width="3"/>
+
+        <!-- map pin -->
+        <path d="M218 40 C192 40 176 60 176 82 C176 110 218 148 218 148 C218 148 260 110 260 82 C260 60 244 40 218 40 Z" fill="var(--accent)"/>
+        <circle cx="218" cy="82" r="15" fill="var(--surface)"/>
+
+        <!-- sparkles -->
+        <circle cx="290" cy="70" r="4" fill="var(--accent-2)" stroke="none"/>
+        <circle cx="150" cy="100" r="4" fill="var(--accent-2)" stroke="none"/>
+        <circle cx="310" cy="110" r="3" fill="var(--accent)" stroke="none"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+
+       <section class="mb-5" aria-labelledby="filterTitle">
+        <h2 id="filterTitle" class="visually-hidden">Filters</h2>
+
+<div class="spot-logo" aria-hidden="true">
+  <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 5h18l-7 8.5V19l-4 2v-7.5L3 5z"/>
+  </svg>
+</div>
+
+<div id="filterBar" class="spot-bar">
+
+  <div class="spot-filter">
+    <button type="button" class="btn btn-outline-brand spot-trigger" id="locationBtn" aria-haspopup="true">Location</button>
+    <ul class="spot-menu">
+      <li><button type="button" data-filter="location" data-value="all">All locations</button></li>
+      <li><button type="button" data-filter="location" data-value="Manama">Manama</button></li>
+      <li><button type="button" data-filter="location" data-value="Riffa">Riffa</button></li>
+      <li><button type="button" data-filter="location" data-value="Muharraq">Muharraq</button></li>
+    </ul>
+  </div>
+
+  <div class="spot-filter">
+    <button type="button" class="btn btn-outline-brand spot-trigger" id="budgetBtn" aria-haspopup="true">Budget</button>
+    <ul class="spot-menu">
+      <li><button type="button" data-filter="budget" data-value="all">Any budget</button></li>
+      <li><button type="button" data-filter="budget" data-value="Free">Free</button></li>
+      <li><button type="button" data-filter="budget" data-value="$">$</button></li>
+      <li><button type="button" data-filter="budget" data-value="$$">$$</button></li>
+      <li><button type="button" data-filter="budget" data-value="$$$">$$$</button></li>
+    </ul>
+  </div>
+
+  <div class="spot-filter">
+    <button type="button" class="btn btn-outline-brand spot-trigger" id="noiseBtn" aria-haspopup="true">Noise</button>
+    <ul class="spot-menu">
+      <li><button type="button" data-filter="noise" data-value="all">Any noise level</button></li>
+      <li><button type="button" data-filter="noise" data-value="Quiet">Quiet</button></li>
+      <li><button type="button" data-filter="noise" data-value="Moderate">Moderate</button></li>
+      <li><button type="button" data-filter="noise" data-value="Lively">Lively</button></li>
+    </ul>
+  </div>
+
+  <div class="spot-filter">
+    <button type="button" class="btn btn-outline-brand spot-trigger" id="wifiBtn" aria-haspopup="true">Wi-Fi</button>
+    <ul class="spot-menu">
+      <li><button type="button" data-filter="wifi" data-value="all">Any</button></li>
+      <li><button type="button" data-filter="wifi" data-value="yes">Wi-Fi available</button></li>
+    </ul>
+  </div>
+
+  <div class="spot-filter">
+    <button type="button" class="btn btn-outline-brand spot-trigger" id="socketsBtn" aria-haspopup="true">Power sockets</button>
+    <ul class="spot-menu">
+      <li><button type="button" data-filter="sockets" data-value="all">Any</button></li>
+      <li><button type="button" data-filter="sockets" data-value="yes">Sockets available</button></li>
+    </ul>
+  </div>
+
+  <button type="button" class="btn btn-brand" id="applyFilters">Apply</button>
+  <button type="button" class="spot-reset" id="resetFilters">Reset all</button>
+
+</div>
+      </section>
+      <section class="mb-5" aria-labelledby="spotsTitle">
+        <h2 id="spotsTitle">Study spots in Bahrain</h2>
+        <div class="row g-4 justify-content-center" id="spotList" id="spotList">
+          <!-- JavaScript will add the cards here -->
+        </div>
+      </section>
+
+
     </div>
   </main>
+
 
   <!-- ===== FOOTER - SHARED. Copy EXACTLY into your page. Owner: AMEENA =====
        Credits: add the source of every image/media you use on YOUR page to the list below. -->

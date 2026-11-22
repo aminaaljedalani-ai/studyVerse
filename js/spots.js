@@ -18,7 +18,7 @@
     sockets: null,
     mode: "library",
     mapsUrl: "https://www.google.com/maps",
-    image: ''
+    image: ""
   },
     {
     id: 2,
@@ -57,13 +57,8 @@ function showStatus(value) {
 
 function renderSpots(list) {
   spotList.innerHTML = "";
-    if (list.length === 0) {
-    spotList.innerHTML = `<div class="col-12"><p>No study spots match your filters. Try changing them.</p></div>`;
-    return;
-  }
   list.forEach(function (spot) {
     spotList.innerHTML += `
-    
       <div class="col-12 col-md-6 col-lg-4">
                 <article class="sv-card spot-card h-100 d-flex flex-column">
                           ${spot.image
@@ -73,8 +68,6 @@ function renderSpots(list) {
           <h3>${spot.name}</h3>
           <div class="spot-badges">
             <span class="spot-badge">${spot.budget}</span>
-            <span class="spot-badge">${spot.noise}</span>
-            <span class="spot-badge">${spot.noise}</span>
             <span class="spot-badge">${spot.noise}</span>
           </div>
           <ul class="spot-facts list-unstyled">
@@ -88,69 +81,65 @@ function renderSpots(list) {
 }
 
 renderSpots(spots);
-const filterForm = document.getElementById("filterForm");
+
+const activeFilters = {
+  location: "all",
+  budget: "all",
+  noise: "all",
+  wifi: "all",
+  sockets: "all"
+};
+
+const filterNames = {
+  location: "Location",
+  budget: "Budget",
+  noise: "Noise",
+  wifi: "Wi-Fi",
+  sockets: "Power sockets"
+};
+
+function updateFilterButtons() {
+  Object.keys(activeFilters).forEach(function (key) {
+    const value = activeFilters[key];
+    const button = document.getElementById(key + "Btn");
+    button.textContent = value === "all"
+      ? filterNames[key]
+      : filterNames[key] + ": " + (value === "yes" ? "Yes" : value);
+    button.classList.toggle("has-value", value !== "all");
+  });
+
+  document.querySelectorAll("[data-filter]").forEach(function (item) {
+    item.classList.toggle("active", activeFilters[item.dataset.filter] === item.dataset.value);
+  });
+}
 
 function applyFilters() {
-  const location = document.getElementById("filterLocation").value;
-  const budget = document.getElementById("filterBudget").value;
-  const noise = document.getElementById("filterNoise").value;
-  const needWifi = document.getElementById("filterWifi").checked;
-  const needSockets = document.getElementById("filterSockets").checked;
-
   const result = spots.filter(function (spot) {
-    if (location !== "all" && spot.location !== location) return false;
-    if (budget !== "all" && spot.budget !== budget) return false;
-    if (noise !== "all" && spot.noise !== noise) return false;
-    if (needWifi && spot.wifi !== true) return false;
-    if (needSockets && spot.sockets !== true) return false;
+    if (activeFilters.location !== "all" && spot.location !== activeFilters.location) return false;
+    if (activeFilters.budget !== "all" && spot.budget !== activeFilters.budget) return false;
+    if (activeFilters.noise !== "all" && spot.noise !== activeFilters.noise) return false;
+    if (activeFilters.wifi === "yes" && spot.wifi !== true) return false;
+    if (activeFilters.sockets === "yes" && spot.sockets !== true) return false;
     return true;
   });
 
   renderSpots(result);
 }
 
-filterForm.addEventListener("change", applyFilters);
+document.getElementById("filterBar").addEventListener("click", function (event) {
+  const choice = event.target.closest("[data-filter]");
 
-filterForm.addEventListener("reset", function () {
-  setTimeout(applyFilters, 0);
-});
-/*----------------------------------------------------------------*/
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('filterForm');
-  const spots = document.querySelectorAll('.spot');
-  const count = document.getElementById('resultCount');
-  const noResults = document.getElementById('noResults');
-
-  function applyFilters() {
-    const f = form.elements;
-    const location = f['location'].value;
-    const budget = f['budget'].value;
-    const noise = f['noise'].value;
-    const needWifi = f['wifi'].checked;
-    const needSockets = f['sockets'].checked;
-
-    let shown = 0;
-    spots.forEach(spot => {
-      const d = spot.dataset;
-      const match =
-        (location === 'all' || d.location === location) &&
-        (budget === 'all' || d.budget === budget) &&
-        (noise === 'all' || d.noise === noise) &&
-        (!needWifi || d.wifi === 'yes') &&
-        (!needSockets || d.sockets === 'yes');
-
-      spot.classList.toggle('d-none', !match);
-      if (match) shown++;
+  if (choice) {
+    activeFilters[choice.dataset.filter] = choice.dataset.value;
+    updateFilterButtons();
+    document.activeElement.blur();
+  } else if (event.target.closest("#applyFilters")) {
+    applyFilters();
+  } else if (event.target.closest("#resetFilters")) {
+    Object.keys(activeFilters).forEach(function (key) {
+      activeFilters[key] = "all";
     });
-
-    count.textContent = `Showing ${shown} of ${spots.length} study spots`;
-    noResults.classList.toggle('d-none', shown !== 0);
+    updateFilterButtons();
+    applyFilters();
   }
-
-  form.addEventListener('change', applyFilters);
-  // the reset event fires before the fields clear, so wait one tick
-  form.addEventListener('reset', () => setTimeout(applyFilters, 0));
-  applyFilters();
 });
-</script>
