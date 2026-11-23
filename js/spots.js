@@ -10,41 +10,133 @@
    const spots = [
   {
     id: 1,
-    name: "EXAMPLE - replace with a real place",
-    location: "Manama",
-    budget: "Free",
-    noise: "Quiet",
-    wifi: null,
-    sockets: null,
-    mode: "library",
-    mapsUrl: "https://www.google.com/maps",
-    image: ""
-  },
-    {
-    id: 2,
-    name: "EXAMPLE 2 - replace",
-    location: "Riffa",
-    budget: "$$",
-    noise: "Moderate",
-    wifi: null,
+    name: "Higher Grounds Cafe",
+    location: "Tubli",
+    budget: "$",
+    noise: 'Quiet',
+    wifi: true,       
     sockets: null,
     mode: "cafe",
-    mapsUrl: "https://www.google.com/maps",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Higher+Grounds+Cafe+Tubli+Bahrain",
+    image: "images/higher-grounds.jpg"
+  },
+  {
+    id: 2,
+    name: "The Dot",
+    location: "Diyar Al Muharraq",
+    budget: '$$',
+    noise: null,
+    wifi: true,       
+    sockets: true,    
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=The+Dot+Marassi+Boulevard+Diyar+Al+Muharraq+Bahrain",
     image: ""
+    
   },
   {
     id: 3,
-    name: "EXAMPLE 3 - replace",
-    location: "Muharraq",
-    budget: "$",
-    noise: "Lively",
+    name: "Oz",
+    location: "Seef",
+    budget:'$$$',
+    noise: null,
+    wifi: true,       
+    sockets: true,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Oz+cafe+Seef+Bahrain",
+    image: ""
+    
+  },
+  {
+    id: 4,
+    name: "Innovation Themes & Coffee",
+    location: "Zinj",
+    budget: null,
+    noise: null,
     wifi: null,
     sockets: null,
-    mode: "home",
-    mapsUrl: "https://www.google.com/maps",
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Innovation+Themes+and+Coffee+Galleria+Mall+Bahrain",
     image: ""
+    
+  },
+  {
+    id: 5,
+    name: "Petal & Bean",
+    location: "Zinj",
+    budget: null,
+    noise: null,
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Petal+and+Bean+Galleria+Mall+Bahrain",
+    image: ""
+    
+  },
+  {
+    id: 6,
+    name: "Brewrista Cafe",
+    location: "Tubli",
+    budget: null,
+    noise: null,
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Brewrista+Cafe+Tubli+Bahrain",
+    image: ""
+    
+  },
+  {
+    id: 7,
+    name: "Coffee Plus",
+    location: "Seef",
+    budget: null,
+    noise: null,
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Coffee+Plus+Seef+Bahrain",
+    image: ""
+    
+  },
+  {
+    id: 8,
+    name: "Think Coffee",
+    location: "Zayed Town",
+    budget: null,
+    noise: null,
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Think+Coffee+Zayed+Town+Bahrain",
+    image: ""
+    
+  },
+  {
+    id: 9,
+    name: "Akeed Cafe",
+    location: "Zayed Town",
+    budget: null,
+    noise: null,
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Akeed+Cafe+Zayed+Town+Bahrain",
+    image: ""
+    
+  },
+  {
+    id: 10,
+    name: "Been Cafe",
+    location: "Seef",
+    budget: null,
+    noise: null,
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
+    image: ""
+    
   }
-  
 ];
 
 const spotList = document.getElementById("spotList");
@@ -99,8 +191,9 @@ function renderSpots(list) {
           <p class="eyebrow mb-1">${spot.location}</p>
           <h3>${spot.name}</h3>
           <div class="spot-badges">
-            <span class="spot-badge">${spot.budget}</span>
-            <span class="spot-badge">${spot.noise}</span>
+            <span class="spot-badge">${spot.budget || "Price not confirmed"}</span>
+            <span class="spot-badge">${spot.noise || "Noise not confirmed"}</span>
+            
           </div>
           <div class="spot-badges">
             ${featureChip("Wi-Fi", "wifi", spot.wifi)}
