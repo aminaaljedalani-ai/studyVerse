@@ -35,3 +35,34 @@
 .planner-add-btn{background: var(--accent); color: var(--on-accent); border: 3px solid var(--edge);
 border-radius: var(--blob); padding: 10px 25px; font-family: var(--font-head); font-size: 1.5rem;
 font-weight: bold; box-shadow: var(--shadow); transition: transform 0.2s ease;}
+
+/* Progress numbers */
+.stat-number{
+    font-family: var(--font-head);
+    font_size: 2.6rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink-line);
+}
+/* Intro illustration */
+.planner-art { max-width: 360px; display: block; margin: 1.5rem auto 0; }
+
+/* Checkboxes */
+.form-check-input{
+    background-color: var(--surface);
+    border: 2px solid var(--edge);
+}
+
+.form-check-input:checked{
+    background-color: var(--accent-2);
+    border-color: var(--edge);
+}
+
+.form-check-input:focus{
+    box-shadow: none;
+    border-color: var(--edge);
+}
+
+[data-bs-theme="dark"] .form-check-input:checked[type="checkbox"] {
+    --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%231E1633' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
