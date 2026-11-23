@@ -28,9 +28,6 @@
             <li class="nav-item"><a class="nav-link" href="subtopic1.html" title="Plan Your Studies">Plan</a></li>
             <li class="nav-item"><a class="nav-link" href="subtopic2.html" title="Focus &amp; Recharge">Focus</a></li>
             <li class="nav-item"><a class="nav-link active" href="subtopic3.html" title="Study Spot Finder" aria-current="page">Spots</a></li>
-            <li class="nav-item"><a class="nav-link" href="planning-design.html" title="Planning &amp; Design">Design</a></li>
-            <li class="nav-item"><a class="nav-link" href="reflection-ai-report.html" title="Reflection &amp; AI Report">Reflection</a></li>
-            <li class="nav-item"><a class="nav-link" href="overview.html" title="Overview">Overview</a></li>
             </ul>
           </div>
         </div>
@@ -67,34 +64,148 @@
        5. Atmosphere modes: Library, Cafe, Home (CSS theme change). Put page styles in css/spots.css.
        ===================================================================== -->
   <header class="page-header">
-    <div class="container"><h1>Study Spot Finder</h1></div>
+    <div class="container"><h1 class="text-center">Study Spot Finder</h1></div>
+     <div class="spot-modebar">
+      
+      <div class="spot-modes" role="group" aria-label="Atmosphere mode">
+        <button type="button" class="spot-mode" data-mode="library" aria-pressed="false">Library</button>
+        <button type="button" class="spot-mode" data-mode="cafe" aria-pressed="false">Café</button>
+        <button type="button" class="spot-mode" data-mode="home" aria-pressed="true">Home</button>
+      </div>
+    </div>
+
   </header>
-  <main id="main" class="section">
-    <div class="container">
-      <p>Replace this placeholder with your page content.</p>
+  
+    <main id="main" class="section spots-page">
+    <div class="container text-center">
+     
+<section class="mb-5 spots-hero" aria-labelledby="introTitle">
+  <div class="row align-items-center g-4">
+
+    <div class="col-lg-6 text-center text-lg-start">
+      
+    </div>
+
+    <div class="col-lg-6 text-center">
+      
+  </div>
+</section>
+    
+
+
+<section class="mb-5" aria-labelledby="filterTitle">
+  <h2 id="filterTitle" class="visually-hidden">Filters</h2>
+
+  <div class="spot-logo" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 5h18l-7 8.5V19l-4 2v-7.5L3 5z"/>
+    </svg>
+  </div>
+
+  <div id="filterBar" class="spot-bar">
+
+    <div class="spot-filter">
+      <button type="button" class="btn btn-outline-brand spot-trigger" id="locationBtn" aria-haspopup="true">Location</button>
+      <ul class="spot-menu">
+        <li><button type="button" data-filter="location" data-value="all">All locations</button></li>
+        <li><button type="button" data-filter="location" data-value="Manama">Manama</button></li>
+        <li><button type="button" data-filter="location" data-value="Riffa">Riffa</button></li>
+        <li><button type="button" data-filter="location" data-value="Muharraq">Muharraq</button></li>
+        <li><button type="button" data-filter="location" data-value="Tubli">Tubli</button></li>
+        <li><button type="button" data-filter="location" data-value="Seef">Seef</button></li>
+        <li><button type="button" data-filter="location" data-value="Zinj">Zinj</button></li>
+        <li><button type="button" data-filter="location" data-value="Muharraq">Muharraq</button></li>
+      </ul>
+    </div>
+
+    <div class="spot-filter">
+      <button type="button" class="btn btn-outline-brand spot-trigger" id="budgetBtn" aria-haspopup="true">Budget</button>
+      <ul class="spot-menu">
+        <li><button type="button" data-filter="budget" data-value="all">Any budget</button></li>
+        <li><button type="button" data-filter="budget" data-value="Free">Free</button></li>
+        <li><button type="button" data-filter="budget" data-value="$">$</button></li>
+        <li><button type="button" data-filter="budget" data-value="$$">$$</button></li>
+        <li><button type="button" data-filter="budget" data-value="$$$">$$$</button></li>
+      </ul>
+    </div>
+
+    <div class="spot-filter">
+      <button type="button" class="btn btn-outline-brand spot-trigger" id="noiseBtn" aria-haspopup="true">Noise</button>
+      <ul class="spot-menu">
+        <li><button type="button" data-filter="noise" data-value="all">Any noise level</button></li>
+        <li><button type="button" data-filter="noise" data-value="Quiet">Quiet</button></li>
+        <li><button type="button" data-filter="noise" data-value="Moderate">Moderate</button></li>
+        <li><button type="button" data-filter="noise" data-value="Lively">Lively</button></li>
+      </ul>
+    </div>
+
+    <div class="spot-filter">
+      <button type="button" class="btn btn-outline-brand spot-trigger" id="wifiBtn" aria-haspopup="true">Wi-Fi</button>
+      <ul class="spot-menu">
+        <li><button type="button" data-filter="wifi" data-value="all">Any</button></li>
+        <li><button type="button" data-filter="wifi" data-value="yes">Wi-Fi available</button></li>
+      </ul>
+    </div>
+
+    <div class="spot-filter">
+      <button type="button" class="btn btn-outline-brand spot-trigger" id="socketsBtn" aria-haspopup="true">Power sockets</button>
+      <ul class="spot-menu">
+        <li><button type="button" data-filter="sockets" data-value="all">Any</button></li>
+        <li><button type="button" data-filter="sockets" data-value="yes">Sockets available</button></li>
+      </ul>
+    </div>
+
+    <button type="button" class="btn btn-brand" id="applyFilters">Apply</button>
+    <button type="button" class="spot-reset" id="resetFilters">Reset all</button>
+
+  </div>
+</section>
+
+  <section class="mb-5" aria-labelledby="spotsTitle">
+    <h2 id="spotsTitle">Study spots in Bahrain</h2>
+    <div class="row g-4 justify-content-center" id="spotList" id="spotList">
+            <!-- JavaScript will add the cards here -->
+    </div>
+  </section>
+
+
     </div>
   </main>
 
-  <!-- ===== FOOTER - SHARED. Copy EXACTLY into your page. Owner: AMEENA =====
+
+ <!-- ===== FOOTER - SHARED. Copy EXACTLY into your page. Owner: AMEENA =====
        Credits: add the source of every image/media you use on YOUR page to the list below. -->
   <footer class="site-footer">
     <div class="container">
       <div class="row g-4">
-        <div class="col-md-5">
+        <div class="col-md-3 pe-md-4">
           <h2>StudyVerse</h2>
           <p>Your world of focus and balance. A student project for IT6012 Web Fundamentals.</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+
           <h2>Quick links</h2>
+
           <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="subtopic1.html">Plan Your Studies</a></li>
-        <li><a href="subtopic2.html">Focus & Recharge</a></li>
-        <li><a href="subtopic3.html">Study Spot Finder</a></li>
-        <li><a href="planning-design.html">Planning & Design</a></li>
-        <li><a href="reflection-ai-report.html">Reflection & AI Report</a></li>
-        <li><a href="overview.html">Overview</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="subtopic1.html">Plan Your Studies</a></li>
+            <li><a href="subtopic2.html">Focus & Recharge</a></li>
+            <li><a href="subtopic3.html">Study Spot Finder</a></li>
           </ul>
+
+        </div>
+
+        <div class="col-md-3">
+
+          <h2>Documents</h2>
+
+          <ul>
+            <li><a href="planning-design.html">Planning & Design</a></li>
+            <li><a href="reflection-ai-report.html">Reflection & AI Report</a></li>
+            <li><a href="overview.html">Overview</a></li>
+          </ul>
+
         </div>
         <div class="col-md-3">
           <h2>Credits</h2>

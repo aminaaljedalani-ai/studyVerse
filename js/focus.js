@@ -1,30 +1,72 @@
-
 (() => {
   "use strict";
 
-  // POMODORO TIMER
+  // helpers: never crash if an element is missing
+  const $ = (id) => document.getElementById(id);
+  const on = (id, evt, fn) => {
+    const el = $(id);
+    if (el) el.addEventListener(evt, fn);
+  };
 
-  const display = document.getElementById("timerDisplay");
-  const modeLabel = document.getElementById("timerMode");
-  const timerStatus = document.getElementById("timerStatus");
-  const modeButtons = document.querySelectorAll(".focus-mode");
+  // ---------- STUDY MOOD ----------
+  const moodTips = {
+    great: "Love that! Use the energy for your hardest task first.",
+    okay: "Steady is good. Try one 25-minute focus session.",
+    tired: "Drink water, stretch, and take a short break before you start.",
+    stressed: "Try Stress SOS below, then begin with one small task.",
+    sad: "Be kind to yourself. A short walk or chatting with a friend can help."
+  };
 
-  let duration = 25 * 60;
+  const moodButtons = document.querySelectorAll("#moodOptions [data-mood]");
+  const moodAdvice = $("moodAdvice");
+
+  moodButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      moodButtons.forEach(b => {
+        const selected = b === btn;
+        b.classList.toggle("is-selected", selected);
+        b.setAttribute("aria-pressed", String(selected));
+      });
+      if (moodAdvice) {
+        moodAdvice.textContent = moodTips[btn.dataset.mood];
+        moodAdvice.hidden = false;
+      }
+
+      // Stressed: scroll down to the Stress SOS section
+      if (btn.dataset.mood === "stressed") {
+        const sos = $("sosSection");
+        if (sos) {
+          const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          sos.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+        }
+      }
+    });
+  });
+
+  // ---------- POMODORO TIMER ----------
+  const FOCUS_MINUTES = 25;
+  const display = $("timerDisplay");
+  const modeLabel = $("timerMode");
+  const timerStatus = $("timerStatus");
+  const ring = $("timerRing");
+  const breakChooser = $("breakChooser");
+  const CIRC = 2 * Math.PI * 90;
+
+  if (ring) ring.style.strokeDasharray = CIRC;
+
+  let currentMode = "Focus";
+  let duration = FOCUS_MINUTES * 60;
   let remaining = duration;
   let timerId = null;
   let endTime = 0;
-  let currentMode = "Focus";
 
-  function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-
-    return String(minutes).padStart(2, "0") +
-      ":" + String(secs).padStart(2, "0");
-  }
+  const formatTime = (s) =>
+    String(Math.floor(s / 60)).padStart(2, "0") + ":" +
+    String(s % 60).padStart(2, "0");
 
   function renderTimer() {
     display.textContent = formatTime(remaining);
+    if (ring) ring.style.strokeDashoffset = CIRC * (1 - remaining / duration);
   }
 
   function stopTimer() {
@@ -34,131 +76,74 @@
     }
   }
 
-  function updateTimer() {
-    remaining = Math.max(
-      0,
-      Math.ceil((endTime - Date.now()) / 1000)
-    );
-
+  function setMode(name, minutes) {
+    stopTimer();
+    currentMode = name;
+    duration = minutes * 60;
+    remaining = duration;
+    modeLabel.textContent = name.toUpperCase();
     renderTimer();
+  }
 
-    if (remaining === 0) {
-      stopTimer();
-      timerStatus.textContent =
-        currentMode + " session completed! Great job!";
+  function startTimer() {
+    if (timerId !== null) return;
+    if (remaining === 0) remaining = duration;
+    endTime = Date.now() + remaining * 1000;
+    timerId = setInterval(updateTimer, 250);
+    timerStatus.textContent =
+      currentMode === "Focus"
+        ? "Timer running. You've got this!"
+        : currentMode + " started. Relax!";
+    renderTimer();
+  }
+
+  function updateTimer() {
+    remaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+    renderTimer();
+    if (remaining === 0) endSession();
+  }
+
+  function endSession() {
+    stopTimer();
+    if (currentMode === "Focus") {
+      timerStatus.textContent = "Focus session completed! Great job! Pick a break.";
+      breakChooser.hidden = false;
+    } else {
+      breakChooser.hidden = true;
+      setMode("Focus", FOCUS_MINUTES);
+      timerStatus.textContent = "Break over. Next focus session started!";
+      startTimer();
     }
   }
 
-  modeButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      stopTimer();
+  on("timerStart", "click", startTimer);
 
-      currentMode = button.dataset.mode;
-      duration = Number(button.dataset.minutes) * 60;
-      remaining = duration;
+  on("timerPause", "click", () => {
+    if (timerId === null) {
+      timerStatus.textContent = "Timer is not running.";
+      return;
+    }
+    updateTimer();
+    stopTimer();
+    if (remaining > 0) timerStatus.textContent = "Timer paused.";
+  });
 
-      modeButtons.forEach(item => {
-        const selected = item === button;
+  on("timerReset", "click", () => {
+    stopTimer();
+    breakChooser.hidden = true;
+    setMode("Focus", FOCUS_MINUTES);
+    timerStatus.textContent = "Timer reset.";
+  });
 
-        item.classList.toggle("is-selected", selected);
-        item.setAttribute("aria-pressed", String(selected));
-      });
-
-      modeLabel.textContent = currentMode.toUpperCase();
-      timerStatus.textContent = currentMode + " selected.";
-
-      renderTimer();
+  // break length buttons (data-break + data-minutes)
+  document.querySelectorAll(".focus-mode[data-break]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      setMode(btn.dataset.break, Number(btn.dataset.minutes));
+      startTimer();
     });
   });
 
-  document.getElementById("timerStart")
-    .addEventListener("click", () => {
-      if (timerId !== null) return;
-
-      if (remaining === 0) {
-        remaining = duration;
-      }
-
-      endTime = Date.now() + remaining * 1000;
-      timerStatus.textContent = "Timer running. You've got this!";
-
-      timerId = setInterval(updateTimer, 250);
-      renderTimer();
-    });
-
-  document.getElementById("timerPause")
-    .addEventListener("click", () => {
-      if (timerId === null) {
-        timerStatus.textContent = "Timer is not running.";
-        return;
-      }
-
-      updateTimer();
-      stopTimer();
-
-      if (remaining > 0) {
-        timerStatus.textContent = "Timer paused.";
-      }
-    });
-
-  document.getElementById("timerReset")
-    .addEventListener("click", () => {
-      stopTimer();
-
-      remaining = duration;
-      renderTimer();
-
-      timerStatus.textContent = "Timer reset.";
-    });
-
-
-  // STUDY MOOD MATCHER
-
-  const moodTips = {
-    stressed:
-      "Take three deep breaths and begin with one small task.",
-
-    tired:
-      "Drink water, stretch, and take a short break.",
-
-    motivated:
-      "Start with your most important task while your energy is high.",
-
-    distracted:
-      "Put your phone away and close unnecessary browser tabs."
-  };
-
-  document.getElementById("moodMatch")
-    .addEventListener("click", () => {
-      const mood = document.getElementById("moodSelect").value;
-      const result = document.getElementById("moodResult");
-
-      result.textContent = mood
-        ? moodTips[mood]
-        : "Please select your mood first.";
-    });
-
-
-  // STRESS SOS
-
-  const sosButton = document.getElementById("sosButton");
-  const breathingArea = document.getElementById("breathingArea");
-
-  sosButton.addEventListener("click", () => {
-    breathingArea.hidden = false;
-    sosButton.setAttribute("aria-expanded", "true");
-  });
-
-  document.getElementById("sosClose")
-    .addEventListener("click", () => {
-      breathingArea.hidden = true;
-      sosButton.setAttribute("aria-expanded", "false");
-      sosButton.focus();
-    });
-
-
-  // BREAK GENERATOR
-
+  // ---------- SURPRISE BREAK ----------
   const breakIdeas = [
     "Stretch your arms and shoulders for two minutes.",
     "Drink a glass of water.",
@@ -168,22 +153,60 @@
     "Tidy your desk.",
     "Write down one thing you achieved today."
   ];
-
   let previousBreak = -1;
 
-  document.getElementById("surpriseBreak")
-    .addEventListener("click", () => {
-      let index = Math.floor(Math.random() * breakIdeas.length);
+  on("surpriseBreak", "click", () => {
+    let i = Math.floor(Math.random() * breakIdeas.length);
+    if (i === previousBreak) i = (i + 1) % breakIdeas.length;
+    previousBreak = i;
+    $("breakResult").textContent = breakIdeas[i];
+  });
 
-      if (index === previousBreak) {
-        index = (index + 1) % breakIdeas.length;
+  // ---------- STRESS SOS (4-4-4 breathing) ----------
+  const sosButton = $("sosButton");
+  const breathingArea = $("breathingArea");
+  const breathLabel = $("breathLabel");
+  const breathCount = $("breathCount");
+  const phases = ["Breathe in", "Hold", "Breathe out"];
+  let breathId = null;
+
+  function startBreathing() {
+    let phase = 0;
+    let count = 4;
+    breathLabel.textContent = phases[0];
+    breathCount.textContent = count;
+
+    breathId = setInterval(() => {
+      count--;
+      if (count === 0) {
+        phase = (phase + 1) % phases.length;
+        count = 4;
+        breathLabel.textContent = phases[phase];
       }
+      breathCount.textContent = count;
+    }, 1000);
+  }
 
-      previousBreak = index;
+  function stopBreathing() {
+    clearInterval(breathId);
+    breathId = null;
+  }
 
-      document.getElementById("breakResult").textContent =
-        breakIdeas[index];
+  if (sosButton) {
+    sosButton.addEventListener("click", () => {
+      breathingArea.hidden = false;
+      sosButton.setAttribute("aria-expanded", "true");
+      stopBreathing();
+      startBreathing();
     });
+  }
+
+  on("sosClose", "click", () => {
+    stopBreathing();
+    breathingArea.hidden = true;
+    sosButton.setAttribute("aria-expanded", "false");
+    sosButton.focus();
+  });
 
   renderTimer();
 })();

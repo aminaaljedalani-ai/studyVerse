@@ -11,6 +11,86 @@
   <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* the menu */
+.overview-menu {
+  --bs-nav-pills-link-active-bg: var(--accent);
+  --bs-nav-pills-link-active-color: var(--on-accent);
+  --bs-nav-link-color: var(--text);
+  --bs-nav-link-hover-color: var(--text);
+  gap: .35rem;
+}
+
+.overview-menu .nav-link {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  text-align: left;
+  font-family: "Gaegu", cursive;
+  font-size: 1.2rem;
+  border-radius: 12px;
+}
+
+.overview-num {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--note);
+  border: 2px solid var(--edge);
+  border-radius: 50%;
+}
+
+/* a notebook-margin line between menu and content */
+@media (min-width: 768px) {
+  .overview-content {
+    padding-left: 2rem;
+    border-left: 2px dashed var(--edge);
+  }
+}
+
+/* on phones, the menu becomes one scrollable row */
+@media (max-width: 767px) {
+  .overview-menu {
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: .5rem;
+  }
+
+  .overview-menu .nav-link {
+    white-space: nowrap;
+  }
+
+  .overview-checks li::before {
+  content: "✓";
+  margin-right: .6rem;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+.overview-reqs li {
+  display: flex;
+  gap: .7rem;
+  margin-bottom: .9rem;
+}
+
+.overview-id {
+  flex: none;
+  align-self: flex-start;
+  padding: .05rem .6rem;
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--note);
+  border: 2px solid var(--edge);
+  border-radius: 999px;
+}
+}
+  </style>
 </head>
 <body>
   <!-- ===== NAVBAR - SHARED. Copy this block EXACTLY into your page. Only move the "active" class
@@ -27,9 +107,6 @@
             <li class="nav-item"><a class="nav-link" href="subtopic1.html" title="Plan Your Studies">Plan</a></li>
             <li class="nav-item"><a class="nav-link" href="subtopic2.html" title="Focus &amp; Recharge">Focus</a></li>
             <li class="nav-item"><a class="nav-link" href="subtopic3.html" title="Study Spot Finder">Spots</a></li>
-            <li class="nav-item"><a class="nav-link" href="planning-design.html" title="Planning &amp; Design">Design</a></li>
-            <li class="nav-item"><a class="nav-link" href="reflection-ai-report.html" title="Reflection &amp; AI Report">Reflection</a></li>
-            <li class="nav-item"><a class="nav-link active" href="overview.html" title="Overview" aria-current="page">Overview</a></li>
             </ul>
           </div>
         </div>
@@ -68,34 +145,155 @@
        8. 11. Ethical & Legal: cite sources, credit images, document AI content, no copying, validate input, collect minimal personal data.
        ===================================================================== -->
   <header class="page-header">
-    <div class="container"><h1>Overview</h1></div>
-  </header>
-  <main id="main" class="section">
     <div class="container">
-      <p>Replace this placeholder with your page content.</p>
+      <h1>Overview</h1></div>
+  </header>
+ <main id="main" class="section overview-page">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- LEFT: the menu -->
+      <div class="col-md-4 col-lg-3">
+        <div class="nav flex-column nav-pills overview-menu" role="tablist" aria-orientation="vertical">
+
+          <button class="nav-link active" id="tab-s1" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s1" aria-controls="s1" aria-selected="true">
+            <span class="overview-num">1</span> Project Overview
+          </button>
+
+          <button class="nav-link" id="tab-s2" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s2" aria-controls="s2" aria-selected="false">
+            <span class="overview-num">2</span> Requirements
+          </button>
+
+          <!-- repeat for s3 ... s11 (without "active") -->
+
+        </div>
+      </div>
+
+      <!-- RIGHT: the content -->
+      <div class="col-md-8 col-lg-9 overview-content">
+        <div class="tab-content">
+
+          <section class="tab-pane fade show active" id="s1" role="tabpanel" aria-labelledby="tab-s1" tabindex="0">
+            <h2>Project <span class="circled">Overview</span></h2>
+            <!-- content later -->
+             
+<p class="lead">StudyVerse is an educational website that helps students in Bahrain plan their studies, stay focused and find places to study.</p>
+
+<hr class="my-4">
+
+<dl class="overview-facts row g-3 mb-0">
+  <div class="col-sm-6">
+    <dt class="eyebrow mb-1">Website title</dt>
+    <dd class="fs-4 mb-0">StudyVerse</dd>
+  </div>
+  <div class="col-sm-6">
+    <dt class="eyebrow mb-1">Category</dt>
+    <dd class="fs-4 mb-0">Educational website</dd>
+  </div>
+  <div class="col-12">
+    <dt class="eyebrow mb-1">Target audience</dt>
+    <dd class="fs-5 mb-0">School, college and university students in Bahrain who want to plan their studies, improve their focus and find good places to study.</dd>
+  </div>
+</dl>
+
+<hr class="my-4">
+
+<h3>Problem statement</h3>
+<p>Students often struggle to organise their study time, stay focused and find a suitable place to study. These tools are usually spread across different apps and websites. StudyVerse brings them together in one friendly place, with study spots that are relevant to students in Bahrain.</p>
+
+<h3 class="mt-4">Project objectives</h3>
+<ul class="overview-checks list-unstyled row row-cols-md-2 g-2 mb-0">
+  <li class="col">Help students plan and organise their study time.</li>
+  <li class="col">Support focus and wellbeing with simple tools.</li>
+  <li class="col">Help students discover study spots in Bahrain.</li>
+  <li class="col">Provide a responsive website for desktop, tablet and mobile, in light and dark mode.</li>
+  <li class="col">Use AI tools responsibly and document how they were used.</li>
+</ul>
+          </section>
+
+          <section class="tab-pane fade" id="s2" role="tabpanel" aria-labelledby="tab-s2" tabindex="0">
+            <h2>Requirement Analysis</h2>
+            <!-- content later -->
+             
+<p class="lead">What the website must do, and how well it must do it.</p>
+
+<hr class="my-4">
+
+<div class="row g-4">
+
+  <div class="col-lg-6">
+    <h3>Functional requirements</h3>
+    <ul class="overview-reqs list-unstyled">
+      <li><span class="overview-id">FR1</span><span><strong>User registration:</strong> a form on the Home page collects first name, last name, mobile number and email.</span></li>
+      <li><span class="overview-id">FR2</span><span><strong>Form validation:</strong> names need at least 3 characters, the mobile number exactly 8 digits and the email a valid format, with clear success and error messages.</span></li>
+      <li><span class="overview-id">FR3</span><span><strong>Navigation system:</strong> one shared navigation bar links all seven pages.</span></li>
+      <li><span class="overview-id">FR4</span><span><strong>Login demo:</strong> a login window shows a welcome message (front-end only).</span></li>
+      <li><span class="overview-id">FR5</span><span><strong>Theme switch:</strong> a moon/sun button changes between light and dark mode.</span></li>
+      <li><span class="overview-id">FR6</span><span><strong>Study planner:</strong> tools to plan study tasks.</span></li>
+      <li><span class="overview-id">FR7</span><span><strong>Focus tools:</strong> Pomodoro timer, Mood Matcher, Stress SOS and Break Generator.</span></li>
+      <li><span class="overview-id">FR8</span><span><strong>Study spot finder:</strong> study spots in Bahrain that can be filtered by location, budget, noise level, Wi-Fi and power sockets.</span></li>
+    </ul>
+  </div>
+
+  <div class="col-lg-6">
+    <h3>Non-functional requirements</h3>
+    <ul class="overview-reqs list-unstyled">
+      <li><span class="overview-id">NFR1</span><span><strong>Performance:</strong> lightweight pages that load quickly.</span></li>
+      <li><span class="overview-id">NFR2</span><span><strong>Accessibility:</strong> semantic HTML, labelled form fields, alt text on images and readable colours in both themes.</span></li>
+      <li><span class="overview-id">NFR3</span><span><strong>Security:</strong> user input is validated, and the demo collects no passwords.</span></li>
+      <li><span class="overview-id">NFR4</span><span><strong>Usability:</strong> a simple layout, consistent cards and buttons, and the same navigation on every page.</span></li>
+      <li><span class="overview-id">NFR5</span><span><strong>Responsiveness:</strong> layouts adapt to desktop, tablet and mobile.</span></li>
+      <li><span class="overview-id">NFR6</span><span><strong>Maintainability:</strong> shared styles and files keep all pages consistent and easy to update.</span></li>
+    </ul>
+  </div>
+
+</div>
+          </section>
+
+          <!-- repeat for s3 ... s11 (without "show active") -->
+
+        </div>
+      </div>
+
     </div>
-  </main>
+  </div>
+</main>
+
 
   <!-- ===== FOOTER - SHARED. Copy EXACTLY into your page. Owner: AMEENA =====
        Credits: add the source of every image/media you use on YOUR page to the list below. -->
   <footer class="site-footer">
     <div class="container">
       <div class="row g-4">
-        <div class="col-md-5">
+        <div class="col-md-3 pe-md-4">
           <h2>StudyVerse</h2>
           <p>Your world of focus and balance. A student project for IT6012 Web Fundamentals.</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+
           <h2>Quick links</h2>
+
           <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="subtopic1.html">Plan Your Studies</a></li>
-        <li><a href="subtopic2.html">Focus & Recharge</a></li>
-        <li><a href="subtopic3.html">Study Spot Finder</a></li>
-        <li><a href="planning-design.html">Planning & Design</a></li>
-        <li><a href="reflection-ai-report.html">Reflection & AI Report</a></li>
-        <li><a href="overview.html">Overview</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="subtopic1.html">Plan Your Studies</a></li>
+            <li><a href="subtopic2.html">Focus & Recharge</a></li>
+            <li><a href="subtopic3.html">Study Spot Finder</a></li>
           </ul>
+
+        </div>
+
+        <div class="col-md-3">
+
+          <h2>Documents</h2>
+
+          <ul>
+            <li><a href="planning-design.html">Planning & Design</a></li>
+            <li><a href="reflection-ai-report.html">Reflection & AI Report</a></li>
+            <li><a href="overview.html">Overview</a></li>
+          </ul>
+
         </div>
         <div class="col-md-3">
           <h2>Credits</h2>
