@@ -268,3 +268,8 @@
 .spots-page[data-mode="cafe"] .spot-card {
   background-color: color-mix(in srgb, var(--mode-tint) 30%, var(--surface));
 }
+
+#showMoreBtn {
+  display: block;
+  margin: 6rem auto 0;
+}

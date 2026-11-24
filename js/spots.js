@@ -12,9 +12,9 @@
     id: 1,
     name: "Higher Grounds Cafe",
     location: "Tubli",
-    budget: "$",
-    noise: 'Quiet',
-    wifi: true,       
+    budget: "Moderately Priced",
+    noise: null,
+    wifi: null,
     sockets: null,
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Higher+Grounds+Cafe+Tubli+Bahrain",
@@ -23,15 +23,15 @@
   {
     id: 2,
     name: "The Dot",
-    location: "Diyar Al Muharraq",
-    budget: '$$',
+    location: "Awali",
+    budget: 'High Priced',
     noise: null,
-    wifi: true,       
-    sockets: true,    
+    wifi: null,
+    sockets: null,
     mode: "cafe",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=The+Dot+Marassi+Boulevard+Diyar+Al+Muharraq+Bahrain",
-    image: ""
-    
+    mapsUrl: "https://maps.app.goo.gl/hMcpDiexJv3mDqW47",
+    image: "images/thedot2.jpg"
+
   },
   {
     id: 3,
@@ -39,12 +39,13 @@
     location: "Seef",
     budget:'$$$',
     noise: null,
-    wifi: true,       
+    wifi: true,
     sockets: true,
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Oz+cafe+Seef+Bahrain",
-    image: ""
+    image: "images/oz.jpg"
     
+
   },
   {
     id: 4,
@@ -57,7 +58,7 @@
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Innovation+Themes+and+Coffee+Galleria+Mall+Bahrain",
     image: ""
-    
+
   },
   {
     id: 5,
@@ -70,7 +71,7 @@
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Petal+and+Bean+Galleria+Mall+Bahrain",
     image: ""
-    
+
   },
   {
     id: 6,
@@ -83,7 +84,7 @@
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Brewrista+Cafe+Tubli+Bahrain",
     image: ""
-    
+
   },
   {
     id: 7,
@@ -96,7 +97,7 @@
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Coffee+Plus+Seef+Bahrain",
     image: ""
-    
+
   },
   {
     id: 8,
@@ -109,7 +110,7 @@
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Think+Coffee+Zayed+Town+Bahrain",
     image: ""
-    
+
   },
   {
     id: 9,
@@ -122,7 +123,7 @@
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Akeed+Cafe+Zayed+Town+Bahrain",
     image: ""
-    
+
   },
   {
     id: 10,
@@ -135,11 +136,30 @@
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
     image: ""
-    
+
   }
 ];
 
+/* ===== TEMPORARY TEST CARDS =====
+   Repeats the real spots until there are 36 cards, so "Show more" can be tested.
+   When you add real places: delete this block and change "allSpots" to "spots"
+   in the two places marked "TEST" below. */
+const TOTAL_TEST_CARDS = 36;
+const allSpots = spots.slice();
+for (let i = spots.length; i < TOTAL_TEST_CARDS; i++) {
+  allSpots.push(Object.assign({}, spots[i % spots.length], { id: i + 1 }));
+}
+/* ===== END TEMPORARY TEST CARDS ===== */
+
 const spotList = document.getElementById("spotList");
+const showMoreBtn = document.getElementById("showMoreBtn");
+
+const FIRST_BATCH = 12;   // cards shown at first (default view)
+const MORE_BATCH = 6;     // cards added by each "Show more" click
+
+let currentList = allSpots;  // TEST: change to "spots" later
+let visibleCount = FIRST_BATCH;
+let isFiltered = false;
 
 
 
@@ -172,28 +192,28 @@ function featureChip(label, iconName, value) {
 }
 
 function renderSpots(list) {
-  spotList.innerHTML = "";
-
   if (list.length === 0) {
     spotList.innerHTML = `<div class="col-12"><p>No study spots match your filters. Try changing them.</p></div>`;
     return;
   }
+
+  let html = "";
 
   list.forEach(function (spot) {
     const photo = spot.image
       ? `<img class="spot-img" src="${spot.image}" alt="${spot.name}">`
       : `<div class="spot-img spot-img-empty" aria-hidden="true">Photo coming soon</div>`;
 
-    spotList.innerHTML += `
+    html += `
       <div class="col-12 col-md-6 col-lg-4">
-        <article class="sv-card spot-card h-100 d-flex flex-column">
+        <article class="sv-card spot-card h-100 d-flex flex-column" tabindex="-1">
           ${photo}
           <p class="eyebrow mb-1">${spot.location}</p>
           <h3>${spot.name}</h3>
           <div class="spot-badges">
             <span class="spot-badge">${spot.budget || "Price not confirmed"}</span>
             <span class="spot-badge">${spot.noise || "Noise not confirmed"}</span>
-            
+
           </div>
           <div class="spot-badges">
             ${featureChip("Wi-Fi", "wifi", spot.wifi)}
@@ -205,9 +225,35 @@ function renderSpots(list) {
         </article>
       </div>`;
   });
+
+  spotList.innerHTML = html;
 }
 
-renderSpots(spots);
+/* Shows the cards: all of them when filtered, otherwise only the first "visibleCount" */
+function showSpots() {
+  const list = isFiltered ? currentList : currentList.slice(0, visibleCount);
+  renderSpots(list);
+
+  const remaining = currentList.length - visibleCount;
+  const hasMore = !isFiltered && remaining > 0;
+
+  showMoreBtn.hidden = !hasMore;
+  if (hasMore) {
+    showMoreBtn.textContent = "Show more (" + remaining + " left)";
+  }
+}
+
+showMoreBtn.addEventListener("click", function () {
+  const firstNewIndex = visibleCount;
+  visibleCount += MORE_BATCH;
+  showSpots();
+
+  // Move focus to the first new card so keyboard / screen-reader users know where the new ones start
+  const firstNewCard = spotList.children[firstNewIndex];
+  if (firstNewCard) {
+    firstNewCard.querySelector(".spot-card").focus();
+  }
+});
 
 const activeFilters = {
   location: "all",
@@ -241,16 +287,27 @@ function updateFilterButtons() {
 }
 
 function applyFilters() {
-  const result = spots.filter(function (spot) {
-    if (activeFilters.location !== "all" && spot.location !== activeFilters.location) return false;
-    if (activeFilters.budget !== "all" && spot.budget !== activeFilters.budget) return false;
-    if (activeFilters.noise !== "all" && spot.noise !== activeFilters.noise) return false;
-    if (activeFilters.wifi === "yes" && spot.wifi !== true) return false;
-    if (activeFilters.sockets === "yes" && spot.sockets !== true) return false;
-    return true;
+  isFiltered = Object.values(activeFilters).some(function (value) {
+    return value !== "all";
   });
 
-  renderSpots(result);
+  if (!isFiltered) {
+    // Default view: back to the first 12 cards
+    currentList = allSpots;  // TEST: change to "spots" later
+    visibleCount = FIRST_BATCH;
+  } else {
+    // Filtered view: search only the real spots (no test copies), show every match
+    currentList = spots.filter(function (spot) {
+      if (activeFilters.location !== "all" && spot.location !== activeFilters.location) return false;
+      if (activeFilters.budget !== "all" && spot.budget !== activeFilters.budget) return false;
+      if (activeFilters.noise !== "all" && spot.noise !== activeFilters.noise) return false;
+      if (activeFilters.wifi === "yes" && spot.wifi !== true) return false;
+      if (activeFilters.sockets === "yes" && spot.sockets !== true) return false;
+      return true;
+    });
+  }
+
+  showSpots();
 }
 
 document.getElementById("filterBar").addEventListener("click", function (event) {
@@ -270,6 +327,8 @@ document.getElementById("filterBar").addEventListener("click", function (event) 
     applyFilters();
   }
 });
+
+showSpots();
 
 const pageMain = document.getElementById("main");
 const modeButtons = document.querySelectorAll(".spot-mode");
