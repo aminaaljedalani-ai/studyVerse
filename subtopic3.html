@@ -99,16 +99,11 @@
 
     <div class="spot-filter">
       <button type="button" class="btn btn-outline-brand spot-trigger" id="locationBtn" aria-haspopup="true">Location</button>
-      <ul class="spot-menu">
-        <li><button type="button" data-filter="location" data-value="all">All locations</button></li>
-        <li><button type="button" data-filter="location" data-value="Manama">Manama</button></li>
-        <li><button type="button" data-filter="location" data-value="Riffa">Riffa</button></li>
-        <li><button type="button" data-filter="location" data-value="Muharraq">Muharraq</button></li>
-        <li><button type="button" data-filter="location" data-value="Tubli">Tubli</button></li>
-        <li><button type="button" data-filter="location" data-value="Seef">Seef</button></li>
-        <li><button type="button" data-filter="location" data-value="Zinj">Zinj</button></li>
-        <li><button type="button" data-filter="location" data-value="Muharraq">Muharraq</button></li>
-        <li><button type="button" data-filter="location" data-value="Awali">Awali</button></li>
+            <ul class="spot-menu" id="locationMenu">
+        <li class="spot-search-item">
+          <input type="search" id="locationSearch" class="spot-search"
+                 placeholder="Search..." aria-label="Search locations" autocomplete="off">
+        </li>
       </ul>
     </div>
 
@@ -116,10 +111,10 @@
       <button type="button" class="btn btn-outline-brand spot-trigger" id="budgetBtn" aria-haspopup="true">Budget</button>
       <ul class="spot-menu">
         <li><button type="button" data-filter="budget" data-value="all">Any budget</button></li>
-        <li><button type="button" data-filter="budget" data-value="Free">Free</button></li>
-        <li><button type="button" data-filter="budget" data-value="$">$</button></li>
-        <li><button type="button" data-filter="budget" data-value="$$">$$</button></li>
-        <li><button type="button" data-filter="budget" data-value="$$$">$$$</button></li>
+        <li><button type="button" data-filter="budget" data-value="Budget friendly">Budget friendly</button></li>
+        <li><button type="button" data-filter="budget" data-value="Moderately Priced">Moderately Priced</button></li>
+        <li><button type="button" data-filter="budget" data-value="High Priced">High Priced</button></li>
+        
       </ul>
     </div>
 

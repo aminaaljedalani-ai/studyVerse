@@ -22,7 +22,7 @@
   },
   {
     id: 2,
-    name: "The Dot",
+    name: "The Dot Cafe",
     location: "Awali",
     budget: 'High Priced',
     noise: null,
@@ -36,7 +36,7 @@
   },
   {
     id: 3,
-    name: "Oz",
+    name: "Oz Cafe",
     location: "Seef",
     budget:'Budget friendly',
     noise: null,
@@ -66,7 +66,7 @@
   },
   {
     id: 5,
-    name: "Petal & Bean",
+    name: "Petal & Bean Cafe",
     location: "Zinj",
     budget: "Moderately Priced",
     noise: null,
@@ -145,19 +145,114 @@
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
     image: ""
 
+  },
+  {
+    id: 11,
+    name: "Hmmba cafe",
+    location: "Saar",
+    budget: "Moderately Priced",
+    noise: null,
+    wifi: true,
+    sockets: true,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
+    image: "images/hmmba2.jpg"
+
+  },
+  {
+    id: 11,
+    name: "Hmmba cafe",
+    location: "Saar",
+    budget: "Moderately Priced",
+    noise: null,
+    wifi: true,
+    sockets: true,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
+    image: "images/hmmba2.jpg"
+
+  },
+  {
+    id: 11,
+    name: "Hmmba cafe",
+    location: "Saar",
+    budget: "Moderately Priced",
+    noise: null,
+    wifi: true,
+    sockets: true,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
+    image: "images/hmmba2.jpg"
+
+  },
+  {
+    id: 11,
+    name: "Hmmba cafe",
+    location: "Saar",
+    budget: "Moderately Priced",
+    noise: null,
+    wifi: true,
+    sockets: true,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
+    image: "images/hmmba2.jpg"
+
+  },
+  {
+    id: 11,
+    name: "Hmmba cafe",
+    location: "Saar",
+    budget: "Moderately Priced",
+    noise: null,
+    wifi: true,
+    sockets: true,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
+    image: "images/hmmba2.jpg"
+
   }
 ];
 
-/* ===== TEMPORARY TEST CARDS =====
-   Repeats the real spots until there are 36 cards, so "Show more" can be tested.
-   When you add real places: delete this block and change "allSpots" to "spots"
-   in the two places marked "TEST" below. */
-const TOTAL_TEST_CARDS = 36;
-const allSpots = spots.slice();
-for (let i = spots.length; i < TOTAL_TEST_CARDS; i++) {
-  allSpots.push(Object.assign({}, spots[i % spots.length], { id: i + 1 }));
+/* ===== LOCATION MENU: built automatically from the spots + search box ===== */
+const locationMenu = document.getElementById("locationMenu");
+const locationSearch = document.getElementById("locationSearch");
+
+function buildLocationMenu() {
+  // every location once, sorted A-Z
+  const locations = [...new Set(spots.map(function (spot) { return spot.location; }).filter(Boolean))]
+    .sort(function (a, b) { return a.localeCompare(b); });
+
+  let html = `<li><button type="button" data-filter="location" data-value="all">All locations</button></li>`;
+  locations.forEach(function (place) {
+    html += `<li><button type="button" data-filter="location" data-value="${place}">${place}</button></li>`;
+  });
+  html += `<li class="spot-no-match" hidden>No matching location</li>`;
+
+  locationMenu.insertAdjacentHTML("beforeend", html);
 }
-/* ===== END TEMPORARY TEST CARDS ===== */
+
+function searchLocations() {
+  const text = locationSearch.value.trim().toLowerCase();
+  let found = 0;
+
+  locationMenu.querySelectorAll('[data-filter="location"]').forEach(function (button) {
+    const show = button.dataset.value === "all"
+      ? text === ""                                         // hide "All locations" while searching
+      : button.textContent.toLowerCase().includes(text);
+    button.parentElement.hidden = !show;
+    if (show) found++;
+  });
+
+  locationMenu.querySelector(".spot-no-match").hidden = found > 0;
+}
+
+function clearLocationSearch() {
+  locationSearch.value = "";
+  searchLocations();
+}
+
+buildLocationMenu();
+locationSearch.addEventListener("input", searchLocations);
 
 const spotList = document.getElementById("spotList");
 const showMoreBtn = document.getElementById("showMoreBtn");
@@ -165,7 +260,7 @@ const showMoreBtn = document.getElementById("showMoreBtn");
 const FIRST_BATCH = 12;   // cards shown at first (default view)
 const MORE_BATCH = 6;     // cards added by each "Show more" click
 
-let currentList = allSpots;  // TEST: change to "spots" later
+let currentList = spots;  // TEST: change to "spots" later
 let visibleCount = FIRST_BATCH;
 let isFiltered = false;
 
@@ -321,9 +416,10 @@ function applyFilters() {
 document.getElementById("filterBar").addEventListener("click", function (event) {
   const choice = event.target.closest("[data-filter]");
 
-  if (choice) {
+    if (choice) {
     activeFilters[choice.dataset.filter] = choice.dataset.value;
     updateFilterButtons();
+    clearLocationSearch();          // NEW
     document.activeElement.blur();
   } else if (event.target.closest("#applyFilters")) {
     applyFilters();
@@ -332,6 +428,7 @@ document.getElementById("filterBar").addEventListener("click", function (event) 
       activeFilters[key] = "all";
     });
     updateFilterButtons();
+    clearLocationSearch();          // NEW
     applyFilters();
   }
 });

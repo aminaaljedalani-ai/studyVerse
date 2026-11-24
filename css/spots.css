@@ -274,3 +274,25 @@
   display: block;
   margin: 6rem auto 0;
 }
+
+/* search box inside the Location menu */
+.spot-search-item {
+  padding: .2rem .2rem .4rem;
+}
+
+.spot-search {
+  width: 100%;
+  min-width: 11rem;
+  padding: .3rem .6rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 2px solid var(--edge);
+  border-radius: 8px;
+}
+
+.spot-no-match {
+  padding: .4rem .8rem;
+  white-space: nowrap;
+  opacity: .7;
+}
