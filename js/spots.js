@@ -30,20 +30,24 @@
     sockets: null,
     mode: "cafe",
     mapsUrl: "https://maps.app.goo.gl/hMcpDiexJv3mDqW47",
-    image: "images/thedot2.jpg"
+    image: "images/thedot3.jpg",
+    imagePos: "100% 55%",
 
   },
   {
     id: 3,
     name: "Oz",
     location: "Seef",
-    budget:'$$$',
+    budget:'Budget friendly',
     noise: null,
-    wifi: true,
-    sockets: true,
+    wifi: null,
+    sockets: null,
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Oz+cafe+Seef+Bahrain",
-    image: "images/oz.jpg"
+    image: "images/oz.jpg",
+    
+    imagePos: "center 100%",
+    
     
 
   },
@@ -64,39 +68,42 @@
     id: 5,
     name: "Petal & Bean",
     location: "Zinj",
-    budget: null,
+    budget: "Moderately Priced",
     noise: null,
     wifi: null,
     sockets: null,
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Petal+and+Bean+Galleria+Mall+Bahrain",
-    image: ""
+    image: "images/petal.jpg",
+    imagePos: "20% 60%",
 
   },
   {
     id: 6,
     name: "Brewrista Cafe",
     location: "Tubli",
-    budget: null,
+    budget: "Budget friendly",
     noise: null,
-    wifi: null,
-    sockets: null,
+    wifi: true,
+    sockets: true,
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Brewrista+Cafe+Tubli+Bahrain",
-    image: ""
+    image: "images/brewrista.jpg"
 
   },
   {
     id: 7,
     name: "Coffee Plus",
     location: "Seef",
-    budget: null,
-    noise: null,
-    wifi: null,
-    sockets: null,
+    budget: "Budget friendly",
+    noise: "Quiet",
+    wifi: true,
+    sockets: true,
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Coffee+Plus+Seef+Bahrain",
-    image: ""
+    image: "images/plus3.png",
+    imagePos: "100% 75%",
+
 
   },
   {
@@ -116,13 +123,14 @@
     id: 9,
     name: "Akeed Cafe",
     location: "Zayed Town",
-    budget: null,
+    budget: "Budget friendly",
     noise: null,
-    wifi: null,
-    sockets: null,
+    wifi: true,
+    sockets: true,
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Akeed+Cafe+Zayed+Town+Bahrain",
-    image: ""
+    image: "images/akeed.jpg",
+    imagePos: "0% 50%",
 
   },
   {
@@ -201,8 +209,8 @@ function renderSpots(list) {
 
   list.forEach(function (spot) {
     const photo = spot.image
-      ? `<img class="spot-img" src="${spot.image}" alt="${spot.name}">`
-      : `<div class="spot-img spot-img-empty" aria-hidden="true">Photo coming soon</div>`;
+  ? `<img class="spot-img" src="${spot.image}" alt="${spot.name}" style="object-position: ${spot.imagePos || "center"};">`
+  : `<div class="spot-img spot-img-empty" aria-hidden="true">Photo coming soon</div>`;
 
     html += `
       <div class="col-12 col-md-6 col-lg-4">
