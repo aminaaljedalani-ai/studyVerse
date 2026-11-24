@@ -137,80 +137,199 @@
     id: 10,
     name: "Been Cafe",
     location: "Seef",
-    budget: null,
+    budget: "Moderately Priced",
     noise: null,
     wifi: null,
     sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
+    image: "images/been.png",
+    
+
+  },
+  {
+    id: 11,
+    name: "Hmmba Cafe",
+    location: "Janabiya",
+    budget: "Moderately Priced",
+    noise: null,
+    wifi: true,
+    sockets: true,
+    mode: "cafe",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
+    image: "images/hmmba2.jpg"
+
+  },
+  {
+    id: 12,
+    name: "Arena Coffe",
+    location: "Janabiya",
+    budget: "Budget friendly",
+    noise: null,
+    wifi: true,
+    sockets: true,
+    mode: "cafe",
+    mapsUrl: "https://maps.app.goo.gl/merVyThDyZji2D4NA",
+    image: "images/arena2.png",
+    imagePos: "50% 75%",
+
+  },
+  {
+    id: 13,
+    name: "The Roastery",
+    location: "Janabiya",
+    budget: "High Priced",
+    noise: "Lively",
+    wifi: true,
+    sockets: true,
     mode: "cafe",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
     image: ""
 
   },
   {
-    id: 11,
-    name: "Hmmba cafe",
+    id: 14,
+    name: "Goodness Cafe & Bakery - Manama",
+    location: "Manama",
+    budget: "Moderately Priced",
+    noise: null,
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://maps.app.goo.gl/XTAJr1urXo6ocajZ7",
+    image: ""
+
+  },
+  {
+    id: 15,
+    name: "Goodness Cafe & Bakery - Saar",
     location: "Saar",
     budget: "Moderately Priced",
     noise: null,
-    wifi: true,
-    sockets: true,
+    wifi: null,
+    sockets: null,
     mode: "cafe",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
+    mapsUrl: "https://maps.app.goo.gl/XTAJr1urXo6ocajZ7",
     image: "images/hmmba2.jpg"
 
   },
   {
-    id: 11,
-    name: "Hmmba cafe",
-    location: "Saar",
-    budget: "Moderately Priced",
+    id: 16,
+    name: "Fold cafe",
+    location: "Riffa",
+    budget: "High Priced",
     noise: null,
-    wifi: true,
-    sockets: true,
+    wifi: null,
+    sockets: null,
     mode: "cafe",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
-    image: "images/hmmba2.jpg"
-
+    mapsUrl: "https://maps.app.goo.gl/Ttxvo36huptQD3ew7",
+    image: "images/fold.jpg",
+    imagePos: "50% 70%"
   },
   {
-    id: 11,
-    name: "Hmmba cafe",
-    location: "Saar",
-    budget: "Moderately Priced",
+    id: 17,
+    name: "Ghuloomi cafe",
+    location: "Janabiya",
+    budget: "High Priced",
     noise: null,
-    wifi: true,
-    sockets: true,
+    wifi: null,
+    sockets: null,
     mode: "cafe",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
-    image: "images/hmmba2.jpg"
-
+    mapsUrl: "https://maps.app.goo.gl/LtKgCVcPV44niAQM8",
+    image: "images/ghuloomi.png",
+    imagePos: "100% 70%"
   },
   {
-    id: 11,
-    name: "Hmmba cafe",
-    location: "Saar",
+    id: 17,
+    name: "Common Grounds",
+    location: "Riffa",
     budget: "Moderately Priced",
     noise: null,
-    wifi: true,
-    sockets: true,
+    wifi: null,
+    sockets: null,
     mode: "cafe",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
-    image: "images/hmmba2.jpg"
-
+    mapsUrl: "https://maps.app.goo.gl/KhYoz9GuSoWBewgx7",
+    image: "images/common2.png",
+    imagePos: "0% 80%"
   },
   {
-    id: 11,
-    name: "Hmmba cafe",
+    id: 17,
+    name: "Sip Cafe & Study",
     location: "Saar",
     budget: "Moderately Priced",
     noise: null,
-    wifi: true,
-    sockets: true,
+    wifi: null,
+    sockets: null,
     mode: "cafe",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Been+Cafe+Seef+Bahrain",
-    image: "images/hmmba2.jpg"
-
-  }
+    mapsUrl: "https://maps.app.goo.gl/o7vE33cGZnuWECW3A",
+    image: "",
+    
+  },
+  {
+    id: 18,
+    name: "Higher Grounds Cafe",
+    location: "Tubli",
+    budget: "Moderately Priced",
+    noise: null,
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://maps.app.goo.gl/ExSoke7oKGSsxAD37",
+    image: "",
+    
+  },
+  {
+    id: 19,
+    name: "Calla Cafe",
+    location: "Diyar al-muharraq.",
+    budget: "Moderately Priced",
+    noise: 'Quiet',
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://maps.app.goo.gl/5Re7VxLtGr9qLg9S7",
+    image: "",
+    
+  },
+  {
+    id: 20,
+    name: "Place Cafe - Saar",
+    location: "Saar",
+    budget: "High Priced",
+    noise: 'Quiet',
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://maps.app.goo.gl/yChrgsW8P2tPp7Fz8",
+    image: "",
+    
+  },
+  {
+    id: 21,
+    name: "Place Cafe - Riffa",
+    location: "Riffa",
+    budget: "High Priced",
+    noise: 'Quiet',
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://maps.app.goo.gl/yChrgsW8P2tPp7Fz8",
+    image: "",
+    
+  },
+  {
+    id: 21,
+    name: "SNUG Cafe",
+    location: "Riffa",
+    budget: "Moderately Priced",
+    noise: 'Moderate',
+    wifi: null,
+    sockets: null,
+    mode: "cafe",
+    mapsUrl: "https://maps.app.goo.gl/4UYEVKZq8cbE7WLV9",
+    image: "",
+    
+  },
 ];
 
 /* ===== LOCATION MENU: built automatically from the spots + search box ===== */
@@ -260,7 +379,7 @@ const showMoreBtn = document.getElementById("showMoreBtn");
 const FIRST_BATCH = 12;   // cards shown at first (default view)
 const MORE_BATCH = 6;     // cards added by each "Show more" click
 
-let currentList = spots;  // TEST: change to "spots" later
+let currentList = spots;  
 let visibleCount = FIRST_BATCH;
 let isFiltered = false;
 
