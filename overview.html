@@ -65,13 +65,17 @@
   .overview-menu .nav-link {
     white-space: nowrap;
   }
+}
 
-  .overview-checks li::before {
+/* objectives list (section 1) */
+.overview-checks li::before {
   content: "✓";
   margin-right: .6rem;
   font-weight: 700;
   color: var(--accent-2);
 }
+
+/* requirement lists (section 2) */
 .overview-reqs li {
   display: flex;
   gap: .7rem;
@@ -89,6 +93,58 @@
   border: 2px solid var(--edge);
   border-radius: 999px;
 }
+
+/* "coming soon" boxes for content other members will supply */
+.overview-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+  min-height: 220px;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 2px dashed var(--edge);
+  border-radius: 14px;
+}
+
+.overview-placeholder p {
+  margin: 0;
+}
+
+/* style guide: colour swatches (section 7) */
+.overview-swatch {
+  height: 70px;
+  margin-bottom: .5rem;
+  background: var(--swatch);
+  border: 2px solid var(--edge);
+  border-radius: 12px;
+}
+
+.overview-font-heading {
+  font-family: "Gaegu", cursive;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.overview-font-body {
+  font-family: "Patrick Hand", cursive;
+  font-size: 1.25rem;
+}
+
+/* tables (sections 8 and 10) */
+.overview-table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text);
+  border-color: var(--edge);
+}
+
+.overview-table th {
+  font-family: "Gaegu", cursive;
+  font-size: 1.15rem;
+  background: var(--note);
 }
   </style>
 </head>
@@ -166,7 +222,50 @@
             <span class="overview-num">2</span> Requirements
           </button>
 
-          <!-- repeat for s3 ... s11 (without "active") -->
+          <button class="nav-link" id="tab-s3" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s3" aria-controls="s3" aria-selected="false">
+            <span class="overview-num">3</span> Site Map
+          </button>
+
+          <button class="nav-link" id="tab-s4" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s4" aria-controls="s4" aria-selected="false">
+            <span class="overview-num">4</span> User Journey
+          </button>
+
+          <button class="nav-link" id="tab-s5" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s5" aria-controls="s5" aria-selected="false">
+            <span class="overview-num">5</span> Wireframes
+          </button>
+
+          <button class="nav-link" id="tab-s6" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s6" aria-controls="s6" aria-selected="false">
+            <span class="overview-num">6</span> Mockups
+          </button>
+
+          <button class="nav-link" id="tab-s7" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s7" aria-controls="s7" aria-selected="false">
+            <span class="overview-num">7</span> UI Style Guide
+          </button>
+
+          <button class="nav-link" id="tab-s8" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s8" aria-controls="s8" aria-selected="false">
+            <span class="overview-num">8</span> Responsive Plan
+          </button>
+
+          <button class="nav-link" id="tab-s9" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s9" aria-controls="s9" aria-selected="false">
+            <span class="overview-num">9</span> AI Utilization
+          </button>
+
+          <button class="nav-link" id="tab-s10" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s10" aria-controls="s10" aria-selected="false">
+            <span class="overview-num">10</span> AI Documentation
+          </button>
+
+          <button class="nav-link" id="tab-s11" type="button" role="tab"
+                  data-bs-toggle="pill" data-bs-target="#s11" aria-controls="s11" aria-selected="false">
+            <span class="overview-num">11</span> Ethics &amp; Legal
+          </button>
 
         </div>
       </div>
@@ -252,7 +351,258 @@
 </div>
           </section>
 
-          <!-- repeat for s3 ... s11 (without "show active") -->
+          <!-- ===== 3. SITE MAP (PERSON 2 supplies the diagram) ===== -->
+          <section class="tab-pane fade" id="s3" role="tabpanel" aria-labelledby="tab-s3" tabindex="0">
+            <h2>Site Map</h2>
+            <p class="lead">How the seven pages of StudyVerse connect to each other.</p>
+            <hr class="my-4">
+
+            <!-- PERSON 2: replace this box with:
+                 <img class="img-fluid" src="images/sitemap.png" alt="Site map: Home links to Plan, Focus, Spots and the three document pages"> -->
+            <div class="overview-placeholder">
+              <p class="fs-4">Site map coming soon</p>
+              <p class="small">Diagram supplied by Person 2.</p>
+            </div>
+          </section>
+
+          <!-- ===== 4. USER JOURNEY MAP (PERSON 2 supplies the diagram) ===== -->
+          <section class="tab-pane fade" id="s4" role="tabpanel" aria-labelledby="tab-s4" tabindex="0">
+            <h2>User Journey Map</h2>
+            <p class="lead">The steps a student takes through StudyVerse, from arriving to reaching their goal.</p>
+            <hr class="my-4">
+
+            <!-- PERSON 2: replace this box with the journey map image (remember the alt text) -->
+            <div class="overview-placeholder">
+              <p class="fs-4">User journey map coming soon</p>
+              <p class="small">Diagram supplied by Person 2.</p>
+            </div>
+          </section>
+
+          <!-- ===== 5. WIREFRAMES (PERSON 3 supplies these) ===== -->
+          <section class="tab-pane fade" id="s5" role="tabpanel" aria-labelledby="tab-s5" tabindex="0">
+            <h2>Wireframes</h2>
+            <p class="lead">Low-detail layouts used to plan each page before designing it.</p>
+            <hr class="my-4">
+
+            <!-- PERSON 3: replace each box with an <img class="img-fluid" src="..." alt="Wireframe of the ... page"> -->
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="overview-placeholder"><p class="fs-5">Home wireframe</p><p class="small">Coming soon from Person 3.</p></div>
+              </div>
+              <div class="col-md-6">
+                <div class="overview-placeholder"><p class="fs-5">Plan Your Studies wireframe</p><p class="small">Coming soon from Person 3.</p></div>
+              </div>
+              <div class="col-md-6">
+                <div class="overview-placeholder"><p class="fs-5">Focus &amp; Recharge wireframe</p><p class="small">Coming soon from Person 3.</p></div>
+              </div>
+              <div class="col-md-6">
+                <div class="overview-placeholder"><p class="fs-5">Study Spot Finder wireframe</p><p class="small">Coming soon from Person 3.</p></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== 6. MOCKUPS (PERSON 3 supplies these) ===== -->
+          <section class="tab-pane fade" id="s6" role="tabpanel" aria-labelledby="tab-s6" tabindex="0">
+            <h2>Mockups</h2>
+            <p class="lead">Full-colour designs showing how the finished pages look.</p>
+            <hr class="my-4">
+
+            <!-- PERSON 3: replace each box with an <img class="img-fluid" src="..." alt="Mockup of the ... page"> -->
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="overview-placeholder"><p class="fs-5">Home mockup</p><p class="small">Coming soon from Person 3.</p></div>
+              </div>
+              <div class="col-md-6">
+                <div class="overview-placeholder"><p class="fs-5">Plan Your Studies mockup</p><p class="small">Coming soon from Person 3.</p></div>
+              </div>
+              <div class="col-md-6">
+                <div class="overview-placeholder"><p class="fs-5">Focus &amp; Recharge mockup</p><p class="small">Coming soon from Person 3.</p></div>
+              </div>
+              <div class="col-md-6">
+                <div class="overview-placeholder"><p class="fs-5">Study Spot Finder mockup</p><p class="small">Coming soon from Person 3.</p></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== 7. UI STYLE GUIDE ===== -->
+          <section class="tab-pane fade" id="s7" role="tabpanel" aria-labelledby="tab-s7" tabindex="0">
+            <h2>UI Style Guide</h2>
+            <p class="lead">The colours, fonts and components shared by every page. The swatches below use the site's real CSS variables, so they change when you switch between light and dark mode.</p>
+            <hr class="my-4">
+
+            <h3>Colours</h3>
+            <div class="row g-3 mb-4">
+              <div class="col-6 col-md-4 col-xl-3">
+                <div class="overview-swatch" style="--swatch: var(--accent)"></div>
+                <p class="mb-0"><strong>Accent</strong><br><code>--accent</code><br><span class="small">Main buttons, active tabs</span></p>
+              </div>
+              <div class="col-6 col-md-4 col-xl-3">
+                <div class="overview-swatch" style="--swatch: var(--accent-2)"></div>
+                <p class="mb-0"><strong>Accent 2</strong><br><code>--accent-2</code><br><span class="small">Highlights, check marks</span></p>
+              </div>
+              <div class="col-6 col-md-4 col-xl-3">
+                <div class="overview-swatch" style="--swatch: var(--note)"></div>
+                <p class="mb-0"><strong>Note</strong><br><code>--note</code><br><span class="small">Sticky-note backgrounds, badges</span></p>
+              </div>
+              <div class="col-6 col-md-4 col-xl-3">
+                <div class="overview-swatch" style="--swatch: var(--surface)"></div>
+                <p class="mb-0"><strong>Surface</strong><br><code>--surface</code><br><span class="small">Menus and panels</span></p>
+              </div>
+              <div class="col-6 col-md-4 col-xl-3">
+                <div class="overview-swatch" style="--swatch: var(--surface-2)"></div>
+                <p class="mb-0"><strong>Surface 2</strong><br><code>--surface-2</code><br><span class="small">Boxes inside cards</span></p>
+              </div>
+              <div class="col-6 col-md-4 col-xl-3">
+                <div class="overview-swatch" style="--swatch: var(--text)"></div>
+                <p class="mb-0"><strong>Text</strong><br><code>--text</code><br><span class="small">Body text</span></p>
+              </div>
+              <div class="col-6 col-md-4 col-xl-3">
+                <div class="overview-swatch" style="--swatch: var(--edge)"></div>
+                <p class="mb-0"><strong>Edge</strong><br><code>--edge</code><br><span class="small">Hand-drawn borders</span></p>
+              </div>
+            </div>
+
+            <h3>Fonts</h3>
+            <div class="row g-4 mb-4">
+              <div class="col-md-6">
+                <p class="eyebrow mb-1">Headings</p>
+                <p class="overview-font-heading mb-1">Gaegu</p>
+                <p class="small mb-0">A handwritten font that gives the notebook feel.</p>
+              </div>
+              <div class="col-md-6">
+                <p class="eyebrow mb-1">Body text</p>
+                <p class="overview-font-body mb-1">Patrick Hand</p>
+                <p class="small mb-0">A clear handwritten font that stays easy to read in paragraphs.</p>
+              </div>
+            </div>
+
+            <h3>Buttons</h3>
+            <div class="d-flex flex-wrap gap-3 mb-4">
+              <button type="button" class="btn btn-brand">Main button</button>
+              <button type="button" class="btn btn-outline-brand">Outline button</button>
+            </div>
+
+            <h3>Card</h3>
+            <div class="row">
+              <div class="col-md-6">
+                <article class="sv-card">
+                  <h4>Example card</h4>
+                  <p class="mb-0">Every page uses the <code>sv-card</code> class for cards, so they all share the same look.</p>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== 8. RESPONSIVE PLAN ===== -->
+          <section class="tab-pane fade" id="s8" role="tabpanel" aria-labelledby="tab-s8" tabindex="0">
+            <h2>Responsive Plan</h2>
+            <p class="lead">StudyVerse uses the Bootstrap 5 grid, so every layout adapts to the screen size.</p>
+            <hr class="my-4">
+
+            <div class="table-responsive">
+              <table class="table table-bordered overview-table align-middle">
+                <caption>How the main parts of the site change on each screen size</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Part of the site</th>
+                    <th scope="col">Phone<br><span class="small fw-normal">under 768px</span></th>
+                    <th scope="col">Tablet<br><span class="small fw-normal">768px - 1199px</span></th>
+                    <th scope="col">Desktop<br><span class="small fw-normal">1200px and wider</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Navigation bar</th>
+                    <td>Collapsed behind the menu button</td>
+                    <td>Collapsed behind the menu button</td>
+                    <td>All links shown in one row</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Study spot cards</th>
+                    <td>1 card per row</td>
+                    <td>2 cards per row (3 from 992px)</td>
+                    <td>3 cards per row</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Overview menu</th>
+                    <td>One row that scrolls sideways</td>
+                    <td>Vertical list beside the content</td>
+                    <td>Vertical list beside the content</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Footer</th>
+                    <td>Columns stacked</td>
+                    <td>4 columns side by side</td>
+                    <td>4 columns side by side</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="mt-4">Testing</h3>
+            <ul class="overview-checks list-unstyled mb-0">
+              <li>Every page is checked on phone, tablet and desktop sizes using the browser's device tools.</li>
+              <li>Every page is checked in both light and dark mode.</li>
+            </ul>
+          </section>
+
+          <!-- ===== 9. AI UTILIZATION PLAN (AMEENA supplies the text) ===== -->
+          <section class="tab-pane fade" id="s9" role="tabpanel" aria-labelledby="tab-s9" tabindex="0">
+            <h2>AI Utilization Plan</h2>
+            <p class="lead">How the team planned to use AI tools during the project.</p>
+            <hr class="my-4">
+
+            <!-- AMEENA: replace this box with the AI Utilization Plan text -->
+            <div class="overview-placeholder">
+              <p class="fs-4">AI utilization plan coming soon</p>
+              <p class="small">Text supplied by Ameena.</p>
+            </div>
+          </section>
+
+          <!-- ===== 10. AI DOCUMENTATION TABLE (ALL members add their REAL rows) ===== -->
+          <section class="tab-pane fade" id="s10" role="tabpanel" aria-labelledby="tab-s10" tabindex="0">
+            <h2>AI Documentation</h2>
+            <p class="lead">A record of every time AI was used, what it produced, and how we changed it.</p>
+            <hr class="my-4">
+
+            <div class="table-responsive">
+              <table class="table table-bordered overview-table align-middle">
+                <caption>AI tools used by the team</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">AI Tool</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Prompt Used</th>
+                    <th scope="col">Output Generated</th>
+                    <th scope="col">Modifications Made</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- ALL MEMBERS: copy this <tr> for every real AI use, then delete this placeholder row -->
+                  <tr>
+                    <td colspan="5" class="text-center fst-italic">Rows coming soon from each team member.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- ===== 11. ETHICAL & LEGAL CONSIDERATIONS ===== -->
+          <section class="tab-pane fade" id="s11" role="tabpanel" aria-labelledby="tab-s11" tabindex="0">
+            <h2>Ethical &amp; Legal Considerations</h2>
+            <p class="lead">How StudyVerse respects other people's work and protects its users.</p>
+            <hr class="my-4">
+
+            <ul class="overview-reqs list-unstyled mb-0">
+              <li><span class="overview-id">E1</span><span><strong>Citing sources:</strong> any information taken from outside sources, such as details about study spots, is checked and its source is recorded.</span></li>
+              <li><span class="overview-id">E2</span><span><strong>Crediting images:</strong> every image used on a page is credited in that page's footer.</span></li>
+              <li><span class="overview-id">E3</span><span><strong>Documenting AI content:</strong> every use of AI is recorded in the AI Documentation table, including the prompt and the changes we made to the output.</span></li>
+              <li><span class="overview-id">E4</span><span><strong>No copying:</strong> the content and design are the team's own work. Bootstrap and Google Fonts are used under their free licences and credited in the footer.</span></li>
+              <li><span class="overview-id">E5</span><span><strong>Accurate information:</strong> study spot features such as Wi-Fi and power sockets are only marked as available once verified; anything unconfirmed is clearly shown as "not confirmed".</span></li>
+              <li><span class="overview-id">E6</span><span><strong>Validating input:</strong> the registration form checks every field before accepting it and shows clear error messages.</span></li>
+              <li><span class="overview-id">E7</span><span><strong>Minimal personal data:</strong> registration asks only for first name, last name, mobile number and email. The login is a front-end demo with no password, and nothing is sent to a server.</span></li>
+            </ul>
+          </section>
 
         </div>
       </div>

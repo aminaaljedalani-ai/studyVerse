@@ -65,15 +65,7 @@
        ===================================================================== -->
   <header class="page-header">
     <div class="container"><h1 class="text-center">Study Spot Finder</h1></div>
-     <div class="spot-modebar">
-      
-      <div class="spot-modes" role="group" aria-label="Atmosphere mode">
-        <button type="button" class="spot-mode" data-mode="library" aria-pressed="false">Library</button>
-        <button type="button" class="spot-mode" data-mode="cafe" aria-pressed="false">Café</button>
-        <button type="button" class="spot-mode" data-mode="home" aria-pressed="true">Home</button>
-      </div>
-    </div>
-
+     
   </header>
   
     <main id="main" class="section spots-page">
@@ -107,15 +99,11 @@
 
     <div class="spot-filter">
       <button type="button" class="btn btn-outline-brand spot-trigger" id="locationBtn" aria-haspopup="true">Location</button>
-      <ul class="spot-menu">
-        <li><button type="button" data-filter="location" data-value="all">All locations</button></li>
-        <li><button type="button" data-filter="location" data-value="Manama">Manama</button></li>
-        <li><button type="button" data-filter="location" data-value="Riffa">Riffa</button></li>
-        <li><button type="button" data-filter="location" data-value="Muharraq">Muharraq</button></li>
-        <li><button type="button" data-filter="location" data-value="Tubli">Tubli</button></li>
-        <li><button type="button" data-filter="location" data-value="Seef">Seef</button></li>
-        <li><button type="button" data-filter="location" data-value="Zinj">Zinj</button></li>
-        <li><button type="button" data-filter="location" data-value="Muharraq">Muharraq</button></li>
+            <ul class="spot-menu" id="locationMenu">
+        <li class="spot-search-item">
+          <input type="search" id="locationSearch" class="spot-search"
+                 placeholder="Search..." aria-label="Search locations" autocomplete="off">
+        </li>
       </ul>
     </div>
 
@@ -123,10 +111,10 @@
       <button type="button" class="btn btn-outline-brand spot-trigger" id="budgetBtn" aria-haspopup="true">Budget</button>
       <ul class="spot-menu">
         <li><button type="button" data-filter="budget" data-value="all">Any budget</button></li>
-        <li><button type="button" data-filter="budget" data-value="Free">Free</button></li>
-        <li><button type="button" data-filter="budget" data-value="$">$</button></li>
-        <li><button type="button" data-filter="budget" data-value="$$">$$</button></li>
-        <li><button type="button" data-filter="budget" data-value="$$$">$$$</button></li>
+        <li><button type="button" data-filter="budget" data-value="Budget friendly">Budget friendly</button></li>
+        <li><button type="button" data-filter="budget" data-value="Moderately Priced">Moderately Priced</button></li>
+        <li><button type="button" data-filter="budget" data-value="High Priced">High Priced</button></li>
+        
       </ul>
     </div>
 
@@ -167,6 +155,13 @@
     <div class="row g-4 justify-content-center" id="spotList" id="spotList">
             <!-- JavaScript will add the cards here -->
     </div>
+        <div class="row g-4 justify-content-center" id="spotList">
+      <!-- JavaScript will add the cards here -->
+    </div>
+    <div class="text-center mt-4">
+      <button type="button" class="btn btn-brand" id="showMoreBtn" hidden>Show more</button>
+    </div>
+  </section>
   </section>
 
 
