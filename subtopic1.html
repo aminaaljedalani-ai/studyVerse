@@ -109,8 +109,53 @@
         </div>
       </section>
 
+       <!-- Study Progress Tracker -->
+      <section class="progress-section mt-4 mb-4" id="progress">
+        <h2>Study Progress</h2>
+        <p>Track your progress and celebrate your achievements!</p>
+
+        <div class="sv-card p-4">
+          <div class="row text-center g-3 mb-3">
+
+            <div class="col-6 col-md-3">
+              <div class="stat-box">
+                <div class="stat-number" id="totalTasks">0</div>
+                <p>Total Tasks</p>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+              <div class="stat-box">
+                <div class="stat-number" id="completedTasks">0</div>
+                <p>Completed</p>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+              <div class="stat-box">
+                <div class="stat-number" id="remainingTasks">0</div>
+                <p>Remaining</p>
+              </div>
+            </div>
+
+          <div class="col-6 col-md-3">
+            <div class="stat-box">
+              <div class="stat-number" id="progressPercent">0%</div>
+              <p>Overall Progress</p>
+            </div>
+          </div>
+
+          <div class="progress" role="progressbar" aria-label="Study task completion"
+                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+          </div>
+        </div>
+      </section>
+
       <!-- My Study Planner -->
-      <section class="planner-section mt-5" id="planner">
+     <div class="row g-4 align-items-start">
+        <div class="col-lg-7">
+      <section class="planner-section mt-0" id="planner">
         <h2>My Study Planner</h2>
         <p>Add your study tasks and stay organized!</p>
 
@@ -119,7 +164,7 @@
             <div class="row g-3">
 
               <!-- Task Name -->
-              <div class="col-md-4">
+              <div class="col-12">
                <label for="taskName" class="form-label">
                   Task Name
                 </label>
@@ -127,13 +172,13 @@
               </div>
 
               <!-- Subject -->
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="taskSubject" class="form-label">Subject</label>
                 <input type="text" class="form-control" id="taskSubject" placeholder="e.g. Mathematics, Biology, History" required>
               </div>
               
               <!-- Due Date -->
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="taskDate" class="form-label">Due Date</label>
                 <input type="date" class="form-control" id="taskDate" required>
               </div>
@@ -150,44 +195,11 @@
 
         <div id="taskList" class="mt-4"></div>
       </section>
-
-      <!-- Study Progress Tracker -->
-      <section class="progress-section mt-5" id="progress">
-        <h2>Study Progress</h2>
-        <p>Track your progress and celebrate your achievements!</p>
-
-        <div class="sv-card p-4">
-          <div class="row text-center g-3 mb-4">
-            <div class="col-md-4">
-              <div class="stat-number" id="totalTasks">0</div>
-              <p>Total Tasks</p>
-            </div>
-
-            <div class="col-md-4">
-              <div class="stat-number" id="completedTasks">0</div>
-              <p>Completed</p>
-            </div>
-
-            <div class="col-md-4">
-              <div class="stat-number" id="remainingTasks">0</div>
-              <p>Remaining</p>
-            </div>
-          </div>
-
-          <div class="d-flex justify-content-between">
-            <p>Overall Progress</p>
-            <p id="progressPercent">0%</p>
-          </div>
-
-          <div class="progress" role="progressbar" aria-label="Study task completion"
-                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-              <div class="progress-bar" id="progressBar" style="width: 0%"></div>
-          </div>
-        </div>
-      </section>
+    </div>
+    <div class="col-lg-5">
 
       <!-- Daily Study Goals -->
-      <section class="goals-section mt-5">
+      <section class="goals-section mb-4">
         <h2>Daily Study Goals</h2>
         <p>Small steps lead to big achievements!</p>
 
@@ -211,7 +223,7 @@
       </section>
 
       <!-- Deadline Reminder -->
-      <section class="deadline-section mt-5">
+      <section class="deadline-section">
         <h2>Deadline Reminder</h2>
         <p>Never lose track of an important deadline!</p>
 
@@ -223,8 +235,42 @@
           </p>
         </div>
       </section>
+     </div>
+    </div>
+
+      <!-- Achievements -->
+      <section class="badges-section mt-5" id="badges">
+        <h2>Achievements</h2>
+        <p>Earn badges as you study. <strong id="badgeCount">0 of 6</strong> unlocked.</p>
+        <div class="row g-4" id="badgeList"></div>
+      </section>
     </div>
   </main>
+
+    <!-- Study buddy + confetti -->
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <div class="buddy" id="buddy">
+    <p class="buddy-bubble is-hidden" id="buddyBubble" role="status" aria-live="polite"></p>
+    <button type="button" class="buddy-btn" id="buddyBtn" aria-label="Bruno, your study buddy. Click for a tip.">
+      <svg viewBox="0 0 120 120" class="hero-art" aria-hidden="true" focusable="false">
+        <circle class="d-line" style="fill:#c68a52" cx="36" cy="24" r="13"/>
+        <circle cx="36" cy="25" r="6" style="fill:#e8b98a"/>
+        <circle class="d-line" style="fill:#c68a52" cx="84" cy="24" r="13"/>
+        <circle cx="84" cy="25" r="6" style="fill:#e8b98a"/>
+        <ellipse class="d-line" style="fill:#c68a52" cx="60" cy="96" rx="32" ry="20"/>
+        <ellipse cx="60" cy="98" rx="17" ry="12" style="fill:#f1d3a5"/>
+        <path class="d-line" style="fill:var(--accent-2)" d="M36 80 Q60 96 84 80 L88 94 Q60 108 32 94Z"/>
+        <circle class="d-line" style="fill:#c68a52" cx="60" cy="52" r="33"/>
+        <ellipse cx="60" cy="64" rx="15" ry="11.5" style="fill:#f1d3a5"/>
+        <ellipse cx="60" cy="58" rx="5.5" ry="4" style="fill:#3b2a24"/>
+        <path class="d-nofill" d="M60 62 V66 M54 67 Q60 72 66 67" style="stroke:#3b2a24;stroke-width:2.8;stroke-linecap:round"/>
+        <circle cx="46" cy="46" r="5" style="fill:#3b2a24"/>
+        <circle cx="74" cy="46" r="5" style="fill:#3b2a24"/>
+        <circle class="d-red" cx="35" cy="60" r="5" style="opacity:.65"/>
+        <circle class="d-red" cx="85" cy="60" r="5" style="opacity:.65"/>
+      </svg>
+    </button>
+  </div>
 
   <!-- ===== FOOTER - SHARED. Copy EXACTLY into your page. Owner: AMEENA =====
        Credits: add the source of every image/media you use on YOUR page to the list below. -->
@@ -302,3 +348,4 @@
   <script src="js/planner.js"></script>
 </body>
 </html>
+0

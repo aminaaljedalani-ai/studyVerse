@@ -166,16 +166,25 @@ function addTask(event){
    renderTasks();
    taskForm.reset();
    showMessage('Task "' + name + '" was added successfully!', false);
+   buddySay('Nice! "' + name + '" is on your list.', false);
+   checkBadges(true);
 }
 
 function toggleTask(id){
+   let justDone = false;
    for (let i = 0; i < tasks.length; i++){
       if (tasks[i].id === id) {
          tasks[i].done = !tasks[i].done; // true becomes false, false becomes true
+         justDone = tasks[i].done;
       }
    }
    saveTasks();
    renderTasks();
+
+   const gotBadge = checkBadges(true);   // a badge message replaces the normal one
+   if (justDone && !gotBadge){
+      celebrate("Task completed! Great job!");
+   }
 }
 
 function deleteTask(id){
@@ -237,9 +246,10 @@ function saveGoals(){
       states.push(goalBoxes[i].checked);
    }
    localStorage.setItem("sv-goals", JSON.stringify(states));
+   checkBadges(true);
 }
 
-// ---------- Deadline remainder ----------
+// ---------- Deadline reminder ----------
 function showDaysRemaining(){
    if(deadlineDate.value === ""){
       deadlineMessage.textContent = "Select a date to see how many days remain.";
@@ -264,6 +274,168 @@ function showDaysRemaining(){
    } else {
       deadlineMessage.textContent = "This deadline passed " + Math.abs(days) + " days ago.";
    }
+   checkBadges(true);
+}
+
+// ---------- Study buddy (Bruno) ----------
+const buddy = document.getElementById("buddy");
+const buddyBtn = document.getElementById("buddyBtn");
+const buddyBubble = document.getElementById("buddyBubble");
+const confettiBox = document.getElementById("confetti");
+let bubbleTimer;
+let confettiTimer;
+
+const tips = [
+   "Small steps every day add up!",
+   "Try 25 minutes of focus, then a 5 minute break.",
+   "Write tomorrow's tasks tonight.",
+   "Drink some water. Your brain will thank you!",
+   "One task at a time. You've got this!"
+];
+
+function buddySay(text, cheer){
+   buddyBubble.textContent = text;
+   buddyBubble.classList.remove("is-hidden");
+   if (cheer){
+      buddy.classList.remove("cheer");
+      void buddy.offsetWidth;              // restart the jump animation
+      buddy.classList.add("cheer");
+   }
+   clearTimeout(bubbleTimer);
+   bubbleTimer = setTimeout(function (){
+      buddyBubble.classList.add("is-hidden");
+      buddy.classList.remove("cheer");
+   }, 4500);
+}
+
+buddyBtn.addEventListener("click", function (){
+   const number = Math.floor(Math.random() * tips.length);
+   buddySay(tips[number], false);
+});
+
+// ---------- Confetti ----------
+function launchConfetti(){
+   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      return;                              // respect people who turn animations off
+   }
+   const colors = ["var(--accent)", "var(--accent-2)", "var(--pop)", "var(--ink-line)"];
+   for (let i = 0; i < 45; i++){
+      const piece = document.createElement("span");
+      piece.className = "confetti-piece";
+      piece.style.left = Math.random() * 100 + "%";
+      piece.style.width = 6 + Math.random() * 8 + "px";
+      piece.style.height = 10 + Math.random() * 10 + "px";
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.animationDuration = 2 + Math.random() * 1.5 + "s";
+      piece.style.animationDelay = Math.random() * 0.4 + "s";
+      confettiBox.appendChild(piece);
+   }
+   clearTimeout(confettiTimer);
+   confettiTimer = setTimeout(function (){
+      confettiBox.innerHTML = "";
+   }, 4500);
+}
+
+function celebrate(message){
+   launchConfetti();
+   buddySay(message, true);
+}
+
+// ---------- Achievement badges ----------
+const badgeList = document.getElementById("badgeList");
+const badgeCount = document.getElementById("badgeCount");
+
+const badges = [
+   { id: "first-task",  icon: "⭐", name: "First Step",       text: "Add your first task." },
+   { id: "first-done",  icon: "✅", name: "Task Master",      text: "Complete a task." },
+   { id: "three-done",  icon: "🔥", name: "On a Roll",        text: "Complete 3 tasks." },
+   { id: "all-goals",   icon: "🎯", name: "Goal Getter",      text: "Tick all 3 daily goals." },
+   { id: "clean-sweep", icon: "🏆", name: "Clean Sweep",      text: "Finish every task (at least 3)." },
+   { id: "deadline",    icon: "⏰", name: "Deadline Watcher", text: "Use the deadline reminder." }
+];
+
+let unlocked = [];
+if (localStorage.getItem("sv-badges") !== null){
+   unlocked = JSON.parse(localStorage.getItem("sv-badges"));
+}
+
+function isEarned(id){
+   const total = tasks.length;
+   let done = 0;
+   for (let i = 0; i < tasks.length; i++){
+      if (tasks[i].done){
+         done++;
+      }
+   }
+   let goalsDone = 0;
+   for (let i = 0; i < goalBoxes.length; i++){
+      if (goalBoxes[i].checked){
+         goalsDone++;
+      }
+   }
+
+   if (id === "first-task") { return total >= 1; }
+   if (id === "first-done") { return done >= 1; }
+   if (id === "three-done") { return done >= 3; }
+   if (id === "all-goals") { return goalsDone === goalBoxes.length; }
+   if (id === "clean-sweep") { return total >= 3 && done === total; }
+   if (id === "deadline") { return deadlineDate.value !== ""; }
+   return false;
+}
+
+// Unlocks any badge that has just been earned. Returns true if one was unlocked.
+function checkBadges(announce){
+   let newName = "";
+   for (let i = 0; i < badges.length; i++){
+      if (unlocked.indexOf(badges[i].id) === -1 && isEarned(badges[i].id)){
+         unlocked.push(badges[i].id);
+         if (newName !== ""){
+            newName = newName + " + ";
+         }
+         newName = newName + badges[i].name;
+      }
+   }
+   if (newName === ""){
+      return false;
+   }
+   localStorage.setItem("sv-badges", JSON.stringify(unlocked));
+   renderBadges();
+   if (announce){
+      celebrate("Badge unlocked: " + newName + "!");
+   }
+   return true;
+}
+
+function renderBadges(){
+   badgeList.innerHTML = "";
+   for (let i = 0; i < badges.length; i++){
+      const badge = badges[i];
+      const isUnlocked = unlocked.indexOf(badge.id) !== -1;
+
+      const col = document.createElement("div");
+      col.className = "col-6 col-md-4";
+
+      const card = document.createElement("div");
+      card.className = "sv-card no-pin badge-card " + (isUnlocked ? "unlocked" : "locked");
+
+      const icon = document.createElement("div");
+      icon.className = "badge-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = isUnlocked ? badge.icon : "🔒";
+
+      const name = document.createElement("h3");
+      name.textContent = badge.name;
+
+      const text = document.createElement("p");
+      text.textContent = isUnlocked ? badge.text : "Locked: " + badge.text;
+
+      card.appendChild(icon);
+      card.appendChild(name);
+      card.appendChild(text);
+      col.appendChild(card);
+      badgeList.appendChild(col);
+   }
+   badgeCount.textContent = unlocked.length + " of " + badges.length;
 }
 
 // ----------- Connect everything ----------
@@ -275,4 +447,6 @@ for(let i = 0; i < goalBoxes.length; i++){
 deadlineDate.addEventListener("change", showDaysRemaining);
 
 loadGoals();
-renderTasks(); 
+renderTasks();
+renderBadges();
+buddySay("Hi! I'm Bruno, your study buddy. Click me for a tip!", false);
