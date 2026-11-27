@@ -194,51 +194,153 @@
     </nav>
   </header>
 
+<!-- Focus page introduction -->
+<section class="hero" id="introduction">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+                <p class="eyebrow">Focus &amp; Recharge</p>
+                <h1>Focus, rest, repeat.</h1>
+                <p class="lead mt-3">Make time for focused studying, take meaningful breaks, and achieve your goals one session at a time with Bruno by your side.</p>
 
-  <!-- PAGE HEADING -->
-  <header class="page-header">
-  <div class="container text-center">
-    <h1>How are you feeling today?</h1>
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a href="#pomodoroHeading" class="btn btn-brand btn-lg">Start Focusing</a>
+                    <a href="#focusTasksSection" class="btn btn-outline-brand btn-lg">My Study Tasks</a>
+                </div>
+            </div>
 
-    <div id="moodOptions"
-         class="d-flex flex-wrap justify-content-center gap-2 mt-3"
-         role="group"
-         aria-label="Choose how you are feeling">
-      <button type="button" class="btn btn-outline-brand" data-mood="great">😄 Great</button>
-      <button type="button" class="btn btn-outline-brand" data-mood="okay">🙂 Okay</button>
-      <button type="button" class="btn btn-outline-brand" data-mood="tired">😴 Tired</button>
-      <button type="button" class="btn btn-outline-brand" data-mood="stressed">😰 Stressed</button>
-      <button type="button" class="btn btn-outline-brand" data-mood="sad">😔 Sad</button>
+            <!-- Illustration of Bruno studying -->
+            <div class="col-lg-5">
+                <svg viewBox="0 0 440 285" class="img-fluid hero-art" role="img" aria-label="Bruno reading a book beside an hourglass, stacked books and a plant">
+                    <path class="d-desk d-line" d="M24 223 Q220 214 416 223 L428 267 Q220 278 12 267Z"/>
+                    <path class="d-line d-nofill" d="M42 95 H115 M42 226 H115" style="stroke-width:7"/>
+                    <path class="d-white d-line" d="M49 99 Q49 131 77 160 Q49 188 49 222 H108 Q108 188 80 160 Q108 131 108 99Z"/>
+                    <path class="d-note" d="M56 119 H101 L78 157Z M56 219 L78 190 L101 219Z" style="fill:var(--accent)"/>
+                    <path d="M78 163 V190" style="stroke:var(--accent);stroke-width:2"/>
+                    <circle class="d-line" cx="161" cy="87" r="24" style="fill:#c68a52"/>
+                    <circle cx="161" cy="87" r="11" style="fill:#e8b98a"/>
+                    <circle class="d-line" cx="263" cy="87" r="24" style="fill:#c68a52"/>
+                    <circle cx="263" cy="87" r="11" style="fill:#e8b98a"/>
+                    <ellipse class="d-line" cx="212" cy="205" rx="66" ry="45" style="fill:#c68a52"/>
+                    <ellipse cx="212" cy="211" rx="34" ry="26" style="fill:#f1d3a5"/>
+                    <path class="d-line" d="M166 175 Q212 197 258 175 L264 192 Q212 213 160 192Z" style="fill:var(--accent-2)"/>
+                    <circle class="d-line" cx="212" cy="133" r="64" style="fill:#c68a52"/>
+                    <ellipse cx="212" cy="153" rx="29" ry="22" style="fill:#f1d3a5"/>
+                    <ellipse cx="212" cy="143" rx="10" ry="7" style="fill:#3b2a24"/>
+                    <path class="d-nofill" d="M212 150 V158 M201 158 Q212 169 223 158" style="stroke:#3b2a24;stroke-width:3;stroke-linecap:round"/>
+                    <circle cx="186" cy="122" r="6" style="fill:#3b2a24"/>
+                    <circle cx="238" cy="122" r="6" style="fill:#3b2a24"/>
+                    <circle class="d-red" cx="169" cy="146" r="9" style="opacity:.65"/>
+                    <circle class="d-red" cx="255" cy="146" r="9" style="opacity:.65"/>
+                    <path class="d-line" d="M143 195 Q179 184 212 203 Q245 184 281 195 V245 Q245 234 212 253 Q179 234 143 245Z" style="fill:var(--accent-2)"/>
+                    <path class="d-line d-nofill" d="M212 203 V253 M155 207 L197 218 M155 221 L197 232 M227 218 L269 207 M227 232 L269 221" style="stroke-width:2.5"/>
+                    <ellipse class="d-line" cx="143" cy="219" rx="12" ry="17" style="fill:#c68a52"/>
+                    <ellipse class="d-line" cx="281" cy="219" rx="12" ry="17" style="fill:#c68a52"/>
+                    <rect class="d-line" x="310" y="227" width="95" height="21" rx="5" style="fill:var(--accent-2)"/>
+                    <rect class="d-line" x="320" y="205" width="80" height="22" rx="5" style="fill:var(--accent)"/>
+                    <path class="d-line d-nofill" d="M337 237 H392 M330 215 H388" style="stroke-width:2"/>
+                    <path class="d-mug d-line" d="M333 152 H389 L382 205 H340Z"/>
+                    <path class="d-line d-nofill" d="M360 152 V88"/>
+                    <path class="d-line" d="M360 132 Q318 130 320 99 Q354 101 360 132 M360 116 Q398 114 400 80 Q365 82 360 116 M360 96 Q338 68 360 45 Q383 69 360 96" style="fill:var(--accent-2)"/>
+                    <path class="d-nofill" d="M37 44 V62 M28 53 H46 M292 43 V61 M283 52 H301 M408 139 V151 M402 145 H414" style="stroke:var(--accent);stroke-width:3;stroke-linecap:round"/>
+                </svg>
+            </div>
+        </div>
     </div>
-
-    <p id="moodAdvice"
-       class="focus-feedback mood-advice mx-auto"
-       role="status"
-       aria-live="polite"
-       hidden></p>
-  </div>
-  </header>
-
+</section>
 
   <!-- PERSON 3 - MAIN CONTENT -->
   <main id="main" class="section focus-page">
 
     <div class="container">
+        
+        <!-- Daily focus statistics -->
+         <section class="focus-stats mb-4" aria-labelledby="statsHeading">
+          <h2 id="statsHeading">Today's Study Progress</h2>
+          
+          <div class="row g-3">
+            <div class="col-12 col-md-4">
+              <div class="sv-card focus-stat text-center">
+                <svg class="focus-stat-icon hero-art" viewBox="0 0 64 64" aria-hidden="true">
+                  <circle class="d-white d-line" cx="32" cy="32" r="25"/>
+                  <path class="d-line d-nofill" d="M32 14 V32 L45 38" style="stroke-linecap:round"/>
+                  <circle cx="32" cy="32" r="4" style="fill:var(--accent)"/>
+                  <path class="d-line d-nofill" d="M32 8 V12 M32 52 V56 M8 32 H12 M52 32 H56"/>
+                </svg>
+                <h3 id="dailyFocusTime">0 min</h3>
+                <p>Focus Time</p>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-4">
+              <div class="sv-card focus-stat text-center">
+                <svg class="focus-stat-icon hero-art" viewBox="0 0 64 64" aria-hidden="true">
+                  <rect class="d-line" x="6" y="39" width="52" height="15" rx="4" style="fill:var(--accent-2)"/>
+                  <rect class="d-line" x="11" y="24" width="45" height="15" rx="4" style="fill:var(--accent)"/>
+                  <rect class="d-line" x="5" y="9" width="45" height="15" rx="4" style="fill:var(--pop)"/>
+                  <path class="d-line d-nofill" d="M15 16 H41 M21 31 H47 M16 46 H49" style="stroke-width:2"/>
+                </svg>
+                <h3 id="dailySessions">0</h3>
+                <p>Sessions Completed</p>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-4">
+              <div class="sv-card focus-stat text-center">
+                <svg class="focus-stat-icon hero-art" viewBox="0 0 64 64" aria-hidden="true">
+                  <rect class="d-white d-line" x="12" y="9" width="41" height="48" rx="5"/>
+                  <rect class="d-line" x="23" y="4" width="19" height="11" rx="3" style="fill:var(--accent)"/>
+                  <path class="d-nofill" d="M20 26 L24 30 L31 21 M20 43 L24 47 L31 38" style="stroke:var(--accent-2);stroke-width:3;stroke-linecap:round;stroke-linejoin:round"/>
+                  <path class="d-line d-nofill" d="M36 26 H45 M36 43 H45"/>
+                </svg>
+                <h3 id="dailyTasks">0 / 0</h3>
+                <p>Tasks Completed</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-      <div class="row g-4 justify-content-center">
+        <div class="row g-4 align-items-stretch focus-dashboard">
 
-        <!-- POMODORO TIMER -->
-        <div class="col-12 col-lg-8 mx-auto">
+        <!-- Focus Timer -->
+        <div class="col-12 col-lg-7">
 
           <section class="sv-card focus-panel focus-timer-card text-center"
                    aria-labelledby="pomodoroHeading">
-
-          
-
+            <h2 id="pomodoroHeading">Focus Timer</h2>
             <p>
-              Focus for 25 minutes, then pick a break.
-              When your break ends, the next focus session starts automatically.
+              Customize your study session, stay focused,
+              and take breaks at your own pace.
             </p>
+
+            <!-- Timer settings -->
+            <div class="timer-settings mb-4">
+              <h3>Quick Presets</h3>
+              
+              <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                <button type="button" class="btn btn-outline-brand timer-preset" data-focus="25" data-break="5">25 / 5</button>
+                <button type="button" class="btn btn-outline-brand timer-preset" data-focus="50" data-break="10">50 / 10</button>
+                <button type="button" class="btn btn-outline-brand timer-preset" data-focus="15" data-break="5">15 / 5</button>
+                <button type="button" class="btn btn-outline-brand timer-preset" data-focus="90" data-break="15">90 / 15</button>
+              </div>
+              
+              <div class="row g-3 mb-3">
+                <div class="col-6">
+                  <label for="focusMinutes" class="form-label">Focus (min)</label>
+                  <input type="number" class="form-control text-center" id="focusMinutes" min="1" max="120" value="25">
+                </div>
+                
+                <div class="col-6">
+                  <label for="breakMinutes" class="form-label">Break (min)</label>
+                  <input type="number" class="form-control text-center" id="breakMinutes" min="1" max="60" value="5">
+                </div>
+              </div>
+              
+              <div class="form-check d-inline-block">
+                <input type="checkbox" class="form-check-input" id="autoStart" checked>
+                <label class="form-check-label" for="autoStart">Automatically start the next session</label>
+              </div>
+            </div>
 
             <!-- Timer display -->
             <p id="timerMode"
@@ -262,68 +364,24 @@
 
             <!-- Timer buttons -->
             <div class="d-flex flex-wrap justify-content-center gap-2">
-
-              <button type="button"
-                      id="timerStart"
-                      class="btn btn-brand">
-                Start
-              </button>
-
-              <button type="button"
-                      id="timerPause"
-                      class="btn btn-outline-brand">
-                Pause
-              </button>
-
-              <button type="button"
-                      id="timerReset"
-                      class="btn btn-outline-brand">
-                Reset
-              </button>
-
+              <button type="button" id="timerStart" class="btn btn-brand">Start</button>
+              <button type="button" id="timerPause" class="btn btn-outline-brand">Pause</button>
+              <button type="button" id="timerReset" class="btn btn-outline-brand">Reset</button>
+              <button type="button" id="skipBreak" class="btn btn-outline-brand" hidden>Skip Break</button>
             </div>
 
-            <!-- Break chooser (appears when a focus session ends) -->
-            <div id="breakChooser"
-                 class="focus-break-chooser"
-                 hidden>
+             <!-- Timer sound -->
+            <div class="form-check form-switch d-inline-block mt-3">
+              <input type="checkbox" class="form-check-input" id="timerSound" role="switch" checked>
+              <label class="form-check-label" for="timerSound">Timer Sound</label>
+            </div>
 
+            <!-- Break activities -->
+            <div id="breakChooser" class="focus-break-chooser" hidden>
               <h3 class="focus-break-title">Time for a break!</h3>
-              <p>Choose how long you want to rest:</p>
-
-              <div class="focus-modes"
-                   role="group"
-                   aria-label="Choose your break length">
-
-                <button type="button"
-                        class="focus-mode"
-                        data-break="Short Break"
-                        data-minutes="5">
-                  Short Break 5 min
-                </button>
-
-                <button type="button"
-                        class="focus-mode"
-                        data-break="Long Break"
-                        data-minutes="15">
-                  Long Break 15 min
-                </button>
-
-                <button type="button"
-                        id="surpriseBreak"
-                        class="focus-mode focus-surprise">
-                  Surprise Me!
-                </button>
-
-              </div>
-
-              <p id="breakResult"
-                 class="focus-feedback"
-                 role="status"
-                 aria-live="polite">
-                Not sure what to do? Tap Surprise Me for a break idea.
-              </p>
-
+              <p class="mx-auto">You've earned a little rest. Take this time to recharge before your next study session.</p>
+              <button type="button" id="surpriseBreak" class="focus-mode focus-surprise">Surprise Me!</button>
+              <p id="breakResult" class="focus-feedback" role="status" aria-live="polite">Not sure what to do? Tap Surprise Me for a break idea.</p>
             </div>
 
             <p id="timerStatus"
@@ -336,9 +394,105 @@
           </section>
         </div>
 
+        <!-- My Study Tasks -->
+         <div class="col-12 col-lg-5 d-flex flex-column gap-4">
+          <section class="sv-card focus-panel" id="focusTasksSection">
+            <h2>My Study Tasks</h2>
+            <p>Stay on track with tasks from your study planner.</p>
+
+            <p id="focusTaskProgress">0 of 0 tasks completed</p>
+            
+            <div class="progress mb-3" role="progressbar" aria-label="Task completion" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" id="focusTaskProgressBar" style="width: 0%"></div>
+            </div>
+
+        <!-- Saved tasks will appear here -->
+        <div id="focusTaskList">
+            <p>No study tasks yet.</p>
+        </div>
+
+        <a href="subtopic1.html" class="btn btn-outline-brand mt-3">Go to Planner</a>
+      </section>
+
+        
+        <!-- My Sticky Notes -->
+        <div class="col-12">
+          <section class="sv-card focus-panel" id="notesSection">
+            <h2>My Sticky Notes</h2>
+            <p>Jot down ideas, reminders and important study points!</p>
+            
+            <div class="sticky-note-editor">
+              <label for="noteTitle" class="form-label">Note Title</label>
+              <input type="text" class="form-control" id="noteTitle" placeholder="Give your note a title...">
+              
+              <label for="studyNotes" class="form-label mt-3">Your Note</label>
+              <textarea class="form-control" id="studyNotes" rows="3" placeholder="Write something to remember..."></textarea>
+              
+              <button type="button" class="btn btn-brand mt-3" id="addNote">
+                + Add Note
+              </button>
+            </div>
+            
+            <p id="notesStatus" class="focus-feedback mt-3" role="status" aria-live="polite">
+              Your sticky notes will be saved automatically.
+            </p>
+            
+            <div class="sticky-notes-board mt-4" id="stickyNotesBoard">
+              <!-- Saved sticky notes will appear here -->
+              </div>
+            </section>
+          </div>
+          
+         </div>
+
+
+        <!-- Bruno's Study Coach -->
+        <div class="col-12 col-lg-7">
+          <section class="sv-card focus-panel" id="coachSection">
+            <!-- Study coach introduction -->
+            <div class="coach-intro">
+              <svg viewBox="0 0 120 120" class="hero-art coach-bruno" aria-hidden="true">
+                <circle class="d-line" style="fill:#c68a52" cx="36" cy="24" r="13"/>
+                <circle cx="36" cy="25" r="6" style="fill:#e8b98a"/>
+                <circle class="d-line" style="fill:#c68a52" cx="84" cy="24" r="13"/>
+                <circle cx="84" cy="25" r="6" style="fill:#e8b98a"/>
+                <ellipse class="d-line" style="fill:#c68a52" cx="60" cy="96" rx="32" ry="20"/>
+                <ellipse cx="60" cy="98" rx="17" ry="12" style="fill:#f1d3a5"/>
+                <path class="d-line" style="fill:var(--accent-2)" d="M36 80 Q60 96 84 80 L88 94 Q60 108 32 94Z"/>
+                <circle class="d-line" style="fill:#c68a52" cx="60" cy="52" r="33"/>
+                <ellipse cx="60" cy="64" rx="15" ry="11.5" style="fill:#f1d3a5"/>
+                <ellipse cx="60" cy="58" rx="5.5" ry="4" style="fill:#3b2a24"/>
+                <path class="d-nofill" d="M60 62 V66 M54 67 Q60 72 66 67" style="stroke:#3b2a24;stroke-width:2.8;stroke-linecap:round"/>
+                <circle cx="46" cy="46" r="5" style="fill:#3b2a24"/>
+                <circle cx="74" cy="46" r="5" style="fill:#3b2a24"/>
+                <circle class="d-red" cx="35" cy="60" r="5" style="opacity:.65"/>
+                <circle class="d-red" cx="85" cy="60" r="5" style="opacity:.65"/>
+              </svg>
+              
+              <div>
+                <h2>Bruno's Study Coach</h2>
+                <p>Every study day is different. Tell me what you're struggling with, and we'll figure it out together!</p>
+              </div>
+            </div>
+            
+            <div id="coachOptions" class="d-grid gap-2">
+              <button type="button" class="btn btn-outline-brand coach-option" data-struggle="concentration">I can't concentrate</button>
+              <button type="button" class="btn btn-outline-brand coach-option" data-struggle="motivation">I feel unmotivated</button>
+              <button type="button" class="btn btn-outline-brand coach-option" data-struggle="starting">I don't know where to start</button>
+              <button type="button" class="btn btn-outline-brand coach-option" data-struggle="exhausted">I feel exhausted</button>
+              <button type="button" class="btn btn-outline-brand coach-option" data-struggle="ready">I'm ready to study!</button>
+            </div>
+            <!-- Bruno's recommendation -->
+             <div id="coachResponse" class="coach-response mt-3" hidden>
+              <h3>Bruno says...</h3>
+              <p id="coachAdvice" role="status" aria-live="polite"></p>
+              <button type="button" class="btn btn-brand" id="applyRecommendation" hidden>Apply Recommended Timer</button>
+            </div>
+          </section>
+        </div>
 
         <!-- STRESS SOS -->
-        <div class="col-12 col-lg-8 mx-auto">
+        <div class="col-12 col-lg-5">
 
           <section id="sosSection"
                    class="sv-card focus-panel focus-timer-card text-center"
@@ -411,6 +565,31 @@
     </div>
 
   </main>
+
+  <!-- Study buddy and confetti -->
+   <div class="confetti" id="confetti" aria-hidden="true"></div>
+   <div class="buddy" id="buddy">
+    <p class="buddy-bubble is-hidden" id="buddyBubble" role="status" aria-live="polite"></p>
+    <button type="button" class="buddy-btn" id="buddyBtn" aria-label="Bruno, your study buddy. Click for motivation.">
+      <svg viewBox="0 0 120 120" class="hero-art" aria-hidden="true" focusable="false">
+        <circle class="d-line" style="fill:#c68a52" cx="36" cy="24" r="13"/>
+        <circle cx="36" cy="25" r="6" style="fill:#e8b98a"/>
+        <circle class="d-line" style="fill:#c68a52" cx="84" cy="24" r="13"/>
+        <circle cx="84" cy="25" r="6" style="fill:#e8b98a"/>
+        <ellipse class="d-line" style="fill:#c68a52" cx="60" cy="96" rx="32" ry="20"/>
+        <ellipse cx="60" cy="98" rx="17" ry="12" style="fill:#f1d3a5"/>
+        <path class="d-line" style="fill:var(--accent-2)" d="M36 80 Q60 96 84 80 L88 94 Q60 108 32 94Z"/>
+        <circle class="d-line" style="fill:#c68a52" cx="60" cy="52" r="33"/>
+        <ellipse cx="60" cy="64" rx="15" ry="11.5" style="fill:#f1d3a5"/>
+        <ellipse cx="60" cy="58" rx="5.5" ry="4" style="fill:#3b2a24"/>
+        <path class="d-nofill" d="M60 62 V66 M54 67 Q60 72 66 67" style="stroke:#3b2a24;stroke-width:2.8;stroke-linecap:round"/>
+        <circle cx="46" cy="46" r="5" style="fill:#3b2a24"/>
+        <circle cx="74" cy="46" r="5" style="fill:#3b2a24"/>
+        <circle class="d-red" cx="35" cy="60" r="5" style="opacity:.65"/>
+        <circle class="d-red" cx="85" cy="60" r="5" style="opacity:.65"/>
+      </svg>
+    </button>
+  </div>
 
 
   <!-- SHARED FOOTER - OWNER: AMEENA -->

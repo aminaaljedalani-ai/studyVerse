@@ -8,140 +8,792 @@
     if (el) el.addEventListener(evt, fn);
   };
 
-  // ---------- STUDY MOOD ----------
-  const moodTips = {
-    great: "Love that! Use the energy for your hardest task first.",
-    okay: "Steady is good. Try one 25-minute focus session.",
-    tired: "Drink water, stretch, and take a short break before you start.",
-    stressed: "Try Stress SOS below, then begin with one small task.",
-    sad: "Be kind to yourself. A short walk or chatting with a friend can help."
-  };
+  // ---------- Pomodoro timer ----------
+const display = $("timerDisplay");
+const modeLabel = $("timerMode");
+const timerStatus = $("timerStatus");
+const ring = $("timerRing");
+const breakChooser = $("breakChooser");
 
-  const moodButtons = document.querySelectorAll("#moodOptions [data-mood]");
-  const moodAdvice = $("moodAdvice");
+const focusMinutes = $("focusMinutes");
+const breakMinutes = $("breakMinutes");
+const autoStart = $("autoStart");
+const timerSound = $("timerSound");
 
-  moodButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      moodButtons.forEach(b => {
-        const selected = b === btn;
-        b.classList.toggle("is-selected", selected);
-        b.setAttribute("aria-pressed", String(selected));
-      });
-      if (moodAdvice) {
-        moodAdvice.textContent = moodTips[btn.dataset.mood];
-        moodAdvice.hidden = false;
-      }
+const startButton = $("timerStart");
+const pauseButton = $("timerPause");
+const skipBreak = $("skipBreak");
+const presetButtons = document.querySelectorAll(".timer-preset");
 
-      // Stressed: scroll down to the Stress SOS section
-      if (btn.dataset.mood === "stressed") {
-        const sos = $("sosSection");
-        if (sos) {
-          const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          sos.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
-        }
-      }
-    });
-  });
+const CIRC = 2 * Math.PI * 90;
 
-  // ---------- POMODORO TIMER ----------
-  const FOCUS_MINUTES = 25;
-  const display = $("timerDisplay");
-  const modeLabel = $("timerMode");
-  const timerStatus = $("timerStatus");
-  const ring = $("timerRing");
-  const breakChooser = $("breakChooser");
-  const CIRC = 2 * Math.PI * 90;
-
-  if (ring) ring.style.strokeDasharray = CIRC;
-
-  let currentMode = "Focus";
-  let duration = FOCUS_MINUTES * 60;
-  let remaining = duration;
-  let timerId = null;
-  let endTime = 0;
-
-  const formatTime = (s) =>
-    String(Math.floor(s / 60)).padStart(2, "0") + ":" +
-    String(s % 60).padStart(2, "0");
-
-  function renderTimer() {
-    display.textContent = formatTime(remaining);
-    if (ring) ring.style.strokeDashoffset = CIRC * (1 - remaining / duration);
-  }
-
-  function stopTimer() {
-    if (timerId !== null) {
-      clearInterval(timerId);
-      timerId = null;
+// Play a notification sound when a session finishes
+function playTimerSound() {
+    if (!timerSound.checked) {
+        return;
     }
-  }
 
-  function setMode(name, minutes) {
+    const audio = new AudioContext();
+    const oscillator = audio.createOscillator();
+    const volume = audio.createGain();
+
+    oscillator.connect(volume);
+    volume.connect(audio.destination);
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = 660;
+
+    volume.gain.setValueAtTime(0.2, audio.currentTime);
+    volume.gain.exponentialRampToValueAtTime(
+        0.01,
+        audio.currentTime + 0.8
+    );
+
+    oscillator.start();
+    oscillator.stop(audio.currentTime + 0.8);
+
+    oscillator.onended = function () {
+        audio.close();
+    };
+}
+
+// ---------- Daily study statistics ----------
+
+// Get today's date
+function getToday() {
+    const today = new Date();
+
+    return today.getFullYear() + "-" +
+        String(today.getMonth() + 1).padStart(2, "0") + "-" +
+        String(today.getDate()).padStart(2, "0");
+}
+
+// Load today's saved statistics
+let dailyStats = JSON.parse(localStorage.getItem("sv-focus-stats"));
+
+if (!dailyStats || dailyStats.date !== getToday()) {
+    dailyStats = {
+        date: getToday(),
+        focusSeconds: 0,
+        sessions: 0
+    };
+}
+
+// Save statistics
+function saveDailyStats() {
+    localStorage.setItem("sv-focus-stats", JSON.stringify(dailyStats));
+}
+
+// Update the statistics on the page
+function updateDailyStats() {
+    const minutes = Math.floor(dailyStats.focusSeconds / 60);
+
+    $("dailyFocusTime").textContent = minutes + " min";
+    $("dailySessions").textContent = dailyStats.sessions;
+
+    // Read tasks saved by the Planner
+    const tasks = JSON.parse(localStorage.getItem("sv-tasks")) || [];
+
+    let completed = 0;
+
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].done) {
+            completed++;
+        }
+    }
+
+    $("dailyTasks").textContent = completed + " / " + tasks.length;
+}
+
+// ---------- Planner task synchronization ----------
+
+// Display tasks saved by the Planner
+function renderFocusTasks() {
+    const taskList = $("focusTaskList");
+    const progressText = $("focusTaskProgress");
+    const progressBar = $("focusTaskProgressBar");
+
+    const tasks = JSON.parse(localStorage.getItem("sv-tasks")) || [];
+
+    taskList.innerHTML = "";
+
+    let completed = 0;
+
+    for (let i = 0; i < tasks.length; i++) {
+        const task = tasks[i];
+
+        if (task.done) {
+            completed++;
+        }
+
+        // Create a task card
+        const card = document.createElement("div");
+        card.className = "focus-task";
+
+        if (task.done) {
+            card.classList.add("is-completed");
+        }
+
+        // Create the completion checkbox
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "form-check-input";
+        checkbox.checked = task.done;
+        checkbox.setAttribute("aria-label", "Complete " + task.name);
+
+        checkbox.addEventListener("change", function () {
+            toggleFocusTask(task.id);
+        });
+
+        // Display task information
+        const info = document.createElement("div");
+        info.className = "flex-grow-1";
+
+        const name = document.createElement("div");
+        name.className = "focus-task-name";
+        name.textContent = task.name;
+
+        const details = document.createElement("div");
+        details.className = "focus-task-details";
+        details.textContent = task.subject + " • Due: " + task.date;
+
+        info.appendChild(name);
+        info.appendChild(details);
+
+        card.appendChild(checkbox);
+        card.appendChild(info);
+
+        taskList.appendChild(card);
+    }
+
+    // Show a message when there are no tasks
+    if (tasks.length === 0) {
+        const empty = document.createElement("p");
+        empty.textContent = "No study tasks yet. Add tasks in your Planner!";
+        taskList.appendChild(empty);
+    }
+
+    // Update task progress
+    const percent = tasks.length === 0
+        ? 0
+        : Math.round((completed / tasks.length) * 100);
+
+    progressText.textContent =
+        completed + " of " + tasks.length + " tasks completed";
+
+    progressBar.style.width = percent + "%";
+
+    const progress = document.querySelector(
+        "#focusTasksSection .progress"
+    );
+
+    progress.setAttribute("aria-valuenow", percent);
+
+    updateDailyStats();
+}
+
+// Save task completion to the same storage used by the Planner
+function toggleFocusTask(id) {
+    const tasks = JSON.parse(localStorage.getItem("sv-tasks")) || [];
+
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].id === id) {
+            tasks[i].done = !tasks[i].done;
+            break;
+        }
+    }
+
+    localStorage.setItem("sv-tasks", JSON.stringify(tasks));
+
+    renderFocusTasks();
+
+// Celebrate when a task is completed
+const completedTask = tasks.find(function (task) {
+    return task.id === id;
+});
+
+if (completedTask && completedTask.done) {
+    celebrate("Task completed! You're one step closer to your goals! 🎉");
+}
+}
+
+// Refresh tasks when the Planner changes in another tab
+window.addEventListener("storage", function (event) {
+    if (event.key === "sv-tasks") {
+        renderFocusTasks();
+    }
+});
+
+// Display saved tasks when Focus opens
+renderFocusTasks();
+
+// Update the statistics when Planner tasks change in another tab
+window.addEventListener("storage", function (event) {
+    if (event.key === "sv-tasks") {
+        updateDailyStats();
+    }
+});
+
+updateDailyStats();
+
+
+// ---------- Sticky Notes ----------
+
+const noteTitle = $("noteTitle");
+const studyNotes = $("studyNotes");
+const addNote = $("addNote");
+const stickyNotesBoard = $("stickyNotesBoard");
+const notesStatus = $("notesStatus");
+
+let stickyNotes = JSON.parse(localStorage.getItem("sv-sticky-notes")) || [];
+
+const noteColors = ["note-yellow", "note-pink", "note-blue", "note-purple"];
+
+// Save sticky notes
+function saveStickyNotes() {
+    localStorage.setItem("sv-sticky-notes", JSON.stringify(stickyNotes));
+}
+
+// Display sticky notes
+function renderStickyNotes() {
+    stickyNotesBoard.innerHTML = "";
+
+    if (stickyNotes.length === 0) {
+        stickyNotesBoard.innerHTML = "<p>No sticky notes yet. Add your first note!</p>";
+        return;
+    }
+
+    stickyNotes.forEach(function (note, index) {
+        const card = document.createElement("article");
+        card.className = "sticky-note " + noteColors[index % noteColors.length];
+
+        const title = document.createElement("h3");
+        title.textContent = note.title;
+
+        const content = document.createElement("p");
+        content.textContent = note.content;
+
+        const buttons = document.createElement("div");
+        buttons.className = "sticky-note-actions";
+
+        const editButton = document.createElement("button");
+        editButton.type = "button";
+        editButton.className = "btn btn-sm btn-outline-brand";
+        editButton.textContent = "Edit";
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.className = "btn btn-sm btn-outline-brand";
+        deleteButton.textContent = "Delete";
+
+        editButton.addEventListener("click", function () {
+            const newTitle = prompt("Edit your note title:", note.title);
+
+            if (newTitle === null) return;
+
+            const newContent = prompt("Edit your note:", note.content);
+
+            if (newContent === null) return;
+
+            if (newTitle.trim() === "" || newContent.trim() === "") {
+                notesStatus.textContent = "Your note cannot be empty.";
+                return;
+            }
+
+            note.title = newTitle.trim();
+            note.content = newContent.trim();
+
+            saveStickyNotes();
+            renderStickyNotes();
+            notesStatus.textContent = "Your note has been updated!";
+        });
+
+        deleteButton.addEventListener("click", function () {
+            const confirmDelete = confirm("Are you sure you want to delete this note?");
+
+            if (confirmDelete) {
+                stickyNotes.splice(index, 1);
+                saveStickyNotes();
+                renderStickyNotes();
+                notesStatus.textContent = "Your note has been deleted.";
+            }
+        });
+
+        buttons.append(editButton, deleteButton);
+        card.append(title, content, buttons);
+        stickyNotesBoard.appendChild(card);
+    });
+}
+
+// Add a new sticky note
+addNote.addEventListener("click", function () {
+    const title = noteTitle.value.trim();
+    const content = studyNotes.value.trim();
+
+    if (title === "" || content === "") {
+        notesStatus.textContent = "Please enter a title and note.";
+        return;
+    }
+
+    stickyNotes.push({
+        title: title,
+        content: content
+    });
+
+    saveStickyNotes();
+    renderStickyNotes();
+
+    noteTitle.value = "";
+    studyNotes.value = "";
+
+    notesStatus.textContent = "Your sticky note has been saved!";
+});
+
+// Display saved notes when the page opens
+renderStickyNotes();
+
+
+ring.style.strokeDasharray = CIRC;
+
+let currentMode = "Focus";
+let duration = 25 * 60;
+let remaining = duration;
+let timerId = null;
+let endTime = 0;
+
+// Format the remaining time
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+
+    return String(minutes).padStart(2, "0") + ":" +
+           String(secs).padStart(2, "0");
+}
+
+// Update the timer display
+function renderTimer() {
+    display.textContent = formatTime(remaining);
+    modeLabel.textContent = currentMode.toUpperCase();
+
+    ring.style.strokeDashoffset =
+        CIRC * (1 - remaining / duration);
+
+    if (currentMode === "Focus") {
+        ring.style.stroke = "var(--accent)";
+    } else {
+        ring.style.stroke = "var(--accent-2)";
+    }
+}
+
+// Validate the timer settings
+function validSettings() {
+    const focus = Number(focusMinutes.value);
+    const rest = Number(breakMinutes.value);
+
+    if (!Number.isInteger(focus) || focus < 1 || focus > 120) {
+        timerStatus.textContent = "Enter a focus time between 1 and 120 minutes.";
+        focusMinutes.focus();
+        return false;
+    }
+
+    if (!Number.isInteger(rest) || rest < 1 || rest > 60) {
+        timerStatus.textContent = "Enter a break time between 1 and 60 minutes.";
+        breakMinutes.focus();
+        return false;
+    }
+
+    return true;
+}
+
+// Enable or disable timer settings
+function lockSettings(locked) {
+    focusMinutes.disabled = locked;
+    breakMinutes.disabled = locked;
+
+    presetButtons.forEach(function (button) {
+        button.disabled = locked;
+    });
+}
+
+// Highlight the selected preset
+function updatePresets() {
+    presetButtons.forEach(function (button) {
+        const selected =
+            Number(button.dataset.focus) === Number(focusMinutes.value) &&
+            Number(button.dataset.break) === Number(breakMinutes.value);
+
+        button.classList.toggle("is-selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
+    });
+}
+
+// Stop the running timer
+function stopTimer() {
+    clearInterval(timerId);
+    timerId = null;
+
+    startButton.disabled = false;
+    pauseButton.disabled = true;
+}
+
+// Switch between focus and break
+function setMode(mode) {
     stopTimer();
-    currentMode = name;
-    duration = minutes * 60;
-    remaining = duration;
-    modeLabel.textContent = name.toUpperCase();
-    renderTimer();
-  }
+    currentMode = mode;
 
-  function startTimer() {
-    if (timerId !== null) return;
-    if (remaining === 0) remaining = duration;
+    if (mode === "Focus") {
+        duration = Number(focusMinutes.value) * 60;
+        breakChooser.hidden = true;
+        skipBreak.hidden = true;
+    } else {
+        duration = Number(breakMinutes.value) * 60;
+        breakChooser.hidden = false;
+        skipBreak.hidden = false;
+    }
+
+    remaining = duration;
+    startButton.textContent = "Start";
+
+    renderTimer();
+}
+
+// Start or resume the timer
+function startTimer() {
+    if (timerId !== null || !validSettings()) {
+        return;
+    }
+
+    lockSettings(true);
+
     endTime = Date.now() + remaining * 1000;
     timerId = setInterval(updateTimer, 250);
-    timerStatus.textContent =
-      currentMode === "Focus"
-        ? "Timer running. You've got this!"
-        : currentMode + " started. Relax!";
-    renderTimer();
-  }
 
-  function updateTimer() {
-    remaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
-    renderTimer();
-    if (remaining === 0) endSession();
-  }
+    startButton.disabled = true;
+    pauseButton.disabled = false;
 
-  function endSession() {
-    stopTimer();
     if (currentMode === "Focus") {
-      timerStatus.textContent = "Focus session completed! Great job! Pick a break.";
-      breakChooser.hidden = false;
+        timerStatus.textContent = "Stay focused. You've got this!";
     } else {
-      breakChooser.hidden = true;
-      setMode("Focus", FOCUS_MINUTES);
-      timerStatus.textContent = "Break over. Next focus session started!";
-      startTimer();
+        timerStatus.textContent = "Take a moment to relax and recharge.";
     }
-  }
 
-  on("timerStart", "click", startTimer);
+    renderTimer();
+}
 
-  on("timerPause", "click", () => {
+// Update the remaining time
+function updateTimer() {
+    const newRemaining = Math.max(
+        0,
+        Math.ceil((endTime - Date.now()) / 1000)
+    );
+
+    // Count only active focus time, not breaks
+    const elapsed = remaining - newRemaining;
+
+    if (currentMode === "Focus" && elapsed > 0) {
+        dailyStats.focusSeconds += elapsed;
+        saveDailyStats();
+        updateDailyStats();
+    }
+
+    remaining = newRemaining;
+
+    renderTimer();
+
+    if (remaining === 0) {
+        endSession();
+    }
+}
+
+
+// Switch to the next session
+function endSession() {
+    stopTimer();
+    playTimerSound();
+
+    if (currentMode === "Focus") {
+        dailyStats.sessions++;
+        saveDailyStats();
+        updateDailyStats();
+        celebrate("Amazing work! You completed a focus session!");
+
+        setMode("Break");
+        timerStatus.textContent = "Focus session completed! You earned a break.";
+        buddySay("Time to relax! You've earned this break.", false);
+    } else {
+        setMode("Focus");
+        timerStatus.textContent = "Break completed! Ready to focus again?";
+        buddySay("Break time is over! You're refreshed and ready for another round!", false);
+    }
+
+    if (autoStart.checked) {
+        startTimer();
+    }
+}
+
+// Timer buttons
+on("timerStart", "click", startTimer);
+
+on("timerPause", "click", function () {
     if (timerId === null) {
-      timerStatus.textContent = "Timer is not running.";
-      return;
+        return;
     }
+
     updateTimer();
-    stopTimer();
-    if (remaining > 0) timerStatus.textContent = "Timer paused.";
-  });
 
-  on("timerReset", "click", () => {
-    stopTimer();
-    breakChooser.hidden = true;
-    setMode("Focus", FOCUS_MINUTES);
-    timerStatus.textContent = "Timer reset.";
-  });
+    if (timerId === null) {
+        return;
+    }
 
-  // break length buttons (data-break + data-minutes)
-  document.querySelectorAll(".focus-mode[data-break]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      setMode(btn.dataset.break, Number(btn.dataset.minutes));
-      startTimer();
+    stopTimer();
+    renderTimer();
+
+    startButton.textContent = "Resume";
+    timerStatus.textContent = "Timer paused. Resume whenever you're ready.";
+});
+
+on("timerReset", "click", function () {
+    stopTimer();
+    lockSettings(false);
+
+    if (!validSettings()) {
+        return;
+    }
+
+    setMode("Focus");
+    timerStatus.textContent = "Timer reset. Ready when you are!";
+});
+
+on("skipBreak", "click", function () {
+    if (currentMode === "Break") {
+        setMode("Focus");
+        timerStatus.textContent = "Break skipped. Ready to focus again?";
+
+        if (autoStart.checked) {
+            startTimer();
+        }
+    }
+});
+
+// Quick timer presets
+presetButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        focusMinutes.value = button.dataset.focus;
+        breakMinutes.value = button.dataset.break;
+
+        setMode("Focus");
+        updatePresets();
+
+        timerStatus.textContent = "Timer settings updated!";
     });
-  });
+});
+
+// Custom timer settings
+function updateSettings() {
+    updatePresets();
+
+    if (validSettings()) {
+        setMode("Focus");
+        timerStatus.textContent = "Custom timer settings applied!";
+    }
+}
+
+focusMinutes.addEventListener("change", updateSettings);
+breakMinutes.addEventListener("change", updateSettings);
+
+updatePresets();
+pauseButton.disabled = true;
+renderTimer();
+
+// ---------- Bruno's Study Coach ----------
+
+const coachTips = {
+    concentration: {
+        advice: "Let's start small! Put away distractions and try focusing on one task for 15 minutes.",
+        focus: 15,
+        rest: 5
+    },
+
+    motivation: {
+        advice: "Choose your easiest task first. Every small achievement counts! Start with just 15 minutes.",
+        focus: 15,
+        rest: 5
+    },
+
+    starting: {
+        advice: "Check your study tasks and choose one priority. Give yourself 25 minutes to work on it.",
+        focus: 25,
+        rest: 5
+    },
+
+    exhausted: {
+        advice: "You deserve a rest. Take a proper break, drink some water and return when you're ready.",
+        focus: null,
+        rest: null
+    },
+
+    ready: {
+        advice: "That's the spirit! Choose a task, prepare your study space and let's get started!",
+        focus: 25,
+        rest: 5
+    }
+};
+
+const coachButtons = document.querySelectorAll(".coach-option");
+const coachResponse = $("coachResponse");
+const coachAdvice = $("coachAdvice");
+const applyRecommendation = $("applyRecommendation");
+
+let recommendedFocus = null;
+let recommendedBreak = null;
+
+// Display Bruno's advice
+coachButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        const struggle = button.dataset.struggle;
+        const recommendation = coachTips[struggle];
+
+        coachButtons.forEach(function (item) {
+            item.classList.remove("is-selected");
+            item.setAttribute("aria-pressed", "false");
+        });
+
+        button.classList.add("is-selected");
+        button.setAttribute("aria-pressed", "true");
+
+        coachAdvice.textContent = recommendation.advice;
+        coachResponse.hidden = false;
+
+        recommendedFocus = recommendation.focus;
+        recommendedBreak = recommendation.rest;
+
+        // Show the timer button only when a timer is recommended
+        applyRecommendation.hidden = recommendedFocus === null;
+    });
+});
+
+// Apply Bruno's recommended timer
+on("applyRecommendation", "click", function () {
+    if (recommendedFocus === null) {
+        return;
+    }
+
+    // Update the timer settings
+    focusMinutes.value = recommendedFocus;
+    breakMinutes.value = recommendedBreak;
+
+    // Reset the timer using the recommended settings
+    stopTimer();
+    lockSettings(false);
+    setMode("Focus");
+    updatePresets();
+
+    timerStatus.textContent =
+        "Bruno's recommendation applied! You're ready to focus.";
+
+    // Move to the timer
+    $("pomodoroHeading").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+});
+
+// ---------- Floating Bruno Buddy ----------
+
+const buddy = $("buddy");
+const buddyBtn = $("buddyBtn");
+const buddyBubble = $("buddyBubble");
+const confettiBox = $("confetti");
+
+let bubbleTimer;
+let confettiTimer;
+
+const buddyTips = [
+    "Small steps every day add up!",
+    "You've got this! Keep going!",
+    "Remember to take breaks and drink water.",
+    "One task at a time. You're doing great!",
+    "Believe in yourself. You're making progress!"
+];
+
+// Display Bruno's message
+function buddySay(message, cheer) {
+    buddyBubble.textContent = message;
+    buddyBubble.classList.remove("is-hidden");
+
+    if (cheer) {
+        buddy.classList.remove("cheer");
+        void buddy.offsetWidth;
+        buddy.classList.add("cheer");
+    }
+
+    clearTimeout(bubbleTimer);
+
+    bubbleTimer = setTimeout(function () {
+        buddyBubble.classList.add("is-hidden");
+        buddy.classList.remove("cheer");
+    }, 4500);
+}
+
+// Give Bruno a random motivational message
+on("buddyBtn", "click", function () {
+    if (currentMode === "Break") {
+        const breakTips = [
+            "Stretch your arms and shoulders!",
+            "Drink some water and stay hydrated.",
+            "Give your eyes a little rest from the screen.",
+            "Take a short walk and get moving!",
+            "Relax, breathe and enjoy your break."
+        ];
+
+        const number = Math.floor(Math.random() * breakTips.length);
+        buddySay(breakTips[number], false);
+    } else {
+        const number = Math.floor(Math.random() * buddyTips.length);
+        buddySay(buddyTips[number], false);
+    }
+});
+// Create confetti when Bruno celebrates
+function launchConfetti() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+    }
+
+    const colors = [
+        "var(--accent)",
+        "var(--accent-2)",
+        "var(--pop)",
+        "var(--ink-line)"
+    ];
+
+    for (let i = 0; i < 45; i++) {
+        const piece = document.createElement("span");
+
+        piece.className = "confetti-piece";
+        piece.style.left = Math.random() * 100 + "%";
+        piece.style.width = 6 + Math.random() * 8 + "px";
+        piece.style.height = 10 + Math.random() * 10 + "px";
+        piece.style.background = colors[
+            Math.floor(Math.random() * colors.length)
+        ];
+        piece.style.animationDuration = 2 + Math.random() * 1.5 + "s";
+        piece.style.animationDelay = Math.random() * 0.4 + "s";
+
+        confettiBox.appendChild(piece);
+    }
+
+    clearTimeout(confettiTimer);
+
+    confettiTimer = setTimeout(function () {
+        confettiBox.innerHTML = "";
+    }, 4500);
+}
+
+// Celebrate an achievement with Bruno
+function celebrate(message) {
+    launchConfetti();
+    buddySay(message, true);
+}
 
   // ---------- SURPRISE BREAK ----------
   const breakIdeas = [
