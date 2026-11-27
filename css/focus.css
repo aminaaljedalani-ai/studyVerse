@@ -763,3 +763,27 @@
     background-color: #4b4050;
     color: white;
 }
+
+.sticky-notes-board button {
+    white-space: nowrap;
+    word-break: normal;
+    overflow-wrap: normal;
+    font-size: 0.95rem;
+    padding: 6px 12px;
+    width: auto;
+    min-width: fit-content;
+    flex-shrink: 0;
+}
+/* Edit button */
+.sticky-notes-board button:first-of-type {
+    background-color: var(--accent);
+    color: var(--on-accent);
+    border-color: var(--edge);
+}
+
+/* Delete button */
+.sticky-notes-board button:last-of-type {
+    background-color: var(--note);
+    color: var(--text);
+    border-color: var(--edge);
+}
